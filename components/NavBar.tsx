@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Heading from '../components/Heading';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
@@ -7,12 +7,9 @@ const NavBar: React.FunctionComponent<Props> = ({}) => (
   <div className="w-fixed w-full flex-shrink flex-grow-0 px-4">
     <div className="sticky top-0 p-4 w-full h-full">
       <ul className="Links space-y-2 tracking-wide mt-8">
-        {/* <li>
-          <Heading text="WMS" />
-        </li> */}
         <li>
           <a
-            href="#"
+            href="./"
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
           >
             <svg
@@ -37,7 +34,7 @@ const NavBar: React.FunctionComponent<Props> = ({}) => (
         </li>
         <li>
           <a
-            href="#"
+            href="/notstarted"
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
           >
             <svg
@@ -58,13 +55,13 @@ const NavBar: React.FunctionComponent<Props> = ({}) => (
               />
             </svg>
             <span className="group-hover:text-gray-700">
-              Unassigned
+              Not Started
             </span>
           </a>
         </li>
         <li>
           <a
-            href="#"
+            href="/wip"
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
           >
             <svg
