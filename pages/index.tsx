@@ -5,6 +5,7 @@ import Table from '../components/Table';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
+import Heading from '../components/Heading';
 
 const IndexPage: NextPage = () => {
   return (
@@ -12,6 +13,7 @@ const IndexPage: NextPage = () => {
       <Layout title="Queue | Work Management System | TuPack" />
       <main>
         <div className="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
+          <Heading text="WMS" />
           <NavBar />
           <main
             role="main"

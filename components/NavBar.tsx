@@ -7,9 +7,9 @@ const NavBar: React.FunctionComponent<Props> = ({}) => (
   <div className="w-fixed w-full flex-shrink flex-grow-0 px-4">
     <div className="sticky top-0 p-4 w-full h-full">
       <ul className="Links space-y-2 tracking-wide mt-8">
-        <li>
+        {/* <li>
           <Heading text="WMS" />
-        </li>
+        </li> */}
         <li>
           <a
             href="#"
@@ -23,9 +23,9 @@ const NavBar: React.FunctionComponent<Props> = ({}) => (
             >
               <path
                 className="fill-current text-gray-300 group-hover:text-cyan-300"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
               <path
                 className="fill-current text-gray-600 group-hover:text-cyan-600"
@@ -97,9 +97,9 @@ const NavBar: React.FunctionComponent<Props> = ({}) => (
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
             </svg>

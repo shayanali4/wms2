@@ -9,8 +9,15 @@ type Props = {
 const Heading: React.FunctionComponent<Props> = ({
   text = 'This is the default Heading',
 }) => (
-  <div className="w-4/5">
-    <Image src={logoOrange} layout="responsive" alt="pic" />
+  <div style={{ width: '5%', height: '5%', position: 'relative' }}>
+    <Image
+      alt="TuPack Logo"
+      src={logoOrange}
+      layout="responsive"
+      objectFit="contain"
+      width="5%"
+      height="5%"
+    />
     <h1 className="text-black text-center text-2xl">{text}</h1>
   </div>
 );
