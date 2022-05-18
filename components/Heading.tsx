@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Image from 'next/image';
+import Image from 'next/Image';
 import logoOrange from '../public/logoOrange.png';
 
 type Props = {
