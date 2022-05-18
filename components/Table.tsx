@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import newOrders from '../data/newOrders';
 
 type Props = {};
@@ -51,13 +52,11 @@ const Table: React.FunctionComponent<Props> = ({}) => (
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
-                    <button
-                      className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                      value={order.order_id}
-                      // onClick={handleClick}
-                    >
-                      Full Details
-                    </button>
+                    <Link href={`/wo/${order.order_id}`}>
+                      <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
+                        Full Details
+                      </button>
+                    </Link>
                     {/* <Link
                                 href={{
                                 pathname: '/approve/[slug]',
