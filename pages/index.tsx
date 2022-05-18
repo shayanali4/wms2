@@ -4,8 +4,6 @@ import NavBar from '../components/NavBar';
 import Table from '../components/Table';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
-import newOrders from '../data/newOrders';
-import Heading from '../components/Heading';
 import TitleText from '../components/TitleText';
 
 const IndexPage: NextPage = () => {
