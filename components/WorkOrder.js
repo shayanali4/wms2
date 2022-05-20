@@ -31,6 +31,7 @@ const WorkOrder = ({ id, pathname }) => {
 
   return (
     <div className>
+      {/* make title queue: tracking id num */}
       <ul>
         <li>Order Number: {wOrderObj.order_num} </li>
         <li>Work Order: {wOrderObj.work_order_name} </li>
