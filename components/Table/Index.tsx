@@ -1,4 +1,3 @@
-import * as React from 'react';
 import TableTemplate from '../Table';
 import newOrders from '../../data/newOrders';
 
@@ -7,7 +6,7 @@ type Props = {};
 let orderObj = newOrders;
 console.log(orderObj);
 
-const Table: React.FunctionComponent<Props> = ({}) => (
+const QueueTable: React.FunctionComponent<Props> = ({}) => (
   <TableTemplate
     orderObject={orderObj}
     headers={[
@@ -21,4 +20,4 @@ const Table: React.FunctionComponent<Props> = ({}) => (
   />
 );
 
-export default Table;
+export default QueueTable;

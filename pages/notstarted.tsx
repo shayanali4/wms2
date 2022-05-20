@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
-import TableQueue from '../components/Table/Queue';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
 import Heading from '../components/Heading';
+import NotStartedTable from '../components/Table/NotStarted';
 
 const IndexPage: NextPage = () => {
   return (
@@ -22,7 +22,7 @@ const IndexPage: NextPage = () => {
             {/* main content */}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="Not Started" />
-              <TableQueue />
+              <NotStartedTable />
             </div>
           </main>
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
-import TableQueue from '../components/Table/Queue';
+import TableQueue from '../components/Table/Index';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
