@@ -5,7 +5,7 @@ export default [
     initial_units_or_quantity: 3,
     brand_entry: 'Dior',
     order_id: 3,
-    tracking_id: 'TBC0945',
+    order_num: 'TBC0945',
   },
   {
     work_order_name: 'Bag & Tag',
@@ -13,6 +13,6 @@ export default [
     initial_units_or_quantity: 4,
     brand_entry: 'M&S',
     order_id: 4,
-    tracking_id: 'CBA522',
+    order_num: 'CBA522',
   },
 ];
