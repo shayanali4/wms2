@@ -1,66 +1,23 @@
-type Props = {
-  orderObject: {
-    tracking_id: string;
-    work_order_name: string;
-    created_at: string;
-    initial_units_or_quantity: number;
-    brand_entry: string;
-    order_id: number;
-  }[];
-  headers: { title: string; align: string }[];
-  colors?: { table: string; text: string };
-};
+import * as React from 'react';
+import newOrders from '../../data/newOrders';
 
-const EXAMPLE = [
-  {
-    work_order_name: 'testtt',
-    tracking_id: 'TBC0945',
-    created_at: '2022-04-08 16:14:45',
-    initial_units_or_quantity: 4,
-    brand_entry: 'Dior',
-    order_id: 3564,
-  },
-  {
-    work_order_name: 'next test',
-    tracking_id: 'Hov15Me',
-    created_at: '2022-05-06 14:34:23',
-    initial_units_or_quantity: 4,
-    brand_entry: 'Dior',
-    order_id: 3564,
-  },
-];
+type Props = {};
 
-const TableHeaderTemplate: React.FunctionComponent<Props> = ({
-  orderObject = EXAMPLE,
-  headers = [
-    { title: 'Add header name here', align: 'centre', value: 'test' },
-  ],
-  //   Using tailwind colors (see https://tailwindcss.com/docs/text-color)
-  colors = { table: 'bg-gray-200', text: 'text-gray-600' },
-}) => (
+const Table: React.FunctionComponent<Props> = ({}) => (
   <table className="min-w-max w-full table-auto">
     <thead>
-      <tr
-        className={`${colors.table} ${colors.text} uppercase text-sm leading-normal`}
-      >
-        {headers
-          ? headers.map((header) => {
-              return (
-                <th className={`py-3 px-6 text-${header.align}`}>
-                  {header.title}
-                </th>
-              );
-            })
-          : null}
+      <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+        <th className="py-3 px-6 text-left">Work Order</th>
+        <th className="py-3 px-6 text-left">Submission Date</th>
+        <th className="py-3 px-6 text-center">Units / Quantity</th>
+        <th className="py-3 px-6 text-center">Brand</th>
+        <th className="py-3 px-6 text-center">Approve or Deny</th>
       </tr>
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
-      {orderObject
-        ? orderObject.map((order) => {
-            {
-              console.log(order);
-              console.log(order.tracking_id);
-            }
+      {/* {loading ? <p className="text-2xl">Loading ...</p> : null} */}
+      {newOrders
+        ? newOrders.map((order) => {
             return (
               <tr
                 key={order.tracking_id}
@@ -101,6 +58,14 @@ const TableHeaderTemplate: React.FunctionComponent<Props> = ({
                     >
                       Full Details
                     </button>
+                    {/* <Link
+                                href={{
+                                pathname: '/approve/[slug]',
+                                query: { slug: order.order_id },
+                                }}
+                            >
+                                <a>Check Order{order.order_id}</a>
+                            </Link> */}
                   </div>
                 </td>
               </tr>
@@ -111,4 +76,4 @@ const TableHeaderTemplate: React.FunctionComponent<Props> = ({
   </table>
 );
 
-export default TableHeaderTemplate;
+export default Table;
