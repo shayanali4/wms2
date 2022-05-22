@@ -5,8 +5,6 @@ import { NotStartedObject } from '../../interfaces/NotStartedObject';
 
 type Props = { orders: NotStartedObject };
 
-const workOrderData = workOrders;
-
 const NotStartedTable: React.FunctionComponent<Props> = ({
   orders,
 }) => (
@@ -53,10 +51,10 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
-                      {workOrderData.filter(
+                      {workOrders.filter(
                         (wo) => wo.id === order.id
                       )[0]
-                        ? workOrderData.filter(
+                        ? workOrders.filter(
                             (wo) => wo.id === order.id
                           )[0].name
                         : 'null'}
