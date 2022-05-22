@@ -1,3 +1,4 @@
+
 import { QueueObject } from '../interfaces/QueueObject';
 import Button from './Table/FieldTypes/ButtonField';
 import DateTimeField from './Table/FieldTypes/DateTimeField';
@@ -145,39 +146,49 @@ const TableHeaderTemplate: React.FunctionComponent<Props> = ({
                 key={order.tracking_id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                {console.log(headers[i])}
-                {headers[i].field &&
-                headers[i].field.type === 'dateTime' ? (
-                  <DateTimeField
-                    bold={headers[i].field.props.bold}
-                    align={headers[i].field.props.align}
-                    value={headers[i].objKey}
-                  />
-                ) : null}
-                {headers[i].field &&
-                headers[i].field.type === 'number' ? (
-                  <Number
-                    bold={headers[i].field.props.bold}
-                    align={headers[i].field.props.align}
-                    value={headers[i].objKey}
-                  />
-                ) : null}
-                {headers[i].field &&
-                headers[i].field.type === 'button' ? (
-                  <Button
-                    align={headers[i].field.props.align}
-                    value={`order.${headers[i].objKey}`}
-                    color={headers[i].field.props.color}
-                  />
-                ) : null}
-                {headers[i].field &&
-                headers[i].field.type === 'text' ? (
-                  <TextField
-                    bold={headers[i].field.props.bold}
-                    align={headers[i].field.props.align}
-                    value={`order.${headers[i].objKey}`}
-                  />
-                ) : null}
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  <div className="flex items-center">
+                    <span className="font-medium">
+                      {order.work_order_name}
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-left">
+                  <div className="flex items-center">
+                    <span>
+                      {order.created_at
+                        .slice(0, 19)
+                        .replace(/T/g, ' ')}
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex items-center justify-center">
+                    <span>{order.initial_units_or_quantity}</span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <span className="font-medium">
+                    {order.brand_entry}
+                  </span>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex item-center justify-center">
+                    <Link href={`/wo/${order.order_id}`}>
+                      <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
+                        Full Details
+                      </button>
+                    </Link>
+                    {/* <Link
+                                href={{
+                                pathname: '/approve/[slug]',
+                                query: { slug: order.order_id },
+                                }}
+                            >
+                                <a>Check Order{order.order_id}</a>
+                            </Link> */}
+                  </div>
+                </td>
               </tr>
             );
           })
