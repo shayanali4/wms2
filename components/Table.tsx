@@ -1,30 +1,73 @@
+import { QueueObject } from '../interfaces/QueueObject';
+import Button from './Table/FieldTypes/ButtonField';
+import DateTimeField from './Table/FieldTypes/DateTimeField';
+import Number from './Table/FieldTypes/NumberField';
+import TextField from './Table/FieldTypes/TextField';
+
 const HEADERS = [
-  'TIME ACCEPTED',
-  'ORDER #',
-  'TASK',
-  'UNITS/QUANTITY',
-  'BRAND',
-  'TARGET TIME',
-  'INITIAL COST',
-  'ASSIGNED TO',
+  {
+    name: 'TIME ACCEPTED',
+    objValue: 'time_accepted',
+    fieldType: 'normal',
+    alignText: 'left',
+  },
+  {
+    name: 'ORDER #',
+    objValue: 'tracking_id',
+    fieldType: 'normal',
+    alignText: 'center',
+  },
+  {
+    name: 'TASK',
+    objValue: 'work_order_name',
+    fieldType: 'bold',
+    alignText: 'left',
+  },
+  {
+    name: 'UNITS/QUANTITY',
+    objValue: 'initial_units_or_quantity',
+    fieldType: 'normal',
+    alignText: 'center',
+  },
+  {
+    name: 'BRAND',
+    objValue: 'brand_system',
+    fieldType: 'normal',
+    alignText: 'center',
+  },
+  {
+    name: 'TARGET TIME',
+    objValue: 'target_time',
+    fieldType: 'bold',
+    alignText: 'center',
+  },
+  {
+    name: 'INITIAL COST',
+    objValue: 'cost_initial',
+    fieldType: 'normal',
+    alignText: 'center',
+  },
+  {
+    name: 'ASSIGNED TO',
+    objValue: 'assigned_to',
+    fieldType: 'normal',
+    alignText: 'center',
+  },
 ];
 
 type Props = {
-  orderObject: {
-    tracking_id: string;
-    work_order_name: string;
-    created_at: string;
-    initial_units_or_quantity: number;
-    brand_entry: string;
-    brand_system: string;
-    order_id: number;
-    time_accepted: string;
-    target_time: string;
-    cost_initial: number;
-    assigned_to: string;
+  orderObject?: QueueObject;
+  headers: {
+    title: string;
+    objKey: string;
+    alignHeader: string;
+    field: {
+      type: string;
+      props: any;
+    };
   }[];
-  headers: { title: string; align: string }[];
   colors?: { table: string; text: string };
+  view?: {};
 };
 
 const EXAMPLE = [
@@ -59,7 +102,15 @@ const EXAMPLE = [
 const TableHeaderTemplate: React.FunctionComponent<Props> = ({
   orderObject = EXAMPLE,
   headers = [
-    { title: 'TARGET TIME', align: 'centre', value: 'test' },
+    {
+      title: 'TARGET TIME',
+      objKey: 'target_time',
+      alignHeader: 'centre',
+      field: {
+        type: 'dateTime',
+        props: { bold: false, align: 'center' },
+      },
+    },
   ],
   //   Using tailwind colors (see https://tailwindcss.com/docs/text-color)
   colors = { table: 'bg-gray-200', text: 'text-gray-600' },
@@ -72,7 +123,9 @@ const TableHeaderTemplate: React.FunctionComponent<Props> = ({
         {headers
           ? headers.map((header) => {
               return (
-                <th className={`py-3 px-6 text-${header.align}`}>
+                <th
+                  className={`py-3 px-6 text-${header.alignHeader}`}
+                >
                   {header.title}
                 </th>
               );
@@ -82,7 +135,7 @@ const TableHeaderTemplate: React.FunctionComponent<Props> = ({
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
       {orderObject
-        ? orderObject.map((order) => {
+        ? orderObject.map((order, i) => {
             {
               console.log(order);
               console.log(order.tracking_id);
@@ -92,74 +145,39 @@ const TableHeaderTemplate: React.FunctionComponent<Props> = ({
                 key={order.tracking_id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                {/* date & time */}
-                <td className="py-3 px-6 text-left">
-                  <div className="flex items-center">
-                    <span>
-                      {order.time_accepted
-                        .slice(0, 19)
-                        .replace(/T/g, ' ')}
-                    </span>
-                  </div>
-                </td>
-                {/* number */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex items-center justify-center">
-                    <span>{order.tracking_id}</span>
-                  </div>
-                </td>
-                {/* text header */}
-                <td className="py-3 px-6 text-left whitespace-nowrap">
-                  <div className="flex items-center">
-                    <span className="font-medium">
-                      {order.work_order_name}
-                    </span>
-                  </div>
-                </td>
-                {/* number */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex items-center justify-center">
-                    <span>{order.initial_units_or_quantity}</span>
-                  </div>
-                </td>
-                {/* number */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex items-center justify-center">
-                    <span>{order.brand_system}</span>
-                  </div>
-                </td>
-                {/* date & time */}
-                <td className="py-3 px-6 text-left">
-                  <div className="flex items-center">
-                    <span>{order.target_time}</span>
-                  </div>
-                </td>
-                {/* text header */}
-                <td className="py-3 px-6 text-left whitespace-nowrap">
-                  <div className="flex items-center">
-                    <span className="font-medium">
-                      £{order.cost_initial}
-                    </span>
-                  </div>
-                </td>
-                {/* number */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex items-center justify-center">
-                    <span>{order.assigned_to}</span>
-                  </div>
-                </td>
-                {/* button */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex item-center justify-center">
-                    <button
-                      className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                      value={order.order_id}
-                      // onClick={handleClick}
-                    >
-                      Update
-                    </button>
-                  </div>
-                </td>
+                {console.log(headers[i])}
+                {headers[i].field &&
+                headers[i].field.type === 'dateTime' ? (
+                  <DateTimeField
+                    bold={headers[i].field.props.bold}
+                    align={headers[i].field.props.align}
+                    value={headers[i].objKey}
+                  />
+                ) : null}
+                {headers[i].field &&
+                headers[i].field.type === 'number' ? (
+                  <Number
+                    bold={headers[i].field.props.bold}
+                    align={headers[i].field.props.align}
+                    value={headers[i].objKey}
+                  />
+                ) : null}
+                {headers[i].field &&
+                headers[i].field.type === 'button' ? (
+                  <Button
+                    align={headers[i].field.props.align}
+                    value={`order.${headers[i].objKey}`}
+                    color={headers[i].field.props.color}
+                  />
+                ) : null}
+                {headers[i].field &&
+                headers[i].field.type === 'text' ? (
+                  <TextField
+                    bold={headers[i].field.props.bold}
+                    align={headers[i].field.props.align}
+                    value={`order.${headers[i].objKey}`}
+                  />
+                ) : null}
               </tr>
             );
           })

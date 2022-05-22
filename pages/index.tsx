@@ -1,13 +1,29 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { supabaseClient } from '../lib/client';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
-import TableQueue from '../components/Table/Index';
+import QueueTable from '../components/Table/Index';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
 import Heading from '../components/Heading';
 
 const IndexPage: NextPage = () => {
+  const [newOrders, setNewOrders] = useState([{}]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNewOrders = async () => {
+      let { data: orders }: { data: any[] } = await supabaseClient
+        .from('order')
+        .select('*');
+      console.log(orders);
+      setNewOrders(orders);
+      setLoading(false);
+    };
+    fetchNewOrders().catch(console.error);
+  }, []);
+
   return (
     <>
       <Layout title="Queue | Work Management System | TuPack" />
@@ -22,7 +38,10 @@ const IndexPage: NextPage = () => {
             {/* main content */}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="Queue" />
-              <TableQueue />
+              {loading ? (
+                <p className="text-2xl">Loading ...</p>
+              ) : null}
+              <QueueTable orders={newOrders} />
             </div>
           </main>
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">
