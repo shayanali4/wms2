@@ -1,0 +1,18 @@
+export default [
+  { name: 'Arc Minute', id: 1 },
+  { name: 'Bettina Ceramica', id: 2 },
+  { name: 'Blake London', id: 3 },
+  { name: 'Day Dress', id: 4 },
+  { name: 'Futsol', id: 5 },
+  { name: 'Hadeda', id: 6 },
+  { name: 'House Of Silviano', id: 7 },
+  { name: 'Pink City Prints', id: 8 },
+  { name: 'Sirplus', id: 9 },
+  { name: 'Spry Workwear', id: 10 },
+  { name: 'Thread & Tonic', id: 11 },
+  { name: 'The Wholeleaf Company', id: 12 },
+  { name: 'Faceplant', id: 13 },
+  { name: 'The Colombia Collective', id: 14 },
+  { name: 'Labell-D', id: 15 },
+  { name: 'Thom', id: 16 },
+];

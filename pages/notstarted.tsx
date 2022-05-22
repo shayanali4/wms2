@@ -1,13 +1,30 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { supabaseClient } from '../lib/client';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
-import Table from '../components/Table';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
 import Heading from '../components/Heading';
+import NotStartedTable from '../components/Table/NotStarted';
 
-const IndexPage: NextPage = () => {
+const NotStartedPage: NextPage = () => {
+  const [notStartedOrders, setNotStartedOrders] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNotStartedOrders = async () => {
+      let { data: ordersNS }: { data: any[] } = await supabaseClient
+        .from('order')
+        .select('*')
+        .eq('tracker_status', 1);
+      console.log(ordersNS);
+      setNotStartedOrders(ordersNS);
+      setLoading(false);
+    };
+    fetchNotStartedOrders().catch(console.error);
+  }, []);
+
   return (
     <>
       <Layout title="Not Started | Work Management System | TuPack" />
@@ -20,9 +37,12 @@ const IndexPage: NextPage = () => {
             className="w-full lg:w-5/6 flex-grow pt-1 px-3"
           >
             {/* main content */}
+            {loading ? <p className="text-2xl">Loading ...</p> : null}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="Not Started" />
-              <Table />
+              {notStartedOrders ? (
+                <NotStartedTable orders={notStartedOrders} />
+              ) : null}
             </div>
           </main>
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">
@@ -34,4 +54,4 @@ const IndexPage: NextPage = () => {
   );
 };
 
-export default IndexPage;
+export default NotStartedPage;

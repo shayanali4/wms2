@@ -1,0 +1,62 @@
+TABLE "Order" as order:
+PK"order_id"
+"tracking_id"
+"tracker_status"
+FK"work_order_id"
+"created_at"
+"description"
+"initial_units_or_quantity"
+"brand_entry"
+"pics"
+"name"
+"email"
+"number"
+"---"
+FK"brand_system_id"
+"target_time"
+"cost_initial"
+"accepted?"
+"accepted_time"
+"comments_initial"
+"---"
+FK"assigned_to"
+"start_date_work_order"
+"est_finish_date"
+"---"
+"finish_date"
+"final_time_taken"
+"final_price"
+"final_units_or_quantity"
+"final_comments"
+"quality_control_pics_urls"
+FK"receipt_pdf_url_id"
+
+
+TABLE "Brand" as brand:
+PK"brand_system_id"
+"name"
+"hourly_rate"
+"rebarcoding_rate"
+"pictures"
+
+TABLE "Work Order" as work_order:
+PK"work_order_id"
+"name"
+"specific_fields"
+"mins_per_unit"
+"flat_cost"
+
+TABLE "Specific Fields" as spec_fields:
+FK"work_order_id"
+FK "order_id"
+"[specific_fields]"
+
+TABLE "Worker" as worker:
+PK"worker_id"
+"name"
+
+# dual relations with cardinality
+brand - order: (One,OneOrMany)["1","1.."]
+work_order - order: (One,OneOrMany)["1","1.."]
+spec_fields - work_order: (Many,Many)["*","*"]
+worker - order: (One,OneOrMany)["1","1.."]
