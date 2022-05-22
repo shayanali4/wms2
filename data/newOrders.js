@@ -19,17 +19,4 @@ export default [
     cost_initial: 45,
     assigned_to: 'Damien',
   },
-  // {
-  //   work_order_name: 'Bag & Tag',
-  //   created_at: '2022-05-06 14:34:23',
-  //   initial_units_or_quantity: 4,
-  //   brand_entry: 'M&S',
-  //   brand_system: 'Marks & Spencer',
-  //   order_id: 4,
-  //   tracking_id: 'CBA522',
-  //   time_accepted: '2022-05-07 14:34:23',
-  //   target_time: '60 mins',
-  //   cost_initial: 45,
-  //   assigned_to: 'Damien',
-  // },
 ];
