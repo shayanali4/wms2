@@ -3,7 +3,7 @@ import newOrders from '../../data/newOrders';
 
 type Props = {};
 
-const Table: React.FunctionComponent<Props> = ({}) => (
+const WIPTable: React.FunctionComponent<Props> = ({}) => (
   <table className="min-w-max w-full table-auto">
     <thead>
       <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -76,4 +76,4 @@ const Table: React.FunctionComponent<Props> = ({}) => (
   </table>
 );
 
-export default Table;
+export default WIPTable;
