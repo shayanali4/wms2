@@ -1,9 +1,8 @@
-import workOrders from '../../data/workOrders';
+import Link from 'next/link';
 import { QueueObject } from '../../interfaces/QueueObject';
+import { getWorkOrder } from '../../helpers/helpers';
 
 type Props = { orders: QueueObject };
-
-const workOrderData = workOrders;
 
 const QueueTable: React.FunctionComponent<Props> = ({ orders }) => (
   <table className="min-w-max w-full table-auto">
@@ -45,15 +44,7 @@ const QueueTable: React.FunctionComponent<Props> = ({ orders }) => (
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>
-                      {workOrderData.filter(
-                        (wo) => wo.id === order.id
-                      )[0]
-                        ? workOrderData.filter(
-                            (wo) => wo.id === order.id
-                          )[0].name
-                        : 'null'}
-                    </span>
+                    <span>{getWorkOrder(order.id)}</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -68,12 +59,11 @@ const QueueTable: React.FunctionComponent<Props> = ({ orders }) => (
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
-                    <button
-                      className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                      value={order.id}
-                    >
-                      Full Details
-                    </button>
+                    <Link href={`/wo/${order.id}`}>
+                      <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
+                        Full Details
+                      </button>
+                    </Link>
                   </div>
                 </td>
               </tr>
