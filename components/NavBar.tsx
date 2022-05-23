@@ -1,6 +1,3 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
-
 type Props = {};
 
 const NavBar: React.FunctionComponent<Props> = ({}) => (

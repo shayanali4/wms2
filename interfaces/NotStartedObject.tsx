@@ -7,3 +7,4 @@ export interface NotStartedObject extends QueueObject {
   initial_cost: string;
   target_time: number;
 }
+[];

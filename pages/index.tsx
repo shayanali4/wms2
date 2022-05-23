@@ -14,11 +14,9 @@ const IndexPage: NextPage = () => {
 
   useEffect(() => {
     const fetchNewOrders = async () => {
-      let { data: orders }: { data: any[] } = await supabaseClient
-        .from('order')
-        .select('*');
-      console.log(orders);
-      setNewOrders(orders);
+      const { data } = await supabaseClient.from('order').select('*');
+      console.log(data);
+      setNewOrders(data || [{}]);
       setLoading(false);
     };
     fetchNewOrders().catch(console.error);

@@ -33,11 +33,9 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
-                      {order.time_accepted
-                        ? order.time_accepted
-                            .slice(0, 19)
-                            .replace(/T/g, ' ')
-                        : null}
+                      {(order.time_accepted as any)
+                        .slice(0, 19)
+                        .replace(/T/g, ' ')}
                     </span>
                   </div>
                 </td>

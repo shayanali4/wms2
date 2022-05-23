@@ -9,17 +9,17 @@ import Heading from '../components/Heading';
 import NotStartedTable from '../components/Table/NotStarted';
 
 const NotStartedPage: NextPage = () => {
-  const [notStartedOrders, setNotStartedOrders] = useState(null);
+  const [notStartedOrders, setNotStartedOrders] = useState([{}]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotStartedOrders = async () => {
-      let { data: ordersNS }: { data: any[] } = await supabaseClient
+      const { data } = await supabaseClient
         .from('order')
         .select('*')
         .eq('tracker_status', 1);
-      console.log(ordersNS);
-      setNotStartedOrders(ordersNS);
+      console.log(data);
+      setNotStartedOrders(data || [{}]);
       setLoading(false);
     };
     fetchNotStartedOrders().catch(console.error);

@@ -33,11 +33,9 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
-                      {order.start_time
-                        ? order.start_time
-                            .slice(0, 19)
-                            .replace(/T/g, ' ')
-                        : null}
+                      {(order.start_time as any)
+                        .slice(0, 19)
+                        .replace(/T/g, ' ')}
                     </span>
                   </div>
                 </td>
@@ -45,11 +43,9 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
-                      {order.expected_finish_date
-                        ? order.expected_finish_date
-                            .slice(0, 19)
-                            .replace(/T/g, ' ')
-                        : null}
+                      {(order.expected_finish_date as any)
+                        .slice(0, 19)
+                        .replace(/T/g, ' ')}
                     </span>
                   </div>
                 </td>
