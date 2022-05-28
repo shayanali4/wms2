@@ -28,7 +28,7 @@ const WIPPage: NextPage = () => {
 
   return (
     <>
-      <Layout title="Work In Progress| Work Management System | TuPack" />
+      <Layout title="Work In Progress | Work Management System | TuPack" />
       <main>
         <div className="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
           <Heading text="WMS" />
