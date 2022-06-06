@@ -17,6 +17,7 @@ const PendingWorkOrder: NextPage = (Props) => {
       name={Props.name}
       email={Props.email}
       number={Props.number}
+      skus={Props.skus}
     ></AcceptWO>
   );
 };
