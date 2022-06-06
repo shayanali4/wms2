@@ -33,7 +33,6 @@ export function AcceptWO(props: QueueObject) {
         <li> ---</li>
         <h1>Specific Order Details</h1>
         <p>SKU{props.skus && props.skus.length === 1 ? null : 's'}</p>
-        {/* <p>{props.skus ? props.skus[0] : null}</p> */}
         <ul>
           {props.skus
             ? props.skus.map((sku: any, i: number) => {
