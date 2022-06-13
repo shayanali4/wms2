@@ -6,5 +6,7 @@ export interface NotStartedObject extends QueueObject {
   assigned_to: number;
   initial_cost: string;
   target_time: number;
-}
-[];
+  tracking_id:string
+  id:number
+  initial_units_or_quantity:number
+};

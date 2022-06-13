@@ -3,7 +3,7 @@ import brands from '../../data/brands';
 import workers from '../../data/workers';
 import { WIPObject } from '../../interfaces/WIPObject';
 
-type Props = { orders: WIPObject };
+type Props = { orders: WIPObject[] };
 
 const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
   <table className="min-w-max w-full table-auto">
