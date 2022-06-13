@@ -4,6 +4,7 @@ import {
   getWorkerName,
   getWorkOrder,
 } from '../../helpers/helpers';
+import Link from 'next/link';
 
 type Props = { orders: NotStartedObject };
 
@@ -82,12 +83,11 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
-                    <button
-                      className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                      value={order.id}
-                    >
-                      Update
-                    </button>
+                    <Link href={`/start_wo/${order.id}`}>
+                      <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
+                        Update
+                      </button>
+                    </Link>
                   </div>
                 </td>
               </tr>
