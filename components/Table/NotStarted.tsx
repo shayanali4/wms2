@@ -1,7 +1,9 @@
-import workOrders from '../../data/workOrders';
-import brands from '../../data/brands';
-import workers from '../../data/workers';
 import { NotStartedObject } from '../../interfaces/NotStartedObject';
+import {
+  getBrandName,
+  getWorkerName,
+  getWorkOrder,
+} from '../../helpers/helpers';
 
 type Props = { orders: NotStartedObject };
 
@@ -10,7 +12,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
-      <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+      <tr className="bg-yellow-300 text-gray-600 uppercase text-sm leading-normal">
         <th className="py-3 px-6 text-left">Time Accepted</th>
         <th className="py-3 px-6 text-left">ID</th>
         <th className="py-3 px-6 text-center">Task</th>
@@ -33,9 +35,11 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
-                      {(order.time_accepted as any)
-                        .slice(0, 19)
-                        .replace(/T/g, ' ')}
+                      {order.time_accepted
+                        ? (order.time_accepted as any)
+                            .slice(0, 19)
+                            .replace(/T/g, ' ')
+                        : 'null'}
                     </span>
                   </div>
                 </td>
@@ -48,15 +52,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>
-                      {workOrders.filter(
-                        (wo) => wo.id === order.id
-                      )[0]
-                        ? workOrders.filter(
-                            (wo) => wo.id === order.id
-                          )[0].name
-                        : 'null'}
-                    </span>
+                    <span>{getWorkOrder(order.id)}</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -66,18 +62,11 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>
-                      {
-                        brands.filter(
-                          (brand) => brand.id === order.brand_id
-                        )[0].name
-                      }
-                    </span>
+                    <span>{getBrandName(order.brand_id)}</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    {console.log(order.target_time)}
                     <span>{order.target_time} minutes</span>
                   </div>
                 </td>
@@ -88,17 +77,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    {console.log(order.assigned_to)}
-                    <span>
-                      {workers.filter(
-                        (worker) => worker.id === order.assigned_to
-                      )[0]
-                        ? workers.filter(
-                            (worker) =>
-                              worker.id === order.assigned_to
-                          )[0].name
-                        : null}
-                    </span>
+                    <span>{getWorkerName(order.assigned_to)}</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
