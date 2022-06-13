@@ -10,6 +10,7 @@ import Heading from '../components/Heading';
 
 const IndexPage: NextPage = () => {
   const [newOrders, setNewOrders] = useState([{}]);
+  const [tasks, setWorkTasks] = useState([{}]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,9 +18,22 @@ const IndexPage: NextPage = () => {
       const { data } = await supabaseClient.from('order').select('*');
       console.log(data);
       setNewOrders(data || [{}]);
-      setLoading(false);
+    };
+    const fetchWorkTasks = async () => {
+      const { data } = await supabaseClient
+        .from('work_tasks')
+        .select('*');
+      console.log(data);
+      setWorkTasks(data || [{}]);
     };
     fetchNewOrders().catch(console.error);
+    fetchWorkTasks().catch(console.error);
+    setLoading(false);
+    return () => {
+      setNewOrders([{}]); // Clean up
+      setWorkTasks([{}]); // Clean up
+      setLoading(true); // Clean up
+    };
   }, []);
 
   return (
@@ -39,7 +53,7 @@ const IndexPage: NextPage = () => {
               {loading ? (
                 <p className="text-2xl">Loading ...</p>
               ) : null}
-              <QueueTable orders={newOrders} />
+              <QueueTable orders={newOrders} tasks={tasks} />
             </div>
           </main>
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">
