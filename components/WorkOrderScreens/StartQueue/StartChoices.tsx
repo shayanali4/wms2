@@ -10,7 +10,7 @@ export const StartChoices = (props: any) => {
   //   console.log(targetTime);
   //   setTargetTime(targetTime);
   // }, []);
-
+  console.log(props.workers);
   return (
     <>
       <h1>Complete this to start</h1>
@@ -19,7 +19,16 @@ export const StartChoices = (props: any) => {
       <input type="date" value="startDate" />
 
       <label htmlFor="assignWorker">Assigned Worker:</label>
-      <select value="assignWorker" />
+      <select value="assignWorker">
+        <option hidden disabled selected>
+          Select a Worker
+        </option>
+        {/* {props.workers.map(({ name, id }) => (
+          <option key={id} value={id}>
+            {name}
+          </option> */}
+        ))}
+      </select>
 
       <label htmlFor="startDate">Expected Finish Date:</label>
       <input type="date" value="expectedFinishDate" />

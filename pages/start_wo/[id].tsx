@@ -12,7 +12,7 @@ const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
   const [task, setTask] = useState({});
-  const [brands, setBrands] = useState({});
+  const [workers, setWorkers] = useState({});
 
   useEffect(() => {
     const fetchNewOrders = async () => {
@@ -47,24 +47,24 @@ const Index: NextPage = (props) => {
         console.log(data);
         setTask(data || {});
       };
-      const getBrands = async () => {
+      const getWorkers = async () => {
         const { data } = await supabaseClient
-          .from('brands')
+          .from('worker')
           .select('*');
         console.log(data);
-        setBrands(data || {});
+        setWorkers(data || {});
       };
       getWorkOrder();
       getSpecifics();
       getWorkTask();
-      getBrands();
+      getWorkers();
     };
     fetchNewOrders().catch(console.error);
     return () => {
       setWorkOrder({}); // Clean up
       setSpecifics({}); // Clean up
       setTask({}); // Clean up
-      setBrands({}); // Clean up
+      setWorkers({}); // Clean up
     };
   }, []);
 
@@ -77,9 +77,9 @@ const Index: NextPage = (props) => {
       {'----'}
       {/* add form here */}
       <StartChoices
-      // task={task}
-      // workOrder={workOrder}
-      // brands={brands}
+        workers={workers}
+        // workOrder={workOrder}
+        // brands={brands}
       />
       {'----'}
       <ActionStartQueue />
