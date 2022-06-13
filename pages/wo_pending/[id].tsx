@@ -60,6 +60,12 @@ const Index: NextPage = (props) => {
       getBrands();
     };
     fetchNewOrders().catch(console.error);
+    return () => {
+      setWorkOrder({}); // Clean up
+      setSpecifics({}); // Clean up
+      setTask({}); // Clean up
+      setBrands({}); // Clean up
+    };
   }, []);
 
   return (
