@@ -1,128 +1,94 @@
-import { useState } from 'react';
-import { AcceptWO } from '../../components/WorkOrderScreens/AcceptWO';
-import { SpecificFields } from '../../components/WorkOrderScreens/SpecificFields';
 import { NextPage } from 'next';
+import { useEffect, useState } from 'react';
+import Layout from '../../components/Layout';
+import { WOSummary } from '../../components/WorkOrderScreens/WOSummary';
+import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
+import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
+import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
 
-const PendingWorkOrder: NextPage = (Props) => {
-  const [workOrder, setWorkOrder] = useState(null);
-  // const [specificFields, setSpecificFields] = useState({});
+const Index: NextPage = (props) => {
+  // const [loading, setLoading] = useState(true);
+  const [workOrder, setWorkOrder] = useState({});
+  const [specifics, setSpecifics] = useState({});
+  const [task, setTask] = useState({});
+  const [brands, setBrands] = useState({});
 
-  let order = Props.order;
-  let specificFields = Props.specificFields;
+  useEffect(() => {
+    const fetchNewOrders = async () => {
+      console.log(props.id);
+
+      const getWorkOrder = async () => {
+        const { data } = await supabaseClient
+          .from('order')
+          .select('*')
+          .eq('id', props.id)
+          .single();
+        console.log(data);
+        setWorkOrder(data || {});
+      };
+      const getSpecifics = async () => {
+        const { data } = await supabaseClient
+          .from('specific_fields')
+          .select('*')
+          .eq('order_id', props.id)
+          .single();
+        console.log(data);
+        setSpecifics(data || {});
+      };
+      const getWorkTask = async () => {
+        console.log(Number(workOrder.work_order_id));
+        const { data } = await supabaseClient
+          .from('work_tasks')
+          .select('*')
+          .eq('id', Number(workOrder.work_order_id))
+          .single();
+
+        console.log(data);
+        setTask(data || {});
+      };
+      const getBrands = async () => {
+        const { data } = await supabaseClient
+          .from('brands')
+          .select('*');
+        console.log(data);
+        setBrands(data || {});
+      };
+      getWorkOrder();
+      getSpecifics();
+      getWorkTask();
+      getBrands();
+    };
+    fetchNewOrders().catch(console.error);
+  }, []);
+
   return (
     <>
-      <AcceptWO
-        id={order.id}
-        tracking_id={order.tracking_id}
-        created_at={order.created_at}
-        description={order.description}
-        initial_units_or_quantity={order.initial_units_or_quantity}
-        brand_entry={order.brand_entry}
-        name={order.name}
-        email={order.email}
-        number={order.number}
-        skus={order.skus}
-      ></AcceptWO>
-      <SpecificFields contents={specificFields.specificFields} />
+      <Layout title="Work order title tbc" />
+      <WOSummary workOrder={workOrder} />
+      {'----'}
+      <SpecificDetails specifics={specifics} workOrder={workOrder} />
+      {'----'}
+      {/* add form here */}
+      <EstimatedCosts
+        task={task}
+        workOrder={workOrder}
+        brands={brands}
+      />
+      {'----'}
+      <ActionWO />
     </>
   );
 };
 
-export default PendingWorkOrder;
+export default Index;
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  console.log(id);
-
-  const orderFetch = async () => {
-    try {
-      let { data, error } = await supabaseClient
-        .from('order')
-        .select(`*`)
-        .eq('id', id)
-        .single();
-      if (data) {
-        return data;
-      }
-    } catch (error: any) {
-      alert(error.message);
-    }
-  };
-
-  const specificFieldsFetch = async () => {
-    try {
-      let { data, error } = await supabaseClient
-        .from('specific_fields')
-        .select(`*`)
-        .eq('order_id', id)
-        .single();
-      if (data) {
-        return data;
-      }
-    } catch (error: any) {
-      alert(error.message);
-    }
-  };
-
-  const [orderData, specificFieldsData] = await Promise.all([
-    await orderFetch(),
-    await specificFieldsFetch(),
-  ]);
-  console.log('order data');
-  console.log(typeof orderData);
-  console.log('spec fields data');
-  console.log(typeof specificFieldsData);
-
+  console.log('SSPid: ', id);
   return {
     props: {
-      order: orderData,
-      specificFields: specificFieldsData,
+      id,
     },
   };
-
-  // try {
-  //   let { data, error, status } = await supabaseClient
-  //     .from('order')
-  //     .select(`*`)
-  //     .eq('id', id)
-  //     .single();
-
-  //   if (error && status !== 406) {
-  //     throw error;
-  //   }
-
-  //   if (data) {
-  //     // console.log(data);
-  //     return {
-  //       props: data,
-  //     };
-  //   }
-  // } catch (error: any) {
-  //   alert(error.message);
-  // } finally {
-  //   try {
-  //     // https://stackoverflow.com/questions/64996432/how-to-query-using-join-in-supabase
-  //     console.log('second call');
-  //     let { data, error, status } = await supabaseClient
-  //       .from('specific_fields')
-  //       .select(`*`)
-  //       .eq('order_id', id)
-  //       .single();
-
-  //     if (error && status !== 406) {
-  //       throw error;
-  //     }
-
-  //     if (data) {
-  //       console.log('founddata');
-  //       console.log(data);
-  //       return {
-  //         props: { specificFields: data },
-  //       };
-  //     }
-  //   } catch (error: any) {
-  //     alert(error.message);
-  //   }
-  // }
 }
