@@ -2,7 +2,7 @@ export const AcceptWO = () => {
   return (
     <>
       <p>
-        <b>Estimated Costs: </b>£15
+        <b>Estimated Costs to complete Work Order: </b>TBC
       </p>
       <p>
         <b>Add new costs? </b>
@@ -15,7 +15,7 @@ export const AcceptWO = () => {
       ></input>
       <button id="updateCosts">Update Costs</button>
       <p className="mt-3">
-        <b>Estimated Time: </b>60 mins
+        <b>Estimated Time to complete Work Order: </b>TBC
       </p>
       <p>
         <b>Update Estimated Time? </b>
