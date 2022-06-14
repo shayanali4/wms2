@@ -24,6 +24,10 @@ const WIPPage: NextPage = () => {
       setLoading(false);
     };
     fetchWIPOrders().catch(console.error);
+    return () => {
+      setWIPOrders(null); // Clean up
+      setLoading(true); // Clean up
+    };
   }, []);
 
   return (

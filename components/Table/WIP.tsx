@@ -4,6 +4,7 @@ import {
   getWorkerName,
   getWorkOrder,
 } from '../../helpers/helpers';
+import Link from 'next/link';
 
 type Props = { orders: WIPObject };
 
@@ -99,12 +100,14 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
                 {/* button */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
-                    <button
-                      className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                      value={order.id}
-                    >
-                      Finish
-                    </button>
+                    <Link href={`/finish/${order.id}`}>
+                      <button
+                        className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
+                        value={order.id}
+                      >
+                        Finish
+                      </button>
+                    </Link>
                   </div>
                 </td>
               </tr>

@@ -23,6 +23,10 @@ const NotStartedPage: NextPage = () => {
       setLoading(false);
     };
     fetchNotStartedOrders().catch(console.error);
+    return () => {
+      setNotStartedOrders([{}]); // Clean up
+      setLoading(true); // Clean up
+    };
   }, []);
 
   return (

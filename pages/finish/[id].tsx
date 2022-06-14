@@ -1,13 +1,13 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
-import { WOSummary } from '../../components/WorkOrderScreens/WOSummary';
+import { FinishSummary } from '../../components/WorkOrderScreens/Finish/FinishSummary';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
 import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
 
-const Index: NextPage = (props) => {
+const FinishIndex: NextPage = (props) => {
   // const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
@@ -37,7 +37,7 @@ const Index: NextPage = (props) => {
         setSpecifics(data || {});
       };
       const getWorkTask = async () => {
-        console.log(Number(workOrder.work_order_id));
+        console.log(workOrder.work_order_id);
         const { data } = await supabaseClient
           .from('work_tasks')
           .select('*')
@@ -70,8 +70,8 @@ const Index: NextPage = (props) => {
 
   return (
     <>
-      <Layout title="Work order title tbc" />
-      <WOSummary workOrder={workOrder} />
+      <Layout title={`Complete WO`} />
+      <FinishSummary workOrder={workOrder} task={task} />
       {'----'}
       <SpecificDetails specifics={specifics} workOrder={workOrder} />
       {'----'}
@@ -87,11 +87,11 @@ const Index: NextPage = (props) => {
   );
 };
 
-export default Index;
+export default FinishIndex;
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  console.log('SSPid: ', id);
+  console.log('Finish SSPid: ', id);
   return {
     props: {
       id,

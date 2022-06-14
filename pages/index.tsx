@@ -10,7 +10,7 @@ import Heading from '../components/Heading';
 
 const IndexPage: NextPage = () => {
   const [newOrders, setNewOrders] = useState([{}]);
-  const [tasks, setTasks] = useState([{}]);
+  const [tasks, setWorkTasks] = useState([{}]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,18 +19,21 @@ const IndexPage: NextPage = () => {
       console.log(data);
       setNewOrders(data || [{}]);
     };
-    const getWorkTasks = async () => {
+    const fetchWorkTasks = async () => {
       const { data } = await supabaseClient
         .from('work_tasks')
         .select('*');
-
       console.log(data);
-      setTasks(data || [{}]);
+      setWorkTasks(data || [{}]);
     };
     fetchNewOrders().catch(console.error);
-    getWorkTasks().catch(console.error);
+    fetchWorkTasks().catch(console.error);
     setLoading(false);
-  }, []);
+    return () => {
+      setNewOrders([{}]); // Clean up
+      setWorkTasks([{}]); // Clean up
+      setLoading(true); // Clean up
+    };
 
   return (
     <>
