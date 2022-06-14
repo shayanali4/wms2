@@ -34,6 +34,7 @@ const IndexPage: NextPage = () => {
       setWorkTasks([{}]); // Clean up
       setLoading(true); // Clean up
     };
+  }, []);
 
   return (
     <>
@@ -55,14 +56,9 @@ const IndexPage: NextPage = () => {
               <QueueTable orders={newOrders} tasks={tasks} />
             </div>
           </main>
-          <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">
-            <SideBar />
-          </div>
+          <div className="w-fixed w-full flex-shrink flex-grow-0 px-2"></div>
         </div>
       </main>
-      <footer className="bg-yellow-300 mt-auto">
-        <h1 className="">hi </h1>
-      </footer>
     </>
   );
 };
