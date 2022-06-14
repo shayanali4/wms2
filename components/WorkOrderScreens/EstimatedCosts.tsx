@@ -19,8 +19,9 @@ export const EstimatedCosts = (props: any) => {
 
   return (
     <>
-      <h1>Calculate Estimated Costs</h1>
+      <h2>Calculate Estimated Costs</h2>
       <ul>
+        <li> --- </li>
         <li>
           <b>Work Order: </b>
           {task.work_order_name}
@@ -35,7 +36,10 @@ export const EstimatedCosts = (props: any) => {
         </li>
       </ul>
       <label htmlFor="brand_system">
-        <h2> Choose the Customer's Brand here to display costs</h2>
+        <h3 className="mt-3">
+          {' '}
+          Match the Customer's Brand here to display costs
+        </h3>
       </label>
       <select
         name="brands"
@@ -45,7 +49,7 @@ export const EstimatedCosts = (props: any) => {
         <option hidden disabled selected>
           Select a Brand
         </option>
-        {props.brands
+        {/* {props.brands
           .sort(function (a, b) {
             if (a.name < b.name) {
               return -1;
@@ -59,7 +63,7 @@ export const EstimatedCosts = (props: any) => {
             <option key={id} value={id}>
               {name}
             </option>
-          ))}
+          ))} */}
       </select>
       <ul>
         <li>

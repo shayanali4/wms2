@@ -1,44 +1,46 @@
 export const WOSummary = (props: any) => {
   return (
     <>
-      <h1>
-        Details for Order:
-        {props.workOrder.tracking_id}
+      {console.log(props)}
+      <h1 className="mb-5">
+        {props.workOrder.tracking_id}: Accept / Reject Work Order
       </h1>
-      <p>
-        Order Id (to delete):
-        {props.workOrder.id}
-      </p>
-
-      <ul>
+      <h2> Summary</h2>
+      <ul className="mb-3">
         <li> --- </li>
         <li>
-          Description
+          <b>Task: </b> {props.task.work_order_name}
+        </li>
+        <li>
+          <b>Description: </b>
           {props.workOrder.description}
         </li>
         <li>
-          Total Units/Quantity:
+          <b>Total Units/Quantity: </b>
           {props.workOrder.initial_units_or_quantity}
         </li>
         <li>
-          Submitted:
-          {props.workOrder.created_at}
+          <b>Date Submitted: </b>
+          {props ? props.workOrder.created_at : 'not working rn'}
         </li>
-        <h1>Contact</h1>
+      </ul>
+      <h2>Contact</h2>
+      <ul className="mb-3">
+        <li> --- </li>
         <li>
-          Brand (Customer Entry):
+          <b>Brand (Customer Entry): </b>
           {props.workOrder.brand_entry}
         </li>
         <li>
-          Customer Name:
+          <b>Customer Name: </b>
           {props.workOrder.name}
         </li>
         <li>
-          Email:
+          <b>Email: </b>
           {props.workOrder.email}
         </li>
         <li>
-          Phone Number:
+          <b>Phone Number: </b>
           {props.workOrder.number}
         </li>
       </ul>
