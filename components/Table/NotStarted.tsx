@@ -1,9 +1,4 @@
 import { NotStartedObject } from '../../interfaces/NotStartedObject';
-import {
-  getBrandName,
-  getWorkerName,
-  getWorkOrder,
-} from '../../helpers/helpers';
 import Link from 'next/link';
 
 type Props = { orders: NotStartedObject };
@@ -21,7 +16,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
         <th className="py-3 px-6 text-center">Brand (Actual)</th>
         <th className="py-3 px-6 text-center">Target Time</th>
         <th className="py-3 px-6 text-center">Initial Cost</th>
-        <th className="py-3 px-6 text-center">Assigned To</th>
+        {/* <th className="py-3 px-6 text-center">Assigned To</th> */}
         <th className="py-3 px-6 text-center">Start Order</th>
       </tr>
     </thead>
@@ -53,7 +48,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getWorkOrder(order.id)}</span>
+                    <span>tbc</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -63,7 +58,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getBrandName(order.brand_id)}</span>
+                    <span>tbc</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -76,11 +71,11 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                     <span>£{order.initial_cost}</span>
                   </div>
                 </td>
-                <td className="py-3 px-6 text-center">
+                {/* <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>{getWorkerName(order.assigned_to)}</span>
                   </div>
-                </td>
+                </td> */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
                     <Link href={`/start_wo/${order.id}`}>
