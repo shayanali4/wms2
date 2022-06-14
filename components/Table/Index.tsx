@@ -49,7 +49,10 @@ const QueueTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
-                      {tasks && order && order.work_order_id
+                      {tasks &&
+                      order &&
+                      order.work_order_id &&
+                      tasks[order.work_order_id].work_order_name
                         ? tasks[order.work_order_id].work_order_name
                         : null}
                     </span>
