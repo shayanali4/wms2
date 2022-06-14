@@ -34,7 +34,6 @@ const IndexPage: NextPage = () => {
       setWorkTasks([{}]); // Clean up
       setLoading(true); // Clean up
     };
-  }, []);
 
   return (
     <>
