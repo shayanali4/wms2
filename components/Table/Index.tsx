@@ -49,7 +49,7 @@ const QueueTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
-                      {tasks
+                      {tasks && order && order.work_order_id
                         ? tasks[order.work_order_id].work_order_name
                         : null}
                     </span>
@@ -67,7 +67,7 @@ const QueueTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
-                    <Link href={`/wo/${order.id}`}>
+                    <Link href={`/wo_pending/${order.id}`}>
                       <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
                         Full Details
                       </button>
