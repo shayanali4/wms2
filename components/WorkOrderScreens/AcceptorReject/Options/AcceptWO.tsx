@@ -21,11 +21,16 @@ export const AcceptWO = () => {
         <b>Update Estimated Time? </b>
       </p>
       <p>Enter New Estimated Time</p>
+      <button id="updateTiming">Update Timing</button>
+
+      <label htmlFor="updateTiming">
+        <p>Any notes to add?</p>
+      </label>
       <textarea
         id="notesForCustAccepted"
         placeholder="Add Your notes to share with the customer here"
       ></textarea>
-      <button id="updateTiming">Update Timing</button>
+      <button id="submitAccept">Accept Work Order</button>
     </>
   );
 };

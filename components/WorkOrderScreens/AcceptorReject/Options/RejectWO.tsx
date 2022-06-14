@@ -17,6 +17,7 @@ export const RejectWO = () => {
         id="notesForCustRejected"
         placeholder="Add Your reasoning to inform the customer of the rejection here"
       ></textarea>
+      <button id="submitReject">Reject Work Order</button>
     </>
   );
 };
