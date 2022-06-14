@@ -12,7 +12,9 @@ const QueueTable: React.FunctionComponent<Props> = ({ orders }) => (
         <th className="py-3 px-6 text-left">Submission Date</th>
         <th className="py-3 px-6 text-center">Work Order</th>
         <th className="py-3 px-6 text-center">Units / Quantity</th>
-        <th className="py-3 px-6 text-center">Brand</th>
+        <th className="py-3 px-6 text-center">
+          Brand (Customer Entry)
+        </th>
         <th className="py-3 px-6 text-center">Approve or Deny</th>
       </tr>
     </thead>
