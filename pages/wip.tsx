@@ -18,7 +18,7 @@ const WIPPage: NextPage = () => {
       let { data: ordersIP }: { data: any[] } = await supabaseClient
         .from('order')
         .select('*')
-        .eq('tracker_status', 3);
+        .eq('tracker_status', 2);
       console.log(ordersIP);
       setWIPOrders(ordersIP);
       setLoading(false);
