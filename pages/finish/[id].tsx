@@ -6,6 +6,10 @@ import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetai
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
 import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
+import { TimeSummary } from '../../components/WorkOrderScreens/Finish/TimeSummary';
+import { PriceSummary } from '../../components/WorkOrderScreens/Finish/PriceSummary';
+import { PricingSummary } from '../../components/WorkOrderScreens/Finish/PricingSummary';
+import { FinishWO } from '../../components/WorkOrderScreens/Finish/FinishWO';
 
 const FinishIndex: NextPage = (props) => {
   // const [loading, setLoading] = useState(true);
@@ -73,16 +77,16 @@ const FinishIndex: NextPage = (props) => {
       <Layout title={`Complete WO`} />
       <FinishSummary workOrder={workOrder} task={task} />
       {'----'}
-      <SpecificDetails specifics={specifics} workOrder={workOrder} />
-      {'----'}
-      {/* add form here */}
-      <EstimatedCosts
-        task={task}
-        workOrder={workOrder}
-        brands={brands}
-      />
-      {'----'}
-      <ActionWO />
+      <TimeSummary workOrder={workOrder} />
+      <PricingSummary workOrder={workOrder} />
+      {/* <PriceSummary workOrder={workOrder} task={task} /> */}
+      {/* <SpecificDetails specifics={specifics} workOrder={workOrder} /> */}
+      <FinishWO />
+      <button className="mb-10" id="finishWO">
+        <span className="group-hover:text-gray-700">
+          Complete Work Order
+        </span>
+      </button>
     </>
   );
 };

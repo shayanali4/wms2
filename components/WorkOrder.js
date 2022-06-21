@@ -1,32 +1,12 @@
 import { useState } from 'react';
 import newOrders from '../data/newOrders';
 
-// const initFunction = (id) => {
-//   try {
-//     const ans = getOrder(id);
-//     console.log(ans);
-//     return ans;
-//   } catch (error) {
-//     alert('Something went wrong!');
-//     console.log(error.message);
-//   } finally {
-//     console.log('initialised done');
-//   }
-// };
-
-// const workOrderObject = useState([]);
-
 const getOrder = (id) => {
-  console.log(newOrders[0].order_id);
-
   const order = newOrders.filter((order) => order.order_id == id);
-  console.log(order);
   return order;
 };
 
 const WorkOrder = ({ id, pathname }) => {
-  //replace w state 2 load into
-  console.log(id);
   const wOrderObj = getOrder(id);
 
   return (
