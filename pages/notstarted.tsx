@@ -7,6 +7,8 @@ import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
 import Heading from '../components/Heading';
 import NotStartedTable from '../components/Table/NotStarted';
+import Table from '../components/Table/Table';
+import Button from '../components/Button/Button';
 
 const NotStartedPage: NextPage = () => {
   const [notStartedOrders, setNotStartedOrders] = useState([{}]);
@@ -29,6 +31,36 @@ const NotStartedPage: NextPage = () => {
     };
   }, []);
 
+  const tHeadNotStarted = [
+    'Time Accepted',
+    'ID',
+    'Task',
+    'Units / Quantity',
+    'Brand (Actual)',
+    'Target Time',
+    'Initial Cost',
+    'Start Order',
+  ];
+
+  const tRow = [
+    {
+      id: '1',
+      items: [
+        'John',
+        'john@email.com',
+        <Button text="Full Details" hyperlink={`/wo_pending/${3}`} />,
+      ],
+    },
+    {
+      id: '2',
+      items: ['Sally', 'sally@email.com', '12/24/2020'],
+    },
+    {
+      id: '3',
+      items: ['Maria', 'maria@email.com', '12/01/2020'],
+    },
+  ];
+
   return (
     <>
       <Layout title="Not Started | Work Management System | TuPack" />
@@ -44,11 +76,12 @@ const NotStartedPage: NextPage = () => {
             {loading ? <p className="text-2xl">Loading ...</p> : null}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="Not Started" />
-              {notStartedOrders ? (
+              {/* {notStartedOrders ? (
                 <NotStartedTable orders={notStartedOrders} />
-              ) : null}
+              ) : null} */}
             </div>
           </main>
+          <Table theadData={tHeadNotStarted} tbodyData={tRow} />
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">
             <SideBar />
           </div>

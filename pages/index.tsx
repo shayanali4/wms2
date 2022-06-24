@@ -36,6 +36,15 @@ const IndexPage: NextPage = () => {
     };
   }, []);
 
+  const tHeadIndex = [
+    'ID',
+    'Submission Date',
+    'Work Order',
+    'Units / Quantity',
+    'Brand (Customer Entry)',
+    'Approve or Deny',
+  ];
+
   return (
     <>
       <Layout title="Queue | Work Management System | TuPack" />

@@ -2,7 +2,7 @@ import TableRow from './TableRow';
 import TableHeadItem from './TableHead';
 type Props = {
   theadData: string[];
-  tbodyData: Array<Array<any>>;
+  tbodyData: any;
 };
 
 const Table: React.FunctionComponent<Props> = ({
