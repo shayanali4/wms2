@@ -3,7 +3,7 @@ import { supabaseClient } from '../lib/client';
 import * as React from 'react';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
-import TableWip from '../components/Table/WIP';
+import TableWip from '../components/Table/Views/WIP';
 import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';

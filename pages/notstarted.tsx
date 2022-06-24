@@ -6,7 +6,7 @@ import SideBar from '../components/SideBar';
 import { NextPage } from 'next';
 import TitleText from '../components/TitleText';
 import Heading from '../components/Heading';
-import NotStartedTable from '../components/Table/NotStarted';
+import NotStartedTable from '../components/Table/Views/NotStarted';
 
 const NotStartedPage: NextPage = () => {
   const [notStartedOrders, setNotStartedOrders] = useState([{}]);
