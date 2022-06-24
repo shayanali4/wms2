@@ -48,9 +48,7 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>
-                      {tasks[Number(order.work_task_id)].name}
-                    </span>
+                    <span>{order.task_name}</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">

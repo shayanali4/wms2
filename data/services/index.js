@@ -55,4 +55,9 @@ export const getTableInformation = async (name) => {
   }
 };
 
-// orders, work tasks, work task name
+export const getWorkTaskNames = (orders, tasks) => {
+  return orders.map((o) => {
+    let task_name = tasks[o.work_task_id].name;
+    return { ...o, task_name: task_name };
+  });
+};
