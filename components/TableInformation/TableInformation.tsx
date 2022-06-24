@@ -35,9 +35,7 @@ export default function TableInformation({ name }) {
   }, [name]);
   return (
     <div>
-      {name === 'newOrders' ? (
-        <NewOrder orders={orders} tasks={workTasks} />
-      ) : null}
+      {name === 'newOrders' ? <NewOrder orders={orders} /> : null}
     </div>
   );
 }

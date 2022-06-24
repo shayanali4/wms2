@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { QueueObject } from '../../../interfaces/QueueObject';
 
-type Props = { orders: QueueObject; tasks: any };
+type Props = { orders: QueueObject };
 
 const NewOrderTable: React.FunctionComponent<Props> = ({
   orders,
-  tasks,
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
