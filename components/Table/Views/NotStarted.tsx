@@ -1,27 +1,22 @@
-import { NotStartedObject } from '../../interfaces/NotStartedObject';
-import {
-  getBrandName,
-  getWorkerName,
-  getWorkOrder,
-} from '../../helpers/helpers';
+import { NotStartedObject } from '../../../interfaces/NotStartedObject';
 import Link from 'next/link';
 
-type Props = { orders: NotStartedObject };
-
+type Props = { orders: NotStartedObject; workTasks: any };
 const NotStartedTable: React.FunctionComponent<Props> = ({
   orders,
+  workTasks,
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
       <tr className="bg-yellow-300 text-gray-600 uppercase text-sm leading-normal">
         <th className="py-3 px-6 text-left">Time Accepted</th>
         <th className="py-3 px-6 text-left">ID</th>
-        <th className="py-3 px-6 text-center">Task</th>
+        <th className="py-3 px-6 text-center">Work Task</th>
         <th className="py-3 px-6 text-center">Units / Quantity</th>
         <th className="py-3 px-6 text-center">Brand (Actual)</th>
         <th className="py-3 px-6 text-center">Target Time</th>
         <th className="py-3 px-6 text-center">Initial Cost</th>
-        <th className="py-3 px-6 text-center">Assigned To</th>
+        {/* <th className="py-3 px-6 text-center">Assigned To</th> */}
         <th className="py-3 px-6 text-center">Start Order</th>
       </tr>
     </thead>
@@ -53,7 +48,8 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getWorkOrder(order.id)}</span>
+                    {/* <span>{workTasks[].work_order_name}</span> */}
+                    {/* <span>{workTasks[2].name}</span> */}
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -63,7 +59,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getBrandName(order.brand_id)}</span>
+                    <span>tbc</span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -76,11 +72,11 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                     <span>£{order.initial_cost}</span>
                   </div>
                 </td>
-                <td className="py-3 px-6 text-center">
+                {/* <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>{getWorkerName(order.assigned_to)}</span>
                   </div>
-                </td>
+                </td> */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
                     <Link href={`/start_wo/${order.id}`}>

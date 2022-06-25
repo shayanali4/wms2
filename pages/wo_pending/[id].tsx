@@ -71,17 +71,14 @@ const Index: NextPage = (props) => {
   return (
     <>
       <Layout title="Work order title tbc" />
-      <WOSummary workOrder={workOrder} />
-      {'----'}
+      <WOSummary workOrder={workOrder} task={task} />
       <SpecificDetails specifics={specifics} workOrder={workOrder} />
-      {'----'}
       {/* add form here */}
       <EstimatedCosts
         task={task}
         workOrder={workOrder}
         brands={brands}
       />
-      {'----'}
       <ActionWO />
     </>
   );

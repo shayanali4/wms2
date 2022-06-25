@@ -9,7 +9,7 @@ export const ActionWO = () => {
 
   return (
     <>
-      <h1>Accept or reject Work Order</h1>
+      <h2 className="mt-3">Accept / Reject Work Order</h2>
       <button id="accept" onClick={() => setWOAction('accept')}>
         Accept
       </button>

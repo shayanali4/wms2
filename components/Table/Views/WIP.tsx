@@ -1,9 +1,9 @@
-import { WIPObject } from '../../interfaces/WIPObject';
+import { WIPObject } from '../../../interfaces/WIPObject';
 import {
   getBrandName,
   getWorkerName,
   getWorkOrder,
-} from '../../helpers/helpers';
+} from '../../../helpers/helpers';
 import Link from 'next/link';
 
 type Props = { orders: WIPObject };

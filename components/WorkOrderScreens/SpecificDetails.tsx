@@ -11,8 +11,10 @@ export const SpecificDetails = (props: any) => {
 
   return (
     <>
-      <h1>Specific Order Details</h1>
+      <h2>Specific Order Details</h2>
       <ul>
+        <li> --- </li>
+
         {specifics.map((specific) => (
           <li>
             {specific[0]}: {specific[1]}
@@ -20,11 +22,11 @@ export const SpecificDetails = (props: any) => {
         ))}
       </ul>
       {!skus ? null : skus.length === 1 ? (
-        <h1>SKU</h1>
+        <h3>SKU</h3>
       ) : (
-        <h1>SKUs</h1>
+        <h2>SKUs</h2>
       )}
-      <ul>
+      <ul className="mb-3">
         {skus
           ? skus.map((sku: any, i: number) => {
               return (
