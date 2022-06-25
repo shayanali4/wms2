@@ -29,11 +29,12 @@ export function Tracker(props: Props) {
             <b>Rejected</b> due to {props.decline_reason}{' '}
           </p>
         ) : null}
+
         {props.tracker_status === 0 ? (
           <p>
-            <b>Pending</b> We've received your work order @{' '}
+            <b>Pending</b> We've received your work order @
             {props.created_at} and will let you know when next steps
-            are ready{' '}
+            are ready.
           </p>
         ) : null}
         {props.tracker_status === 1 ? (
