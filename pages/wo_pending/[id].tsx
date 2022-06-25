@@ -6,6 +6,9 @@ import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetai
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
 import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
+// import { awsSendEmail } from '../../components/Email/awsSendTestEmail';
+// import {sesClient} from '../../lib/sesClient'
+import { run } from '../../components/Email/awsSendTestEmail';
 
 const Index: NextPage = (props) => {
   // const [loading, setLoading] = useState(true);
@@ -79,6 +82,7 @@ const Index: NextPage = (props) => {
         workOrder={workOrder}
         brands={brands}
       />
+      <button onClick={() => run()}> Send Test Email</button>
       <ActionWO />
     </>
   );

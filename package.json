@@ -9,6 +9,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.112.0",
     "@supabase/supabase-js": "^1.35.3",
     "isomorphic-unfetch": "3.0.0",
     "next": "^12.1.6",
