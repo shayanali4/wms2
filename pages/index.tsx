@@ -42,6 +42,12 @@ const IndexPage: NextPage = () => {
           <button onClick={() => setTable('wip')}>
             Work In Progress
           </button>
+          <button onClick={() => setTable('completed')}>
+            Completed
+          </button>
+          <button onClick={() => setTable('declined')}>
+            Declined
+          </button>
           <main
             role="main"
             className="w-full lg:w-5/6 flex-grow pt-1 px-3"
