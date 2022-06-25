@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Wip, NewOrder, NotStarted } from '../Table/Views';
+import { Wip, NewOrder, NotStarted, Completed } from '../Table/Views';
 import {
   getTableInformation,
   getWorkTaskNames,
@@ -36,6 +36,7 @@ export default function TableInformation({ name }) {
   return (
     <div>
       {name === 'newOrders' ? <NewOrder orders={orders} /> : null}
+      {name === 'completed' ? <Completed orders={orders} /> : null}
     </div>
   );
 }
