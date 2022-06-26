@@ -6,64 +6,41 @@ import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetai
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
 import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
+import {
+  fetchBrands,
+  fetchOneOrder,
+  fetchWorkTasks,
+  findSpecificFieldsForOrder,
+  findWorkTask,
+} from '../../data/services';
 
 const Index: NextPage = (props) => {
   // const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
-  const [task, setTask] = useState({});
+  const [tasks, setTasks] = useState({});
   const [brands, setBrands] = useState({});
 
   useEffect(() => {
     const fetchNewOrders = async () => {
-      console.log(props.id);
-
-      const getWorkOrder = async () => {
-        const { data } = await supabaseClient
-          .from('order')
-          .select('*')
-          .eq('id', props.id)
-          .single();
-        console.log(data);
-        setWorkOrder(data || {});
-      };
-      const getSpecifics = async () => {
-        const { data } = await supabaseClient
-          .from('specific_fields')
-          .select('*')
-          .eq('order_id', props.id)
-          .single();
-        console.log(data);
-        setSpecifics(data || {});
-      };
-      const getWorkTask = async () => {
-        console.log(Number(workOrder.work_order_id));
-        const { data } = await supabaseClient
-          .from('work_tasks')
-          .select('*')
-          .eq('id', Number(workOrder.work_order_id))
-          .single();
-
-        console.log(data);
-        setTask(data || {});
-      };
-      const getBrands = async () => {
-        const { data } = await supabaseClient
-          .from('brands')
-          .select('*');
-        console.log(data);
-        setBrands(data || {});
-      };
-      getWorkOrder();
-      getSpecifics();
-      getWorkTask();
-      getBrands();
+      const order = await fetchOneOrder(props.id);
+      setWorkOrder(order || {});
+      const specificFields = await findSpecificFieldsForOrder(
+        props.id
+      );
+      setSpecifics(specificFields || {});
+      const workTasks = await fetchWorkTasks();
+      setTasks(workTasks || {});
+      const brands = await fetchBrands();
+      console.log(workTasks);
+      console.log(brands);
+      setBrands(brands || {});
     };
     fetchNewOrders().catch(console.error);
     return () => {
       setWorkOrder({}); // Clean up
       setSpecifics({}); // Clean up
-      setTask({}); // Clean up
+      setTasks({}); // Clean up
       setBrands({}); // Clean up
     };
   }, []);
@@ -71,11 +48,11 @@ const Index: NextPage = (props) => {
   return (
     <>
       <Layout title="Work order title tbc" />
-      <WOSummary workOrder={workOrder} task={task} />
+      <WOSummary workOrder={workOrder} task={tasks} />
       <SpecificDetails specifics={specifics} workOrder={workOrder} />
       {/* add form here */}
       <EstimatedCosts
-        task={task}
+        task={tasks}
         workOrder={workOrder}
         brands={brands}
       />

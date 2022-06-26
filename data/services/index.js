@@ -4,8 +4,16 @@ export const fetchAllOrders = async () => {
   const { data } = await supabaseClient.from('order').select('*');
   return data;
 };
+export const fetchOneOrder = async (id) => {
+  const { data } = await supabaseClient
+    .from('order')
+    .select('*')
+    .eq('id', id)
+    .single();
+  return data;
+};
 
-export const FetchBrands = async () => {
+export const fetchBrands = async () => {
   const { data } = await supabaseClient.from('brands').select('*');
   return data;
 };
