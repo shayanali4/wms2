@@ -5,87 +5,95 @@ import { QueueSummary } from '../../components/WorkOrderScreens/StartQueue/Queue
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { StartChoices } from '../../components/WorkOrderScreens/StartQueue/StartChoices';
 import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/ActionStartQueue';
+import {
+  fetchWorkers,
+  fetchOneOrder,
+  fetchWorkTasks,
+  findSpecificFieldsForOrder,
+} from '../../data/services';
 import { supabaseClient } from '../../lib/client';
 
 const Index: NextPage = (props) => {
   // const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
-  const [task, setTask] = useState({});
+  const [task, setTasks] = useState({});
   const [workers, setWorkers] = useState({});
 
   useEffect(() => {
-    const fetchNewOrders = async () => {
-      console.log(props.id);
-
-      const getWorkOrder = async () => {
-        const { data } = await supabaseClient
-          .from('order')
-          .select('*')
-          .eq('id', props.id)
-          .single();
-        console.log(data);
-        setWorkOrder(data || {});
-      };
-      const getSpecifics = async () => {
-        const { data } = await supabaseClient
-          .from('specific_fields')
-          .select('*')
-          .eq('order_id', props.id)
-          .single();
-        console.log(data);
-        setSpecifics(data || {});
-      };
-      const getWorkTask = async () => {
-        console.log(Number(workOrder.work_order_id));
-        const { data } = await supabaseClient
-          .from('work_tasks')
-          .select('*')
-          .eq('id', Number(workOrder.work_order_id))
-          .single();
-
-        console.log(data);
-        setTask(data || {});
-      };
-      const getWorkers = async () => {
-        const { data } = await supabaseClient
-          .from('worker')
-          .select('*');
-        console.log(data);
-        setWorkers(data || {});
-      };
-      getWorkOrder();
-      getSpecifics();
-      getWorkTask();
-      getWorkers();
+    const fetchNotStartedOrders = async () => {
+      const order = await fetchOneOrder(props.id);
+      setWorkOrder(order || {});
+      const specificFields = await findSpecificFieldsForOrder(
+        props.id
+      );
+      setSpecifics(specificFields || {});
+      const workTasks = await fetchWorkTasks();
+      setTasks(workTasks || {});
+      const workers = await fetchWorkers();
+      console.log(workTasks, workers);
+      setWorkers(workers || {});
     };
-    fetchNewOrders().catch(console.error);
+    fetchNotStartedOrders().catch(console.error);
     return () => {
-      setWorkOrder({}); // Clean up
-      setSpecifics({}); // Clean up
-      setTask({}); // Clean up
-      setWorkers({}); // Clean up
+      setWorkOrder({});
+      setSpecifics({});
+      setTasks({});
+      setWorkers({});
     };
   }, []);
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    let formData = { tracker_status: 2 };
+
+    Array.prototype.forEach.call(
+      e.target.elements,
+      (element: Element) => {
+        console.log(element.id, ' ', element.value);
+        element.id == 'declineReason'
+          ? (formData = {
+              ...formData,
+              tracker_status: 99,
+              decline_reason: element.value,
+            })
+          : null;
+        element.id == 'startDate'
+          ? (formData = { ...formData, start_time: element.value })
+          : null;
+        element.id == 'estFinishDate'
+          ? (formData = {
+              ...formData,
+              expected_finish_date: element.value,
+            })
+          : null;
+      }
+    );
+
+    const { data, error } = await supabaseClient
+      .from('order')
+      .update(formData)
+      .eq('id', props.id);
+    console.log(data);
+    if (error) {
+      console.log(error.message);
+    }
+    if (data) {
+      alert('Submitted successfully');
+    }
+  };
+
   return (
     <>
-      <Layout title="Queue: Work Order" />
-      <QueueSummary workOrder={workOrder} task={task} />
-      {'----'}
-      <SpecificDetails specifics={specifics} workOrder={workOrder} />
-      {'----'}
-      {/* add form here */}
-      <StartChoices
-        workers={workers}
-        // workOrder={workOrder}
-        // brands={brands}
+      <Layout
+        title={`Order #${workOrder.tracking_id} | Queue | WMS | TuPack`}
       />
-      {'----'}
-      <ActionStartQueue />
-      <button id="accept" onClick={() => null}>
-        Start Work Order
-      </button>
+      <QueueSummary workOrder={workOrder} task={task} />
+      <SpecificDetails specifics={specifics} workOrder={workOrder} />
+      <form onSubmit={handleSubmit}>
+        <StartChoices workers={workers} />
+        <ActionStartQueue />
+      </form>
     </>
   );
 };

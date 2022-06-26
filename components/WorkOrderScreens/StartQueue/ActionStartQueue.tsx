@@ -1,22 +1,31 @@
 import { useState } from 'react';
+import { RejectWO } from '../AcceptorReject/Options/RejectWO';
 
 export const ActionStartQueue = () => {
-  const [WOAction, setWOAction] = useState<
-    'accept' | 'reject' | null
-  >(null);
+  const [WOAction, setWOAction] = useState<'start' | 'reject' | null>(
+    null
+  );
 
   return (
     <>
-      <h1>Accept or reject Work Order</h1>
+      <h1>Start Work Order</h1>
 
-      <button id="reset" onClick={() => setWOAction('reject')}>
-        Reset (to Queue)
+      <button
+        // type="button"
+        id="start"
+        onClick={() => setWOAction('start')}
+      >
+        Start Work Order
       </button>
-      <button id="reject" onClick={() => setWOAction('reject')}>
-        Reject
+
+      <button
+        // type="button"
+        id="reject"
+        onClick={() => setWOAction('reject')}
+      >
+        Reject Work Order
       </button>
-      {/* {WOAction && WOAction === 'accept' ? <AcceptWO /> : null}
-      {WOAction && WOAction === 'reject' ? <RejectWO /> : null} */}
+      {WOAction === 'reject' ? <RejectWO /> : null}
     </>
   );
 };

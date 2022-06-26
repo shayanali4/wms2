@@ -33,6 +33,11 @@ export const fetchWorkTasks = async () => {
   return data;
 };
 
+export const fetchWorkers = async () => {
+  const { data } = await supabaseClient.from('workers').select('*');
+  return data;
+};
+
 export const findSpecificFieldsForOrder = async (orderId) => {
   const { data } = await supabaseClient
     .from('specific_fields')
