@@ -1,4 +1,4 @@
-import Layout from '../Layout';
+import Layout from '../Layout/Layout';
 import { QueueObject } from '../../interfaces/QueueObject';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
 

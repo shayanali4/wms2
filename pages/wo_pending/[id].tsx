@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/Layout';
 import { WOSummary } from '../../components/WorkOrderScreens/WOSummary';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';

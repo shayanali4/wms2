@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { supabaseClient } from '../lib/client';
 import * as React from 'react';
-import Layout from '../components/Layout';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout/Layout';
+import NavBar from '../components/Layout/NavBar';
 import TableWip from '../components/Table/Views/WIP';
-import SideBar from '../components/SideBar';
+import SideBar from '../components/Layout/SideBar';
 import { NextPage } from 'next';
-import TitleText from '../components/TitleText';
-import Heading from '../components/Heading';
+import TitleText from '../components/Layout/TitleText';
+import Heading from '../components/Layout/Heading';
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState(null);

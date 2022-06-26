@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { supabaseClient } from '../lib/client';
-import Layout from '../components/Layout';
-import NavBar from '../components/NavBar';
-import SideBar from '../components/SideBar';
+import Layout from '../components/Layout/Layout';
+import NavBar from '../components/Layout/NavBar';
+import SideBar from '../components/Layout/SideBar';
 import { NextPage } from 'next';
-import TitleText from '../components/TitleText';
-import Heading from '../components/Heading';
+import TitleText from '../components/Layout/TitleText';
+import Heading from '../components/Layout/Heading';
 import Table from '../components/Table/Table';
 import Button from '../components/Button/Button';
 import NotStartedTable from '../components/Table/Views/NotStarted';
