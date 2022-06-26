@@ -14,24 +14,28 @@ export const EstimatedCosts = (props: any) => {
 
   useEffect(() => {
     console.log(workOrder.id);
-    // setWorkOrders()
-
-    const targetTime =
-      workOrder.initial_units_or_quantity * task.mins_per_unit;
-    // console.log(targetTime);
-    // setTargetTime(targetTime);
   }, [props]);
 
   const handleBrandSelect = (input: any) => {
     const brand = brands.filter((b) => b.id == input)[0];
     const minsPerUnit = task[workOrder.work_task_id].mins_per_unit;
-    // const flatCost //do refactor
+    const flatCost = task[workOrder.work_task_id].flat_cost;
     const quantity = workOrder.initial_units_or_quantity;
-    setTargetTime(minsPerUnit * quantity);
+    if (minsPerUnit == null) {
+      setTargetTime(0);
+    } else {
+      setTargetTime(minsPerUnit * quantity);
+    }
     const costRate = brand.hourly_rate;
     let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
-    estimatedCost = Number(estimatedCost.toFixed(2));
-    setEstCost(estimatedCost);
+    if (minsPerUnit == null && flatCost != null) {
+      setEstCost(Number(flatCost * quantity.toFixed(2)));
+    } else if (minsPerUnit == null && flatCost == null) {
+      setEstCost(0);
+    } else {
+      estimatedCost = Number(estimatedCost.toFixed(2));
+      setEstCost(estimatedCost);
+    }
   };
 
   return (
@@ -55,7 +59,7 @@ export const EstimatedCosts = (props: any) => {
       <label htmlFor="brand_system">
         <h3 className="mt-3">
           {' '}
-          Match the Customer's Brand here to display costs
+          Match the Customer's Brand here to get estimates
         </h3>
       </label>
       <select

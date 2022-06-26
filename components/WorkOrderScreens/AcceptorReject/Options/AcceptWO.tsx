@@ -1,34 +1,23 @@
 export const AcceptWO = () => {
   return (
     <>
-      <p>
-        <b>Estimated Costs to complete Work Order: </b>TBC
-      </p>
-      <p>
-        <b>Add new costs? </b>
-      </p>
-      <p>Enter New Estimated Cost</p>
-      <input
-        type="text"
-        id="notesEstCostAccepted"
-        placeholder="Enter new Est cost here"
-      ></input>
-      <button id="updateCosts">Update Costs</button>
-      <p className="mt-3">
-        <b>Estimated Time to complete Work Order: </b>TBC
-      </p>
-      <p>
-        <b>Update Estimated Time? </b>
-      </p>
-      <p>Enter New Estimated Time</p>
+      <label htmlFor="updateTiming">
+        <p className="mt-3">Update Target Time (optional)</p>
+      </label>
+      <input type="text" id="notesEstCostAccepted"></input>
       <button id="updateTiming">Update Timing</button>
 
-      <label htmlFor="updateTiming">
-        <p>Any notes to add?</p>
+      <label htmlFor="updateCosts">
+        <p>Update Estimated Cost (optional)</p>
       </label>
+      <input type="text" id="notesEstCostAccepted"></input>
+      <button id="updateCosts">Update Costs</button>
+      <p className="mt-3"></p>
+
+      <p>Any notes to accepting a work order?</p>
       <textarea
         id="notesForCustAccepted"
-        placeholder="Add Your notes to share with the customer here"
+        placeholder="Add Your notes to share with the customer here..."
       ></textarea>
       <button id="submitAccept">Accept Work Order</button>
     </>
