@@ -21,7 +21,7 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
       </tr>
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
-      {console.log(tasks)}
+      {/* {console.log(tasks)} */}
       {orders
         ? orders.map((order) => {
             return (

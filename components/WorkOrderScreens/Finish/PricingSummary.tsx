@@ -12,7 +12,7 @@ export const PricingSummary = (props: any) => {
       <p>
         <b>Price Per Unit: </b>
         TBCC
-        {/* {props.workOrder.expected_finish_date} */}
+        {props.workOrder.expected_finish_date}
       </p>
 
       <label className="mt-3" htmlFor="finalPrice">
@@ -24,7 +24,7 @@ export const PricingSummary = (props: any) => {
         id="finalPrice"
       />
       <label className="mt-3" htmlFor="finalUnits">
-        <h2>Final number of Units / Total Quantity</h2>
+        <h2>Final Units / Quantity</h2>
       </label>
       <input
         type="text"
