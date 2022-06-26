@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Page from '../components/Page';
-import { fetchNewOrders } from '../data/services';
+import { fetchOrdersTrackerStatus } from '../data/services';
 import NewOrderTable from '../components/Table/Views/NewOrders';
 
 const IndexPage: NextPage = () => {
@@ -10,7 +10,7 @@ const IndexPage: NextPage = () => {
 
   useEffect(() => {
     let mounted = true;
-    fetchNewOrders().then((data) => {
+    fetchOrdersTrackerStatus(0).then((data: any) => {
       setOrders(data.orders || [{}]);
       setWorkTasks(data.workTasks || [{}]);
     });

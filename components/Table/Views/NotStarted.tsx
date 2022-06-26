@@ -1,10 +1,10 @@
 import { NotStartedObject } from '../../../interfaces/NotStartedObject';
 import Link from 'next/link';
 
-type Props = { orders: NotStartedObject; workTasks: any };
+type Props = { orders: NotStartedObject; tasks: any };
 const NotStartedTable: React.FunctionComponent<Props> = ({
   orders,
-  workTasks,
+  tasks,
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
@@ -16,7 +16,6 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
         <th className="py-3 px-6 text-center">Brand (Actual)</th>
         <th className="py-3 px-6 text-center">Target Time</th>
         <th className="py-3 px-6 text-center">Initial Cost</th>
-        {/* <th className="py-3 px-6 text-center">Assigned To</th> */}
         <th className="py-3 px-6 text-center">Start Order</th>
       </tr>
     </thead>
@@ -48,8 +47,8 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    {/* <span>{workTasks[].work_order_name}</span> */}
-                    {/* <span>{workTasks[2].name}</span> */}
+                    {/* <span>{tasks[].work_order_name}</span> */}
+                    {/* <span>{tasks[2].name}</span> */}
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -81,7 +80,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                   <div className="flex item-center justify-center">
                     <Link href={`/start_wo/${order.id}`}>
                       <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
-                        Update
+                        Start
                       </button>
                     </Link>
                   </div>
