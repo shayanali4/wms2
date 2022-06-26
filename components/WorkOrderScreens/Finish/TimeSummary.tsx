@@ -1,27 +1,26 @@
 export const TimeSummary = (props: any) => {
-  console.log(props);
   return (
     <>
-      <h1>
-        Time taken to complete
-        {props.workOrder.tracking_id}
-      </h1>
+      <h2>Final Timings</h2>
       <p>
-        Start Date:
-        {props.task.work_order_name}
+        <b>Start Date: </b>
+        {props.workOrder.start_time}
       </p>
       <p>
-        Finish Date:
-        {props.task.work_order_name}
+        <b>Expected Finish Date: </b>
+        {props.workOrder.expected_finish_date}
       </p>
       <p>
-        Total Time Taken:
-        {props.task.work_order_name}
+        <b>Target Time: </b> {props.workOrder.target_time} mins
       </p>
-      <p>
-        Target Time:
-        {props.task.work_order_name}
-      </p>
+      <label className="mt-3" htmlFor="timeTaken">
+        Total Time Taken (Askkkk)
+      </label>
+      <input
+        type="text"
+        value={`${props.workOrder.target_time} mins`}
+        id="timeTaken"
+      />
     </>
   );
 };

@@ -26,6 +26,15 @@ const IndexPage: NextPage = () => {
   //   };
   // }, []);
 
+  const tHeadIndex = [
+    'ID',
+    'Submission Date',
+    'Work Order',
+    'Units / Quantity',
+    'Brand (Customer Entry)',
+    'Approve or Deny',
+  ];
+
   return (
     <>
       <Layout title="Work Management System | TuPack" />
