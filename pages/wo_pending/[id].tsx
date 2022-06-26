@@ -32,31 +32,66 @@ const Index: NextPage = (props) => {
       const workTasks = await fetchWorkTasks();
       setTasks(workTasks || {});
       const brands = await fetchBrands();
-      console.log(workTasks);
-      console.log(brands);
+      console.log(workTasks, brands);
       setBrands(brands || {});
     };
     fetchNewOrders().catch(console.error);
     return () => {
-      setWorkOrder({}); // Clean up
-      setSpecifics({}); // Clean up
-      setTasks({}); // Clean up
-      setBrands({}); // Clean up
+      setWorkOrder({});
+      setSpecifics({});
+      setTasks({});
+      setBrands({});
     };
   }, []);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    let formData = {
+      tracker_status: 2,
+    };
+
+    Array.prototype.forEach.call(
+      e.target.elements,
+      (element: Element) => {
+        element.id == 'updateTime'
+          ? (formData = { ...formData, target_time: element.value })
+          : null;
+        element.id == 'updateCost'
+          ? (formData = { ...formData, initial_cost: element.value })
+          : null;
+        element.id == 'initialComments' && element.value
+          ? (formData = {
+              ...formData,
+              initial_comments: element.value,
+            })
+          : null;
+        console.log(element.id, ' ', element.value);
+      }
+    );
+
+    const { data, error } = await supabaseClient
+      .from('order')
+      .update(formData)
+      .eq('id', props.id);
+    console.log(data);
+    if (error) {
+      console.log(error.message);
+    }
+    alert('Submitted successfully');
+  };
 
   return (
     <>
       <Layout title="Work order title tbc" />
       <WOSummary workOrder={workOrder} task={tasks} />
       <SpecificDetails specifics={specifics} workOrder={workOrder} />
-      {/* add form here */}
-      <EstimatedCosts
-        task={tasks}
-        workOrder={workOrder}
-        brands={brands}
-      />
-      <ActionWO />
+      <form onSubmit={handleSubmit}>
+        <EstimatedCosts
+          task={tasks}
+          workOrder={workOrder}
+          brands={brands}
+        />
+      </form>
     </>
   );
 };

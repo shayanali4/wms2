@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ActionWO } from './AcceptorReject/ActionWO';
 
 export const EstimatedCosts = (props: any) => {
   const task = props.task;
@@ -14,7 +15,7 @@ export const EstimatedCosts = (props: any) => {
 
   useEffect(() => {
     console.log(workOrder.id);
-  }, [props]);
+  }, []);
 
   const handleBrandSelect = (input: any) => {
     const brand = brands.filter((b) => b.id == input)[0];
@@ -70,21 +71,23 @@ export const EstimatedCosts = (props: any) => {
         <option hidden disabled selected>
           Select a Brand
         </option>
-        {brands
-          ?.sort(function (a, b) {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          })
-          .map(({ name, id }) => (
-            <option key={id} value={id}>
-              {name}
-            </option>
-          ))}
+        {/* {brands
+          ? brands
+              .sort(function (a, b) {
+                if (a.name < b.name) {
+                  return -1;
+                }
+                if (a.name > b.name) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map(({ name, id }) => (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              ))
+          : null} */}
       </select>
       <ul>
         <li>
@@ -94,6 +97,7 @@ export const EstimatedCosts = (props: any) => {
           <b>Estimated Costs: </b> £{estCost}
         </li>
       </ul>
+      <ActionWO targetTime={targetTime} estCost={estCost} />
     </>
   );
 };

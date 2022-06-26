@@ -2,7 +2,13 @@ import { useState } from 'react';
 import { AcceptWO } from './Options/AcceptWO';
 import { RejectWO } from './Options/RejectWO';
 
-export const ActionWO = () => {
+export const ActionWO = ({
+  targetTime = 0,
+  estCost = 0,
+}: {
+  targetTime: number;
+  estCost: number;
+}) => {
   const [WOAction, setWOAction] = useState<
     'accept' | 'reject' | null
   >(null);
@@ -10,13 +16,23 @@ export const ActionWO = () => {
   return (
     <>
       <h2 className="mt-3">Accept / Reject Work Order</h2>
-      <button id="accept" onClick={() => setWOAction('accept')}>
+      <button
+        id="accept"
+        type="button"
+        onClick={() => setWOAction('accept')}
+      >
         Accept
       </button>
-      <button id="reject" onClick={() => setWOAction('reject')}>
+      <button
+        id="reject"
+        type="button"
+        onClick={() => setWOAction('reject')}
+      >
         Reject
       </button>
-      {WOAction && WOAction === 'accept' ? <AcceptWO /> : null}
+      {WOAction && WOAction === 'accept' ? (
+        <AcceptWO targetTime={targetTime} estCost={estCost} />
+      ) : null}
       {WOAction && WOAction === 'reject' ? <RejectWO /> : null}
     </>
   );

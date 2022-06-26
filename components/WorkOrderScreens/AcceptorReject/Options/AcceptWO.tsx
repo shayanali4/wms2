@@ -1,22 +1,36 @@
-export const AcceptWO = () => {
+export const AcceptWO = ({
+  estCost,
+  targetTime,
+}: {
+  estCost: number;
+  targetTime: number;
+}) => {
   return (
     <>
       <label htmlFor="updateTiming">
-        <p className="mt-3">Update Target Time (optional)</p>
+        <p className="mt-3">Confirm Target Time</p>
       </label>
-      <input type="text" id="notesEstCostAccepted"></input>
-      <button id="updateTiming">Update Timing</button>
+      <input
+        placeholder={String(targetTime)}
+        type="number"
+        id="updateTime"
+        required
+      ></input>
 
       <label htmlFor="updateCosts">
-        <p>Update Estimated Cost (optional)</p>
+        <p>Confirm Estimated Cost</p>
       </label>
-      <input type="text" id="notesEstCostAccepted"></input>
-      <button id="updateCosts">Update Costs</button>
+      <input
+        placeholder={String(estCost)}
+        type="number"
+        id="updateCost"
+        required
+      ></input>
       <p className="mt-3"></p>
 
       <p>Any notes to accepting a work order?</p>
       <textarea
-        id="notesForCustAccepted"
+        id="initialComments"
         placeholder="Add Your notes to share with the customer here..."
       ></textarea>
       <button id="submitAccept">Accept Work Order</button>
