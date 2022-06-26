@@ -6,5 +6,6 @@ export interface NotStartedObject extends QueueObject {
   assigned_to: number;
   initial_cost: string;
   target_time: number;
+  work_task_id: number;
 }
 [];
