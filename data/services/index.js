@@ -43,8 +43,8 @@ export const findWorkTask = async (workOrderId) => {
   return data;
 };
 
-export const newOrders = async () => {
-  const orders = await fetchAllOrders();
+export const fetchNewOrders = async () => {
+  const orders = await fetchOrdersFilter('tracker_status', 0);
   const workTasks = await fetchWorkTasks();
   return { orders, workTasks };
 };

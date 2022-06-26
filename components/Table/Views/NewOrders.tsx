@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { QueueObject } from '../../../interfaces/QueueObject';
 
-type Props = { orders: QueueObject };
+type Props = { orders: QueueObject; tasks: any };
 
 const NewOrderTable: React.FunctionComponent<Props> = ({
   orders,
+  tasks,
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
@@ -20,6 +21,7 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
       </tr>
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
+      {console.log(tasks)}
       {orders
         ? orders.map((order) => {
             return (
@@ -47,7 +49,10 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{order.task_name}</span>
+                    {order.task_name}
+                    {/* <span>{tasks[order.id].name}</span>
+                    <span>{tasks.filter(task [order.id].name}</span> */}
+                    {/* <span>{'tasks[1].name'}</span> */}
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">

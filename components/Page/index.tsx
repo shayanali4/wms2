@@ -1,13 +1,10 @@
-import Heading from '../Heading';
-import Layout from '../Layout';
-import { useRouter } from 'next/router';
-
+import Heading from '../Layout/Heading';
+import Layout from '../Layout/Layout';
+import Link from 'next/link';
 type Props = {
   title?: string;
   layoutTitle?: string;
 };
-
-const router = useRouter();
 
 const Page: React.FunctionComponent<Props> = ({
   children,
@@ -18,15 +15,15 @@ const Page: React.FunctionComponent<Props> = ({
     <main>
       <div className="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
         <Heading text="WMS" />
-        <button onClick={() => router.push('newOrders')}>
-          New Orders
-        </button>
-        <button onClick={() => router.push('notStarted')}>
-          Not Started
-        </button>
-        <button onClick={() => router.push('wip')}>
-          Work In Progress
-        </button>
+        <Link href="/">
+          <a>New Orders</a>
+        </Link>
+        <Link href="/notstarted">
+          <a>Not Started</a>
+        </Link>
+        <Link href="/wip">
+          <a>Work In Progress</a>
+        </Link>
         <main
           role="main"
           className="w-full lg:w-5/6 flex-grow pt-1 px-3"
