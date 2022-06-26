@@ -46,9 +46,7 @@ const Index: NextPage = (props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    let formData = {
-      tracker_status: 2,
-    };
+    let formData = {};
 
     Array.prototype.forEach.call(
       e.target.elements,
@@ -59,13 +57,23 @@ const Index: NextPage = (props) => {
         element.id == 'updateCost'
           ? (formData = { ...formData, initial_cost: element.value })
           : null;
+        if (element.id == 'submitReject') {
+          formData = { ...formData, tracker_status: 99 };
+        } else if (element.id == 'submitAccept') {
+          formData = { ...formData, tracker_status: 2 };
+        }
         element.id == 'initialComments' && element.value
           ? (formData = {
               ...formData,
               initial_comments: element.value,
             })
           : null;
-        console.log(element.id, ' ', element.value);
+        element.id == 'declineReason'
+          ? (formData = {
+              ...formData,
+              decline_reason: element.value,
+            })
+          : null;
       }
     );
 
@@ -82,7 +90,9 @@ const Index: NextPage = (props) => {
 
   return (
     <>
-      <Layout title="Work order title tbc" />
+      <Layout
+        title={`Order #${workOrder.tracking_id} | Pending | WMS | TuPack`}
+      />
       <WOSummary workOrder={workOrder} task={tasks} />
       <SpecificDetails specifics={specifics} workOrder={workOrder} />
       <form onSubmit={handleSubmit}>
