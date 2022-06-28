@@ -13,7 +13,10 @@ export const TimeSummary = (props: any) => {
       <p className="mt-3">
         <b>Target Time: </b> {props.workOrder.target_time} mins
       </p>
-      <label htmlFor="timeTaken">Total Time Taken (Askkkk)</label>
+      <label htmlFor="finishTime">Actual Finish Date</label>
+      <input type="date" id="finishTime" />
+
+      <label htmlFor="timeTaken">Total Time Taken </label>
       <input
         type="text"
         value={`${props.workOrder.target_time} mins`}

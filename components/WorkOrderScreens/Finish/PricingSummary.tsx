@@ -9,11 +9,6 @@ export const PricingSummary = (props: any) => {
         <b>Total Units / Quantity: </b>
         {props.workOrder.initial_units_or_quantity}
       </p>
-      <p>
-        <b>Price Per Unit: </b>
-        TBCC
-        {props.workOrder.expected_finish_date}
-      </p>
 
       <label className="mt-3" htmlFor="finalPrice">
         <h2>Final Price</h2>

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/Layout';
 import { FinishSummary } from '../../components/WorkOrderScreens/Finish/FinishSummary';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
-import { supabaseClient } from '../../lib/client';
 import { TimeSummary } from '../../components/WorkOrderScreens/Finish/TimeSummary';
 import { PricingSummary } from '../../components/WorkOrderScreens/Finish/PricingSummary';
 import { FinishWO } from '../../components/WorkOrderScreens/Finish/FinishWO';
@@ -13,6 +12,10 @@ import {
   findSpecificFieldsForOrder,
 } from '../../data/services';
 import S3UploadFile from '../../components/s3UploadFile';
+
+interface File {
+  name: string;
+}
 
 const FinishIndex: NextPage = (props) => {
   // const [loading, setLoading] = useState(true);
@@ -43,6 +46,8 @@ const FinishIndex: NextPage = (props) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let formData = { tracker_status: 3 };
+    let QCPics = [];
+    const emailAd = workOrder.email;
 
     Array.prototype.forEach.call(
       e.target.elements,
@@ -57,6 +62,9 @@ const FinishIndex: NextPage = (props) => {
           : null;
         element.id == 'timeTaken'
           ? (formData = { ...formData, start_time: element.value })
+          : null;
+        element.id == 'finishTime'
+          ? (formData = { ...formData, finish_time: element.value })
           : null;
         element.id == 'finalPrice'
           ? (formData = {
@@ -76,28 +84,25 @@ const FinishIndex: NextPage = (props) => {
               expected_finish_date: element.value,
             })
           : null;
-        // element.id == 'QCPics'
-        //   ? (
-        //     //tbc
-        //     if(element.files) {
-        //       interface File {
-        //         name: string;
-        //       }
-        //       [...element.files].forEach((file: File) => {
-        //         S3UploadFile(file, emailAd);
-        //         pics.push(
-        //           `https://wmspics.s3.amazonaws.com/${emailAd}/${file.name}`
-        //         );
-        //       });
-        //     }
-
-        //     formData = {
-        //       ...formData,
-        //       expected_finish_date: element.value,
-        //     })
-        //   : null;
+        if (element.id == 'QCPics') {
+          if (element.files) {
+            [...element.files].forEach((file: File) => {
+              S3UploadFile(file, emailAd);
+              QCPics.push(
+                `https://wmspics.s3.amazonaws.com/${emailAd}/qc/${file.name}`
+              );
+            });
+          }
+        }
+        // formData = {
+        //   ...formData,
+        //   qc_pics: QCPics
+        // };
+        QCPics.length > 0 ? (formData['qc_pics'] = QCPics) : null;
       }
     );
+
+    // make receipt
 
     // const { data, error } = await supabaseClient
     //   .from('order')
