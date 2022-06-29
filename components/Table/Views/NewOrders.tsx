@@ -3,7 +3,7 @@ import { QueueObject } from '../../../interfaces/QueueObject';
 
 type Props = { orders: QueueObject; tasks: any };
 
-const NewOrderTable: React.FunctionComponent<Props> = ({
+const NewOrdersTable: React.FunctionComponent<Props> = ({
   orders,
   tasks,
 }) => (
@@ -12,7 +12,7 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
       <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
         <th className="py-3 px-6 text-left">ID</th>
         <th className="py-3 px-6 text-left">Submission Date</th>
-        <th className="py-3 px-6 text-center">Work Order</th>
+        <th className="py-3 px-6 text-center">Work Task</th>
         <th className="py-3 px-6 text-center">Units / Quantity</th>
         <th className="py-3 px-6 text-center">
           Brand (Customer Entry)
@@ -49,10 +49,14 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    {order.task_name}
-                    {/* <span>{tasks[order.id].name}</span>
-                    <span>{tasks.filter(task [order.id].name}</span> */}
-                    {/* <span>{'tasks[1].name'}</span> */}
+                    <span>
+                      {
+                        order?.task_name
+                        // tasks.filter(
+                        //   (task) => task.id == order.work_task_id
+                        // )[0].name
+                      }
+                    </span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -82,4 +86,4 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
   </table>
 );
 
-export default NewOrderTable;
+export default NewOrdersTable;
