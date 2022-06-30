@@ -13,17 +13,18 @@ const CompletedTable: React.FunctionComponent<Props> = ({
     <thead>
       <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
         <th className="py-3 px-6 text-left">ID</th>
-        <th className="py-3 px-6 text-left">Submission Date</th>
+        <th className="py-3 px-6 text-left">Finish Date</th>
         <th className="py-3 px-6 text-center">Work Task</th>
-        <th className="py-3 px-6 text-center">Units / Quantity</th>
+        <th className="py-3 px-6 text-center">Brand</th>
         <th className="py-3 px-6 text-center">
-          Brand (Customer Entry)
+          Final Units / Quantity
         </th>
-        <th className="py-3 px-6 text-center">Approve or Deny</th>
+        <th className="py-3 px-6 text-center">Time Taken</th>
+        <th className="py-3 px-6 text-center">Receipt Link</th>
+        <th className="py-3 px-6 text-center">See All Details</th>
       </tr>
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
-      {/* {console.log(tasks)} */}
       {orders
         ? orders.map((order) => {
             return (
@@ -34,22 +35,24 @@ const CompletedTable: React.FunctionComponent<Props> = ({
                 <Row input={order.tracking_id} />
                 <Row
                   input={
-                    order.created_at
+                    order.finish_time
                       ? String(
-                          order.created_at
+                          order.finish_time
                             .slice(0, 19)
                             .replace(/T/g, ' ')
                         )
                       : null
                   }
                 />
-                <Row input={order?.task_name} />
-                <Row input={order.initial_units_or_quantity} />
-                <Row input={order.brand_entry} />
+                <Row input={'insert work task here'} />
+                <Row input={'insert brand'} />
+                <Row input={order.final_units_or_quantity} />
+                <Row input={`${order.minutes_taken} mins`} />
                 <RowButton
-                  link={`/wo_pending/${order.id}`}
-                  text="Action"
+                  link={'order.receipt_pdf_url'}
+                  text="Get Receipt"
                 />
+                <RowButton link={'#'} text="All Details" />
               </tr>
             );
           })
