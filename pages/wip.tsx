@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '../lib/client';
-import * as React from 'react';
-import Layout from '../components/Layout/Layout';
-import NavBar from '../components/Layout/NavBar';
-import TableWip from '../components/Table/Views/WIP';
-import SideBar from '../components/Layout/SideBar';
-import { NextPage } from 'next';
-import TitleText from '../components/Layout/TitleText';
-import Heading from '../components/Layout/Heading';
+import { useEffect, useState } from "react";
+import { supabaseClient } from "../lib/client";
+import * as React from "react";
+import Layout from "../components/Layout/Layout";
+import NavBar from "../components/Layout/NavBar";
+import TableWip from "../components/Table/Views/WIP";
+import SideBar from "../components/Layout/SideBar";
+import { NextPage } from "next";
+import TitleText from "../components/Layout/TitleText";
+import Heading from "../components/Layout/Heading";
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState(null);
@@ -16,9 +16,9 @@ const WIPPage: NextPage = () => {
   useEffect(() => {
     const fetchWIPOrders = async () => {
       let { data: ordersIP }: { data: any[] } = await supabaseClient
-        .from('order')
-        .select('*')
-        .eq('tracker_status', 2);
+        .from("order")
+        .select("*")
+        .eq("tracker_status", 2);
       console.log(ordersIP);
       setWIPOrders(ordersIP);
       setLoading(false);
@@ -37,10 +37,7 @@ const WIPPage: NextPage = () => {
         <div className="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
           <Heading text="WMS" />
           <NavBar />
-          <main
-            role="main"
-            className="w-full lg:w-5/6 flex-grow pt-1 px-3"
-          >
+          <main role="main" className="w-full lg:w-5/6 flex-grow pt-1 px-3">
             {/* main content */}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="In Progress" />
