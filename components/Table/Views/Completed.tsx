@@ -5,7 +5,7 @@ import { RowButton } from '../RowButton';
 
 type Props = { orders: QueueObject; tasks: any };
 
-const NewOrdersTable: React.FunctionComponent<Props> = ({
+const CompletedTable: React.FunctionComponent<Props> = ({
   orders,
   tasks,
 }) => (
@@ -58,4 +58,4 @@ const NewOrdersTable: React.FunctionComponent<Props> = ({
   </table>
 );
 
-export default NewOrdersTable;
+export default CompletedTable;

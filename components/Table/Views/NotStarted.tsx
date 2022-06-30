@@ -1,5 +1,6 @@
 import { NotStartedObject } from '../../../interfaces/NotStartedObject';
 import Link from 'next/link';
+import { RowButton } from '../RowButton';
 
 type Props = { orders: NotStartedObject; tasks: any };
 const NotStartedTable: React.FunctionComponent<Props> = ({
@@ -71,20 +72,10 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                     <span>£{order.initial_cost}</span>
                   </div>
                 </td>
-                {/* <td className="py-3 px-6 text-center">
-                  <div className="flex items-center justify-center">
-                    <span>{getWorkerName(order.assigned_to)}</span>
-                  </div>
-                </td> */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex item-center justify-center">
-                    <Link href={`/start_wo/${order.id}`}>
-                      <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
-                        Start
-                      </button>
-                    </Link>
-                  </div>
-                </td>
+                <RowButton
+                  link={`/start_wo/${order.id}`}
+                  text={'Start '}
+                />
               </tr>
             );
           })

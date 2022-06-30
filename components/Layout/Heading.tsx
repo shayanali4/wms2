@@ -15,10 +15,10 @@ const Heading: React.FunctionComponent<Props> = ({
       src={logoOrange}
       layout="responsive"
       objectFit="contain"
-      width="5%"
-      height="5%"
+      width="10%"
+      height="10%"
     />
-    <h1 className="text-black text-center text-2xl">{text}</h1>
+    <h1 className="text-black text-center text-xl p-0 m-0">{text}</h1>
   </div>
 );
 

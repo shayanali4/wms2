@@ -12,22 +12,34 @@ const Page: React.FunctionComponent<Props> = ({
 }) => (
   <>
     <Layout title={layoutTitle} />
+    <Heading text="WMS" />
     <main>
       <div className="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
-        <Heading text="WMS" />
-        <Link href="/">
-          <a>New Orders</a>
-        </Link>
-        <Link href="/notstarted">
-          <a>Not Started</a>
-        </Link>
-        <Link href="/wip">
-          <a>Work In Progress</a>
-        </Link>
         <main
           role="main"
           className="w-full lg:w-5/6 flex-grow pt-1 px-3"
         >
+          <div className="flex-column">
+            <Link href="/">
+              <a>New Orders</a>
+            </Link>
+            {'  |  '}
+            <Link href="/notstarted">
+              <a>Not Started</a>
+            </Link>
+            {'  |  '}
+            <Link href="/wip">
+              <a>Work In Progress</a>
+            </Link>
+            {'  |  '}
+            <Link href="/completed">
+              <a>Completed</a>
+            </Link>
+            {'  |  '}
+            <Link href="/#">
+              <a>Cancelled</a>
+            </Link>
+          </div>
           <div className="bg-white shadow-md rounded my-6">
             {children}
           </div>
