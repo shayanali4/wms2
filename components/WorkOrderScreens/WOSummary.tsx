@@ -1,7 +1,6 @@
 export const WOSummary = (props: any) => {
   return (
     <>
-      {console.log(props)}
       <h1 className="mb-5">
         {props.workOrder.tracking_id}: Accept / Reject Work Order
       </h1>
@@ -9,7 +8,7 @@ export const WOSummary = (props: any) => {
       <ul className="mb-3">
         <li> --- </li>
         <li>
-          <b>Task: </b> {props.task.work_order_name}
+          <b>Task: </b> {props.task.name}
         </li>
         <li>
           <b>Description: </b>

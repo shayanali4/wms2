@@ -15,7 +15,6 @@ export default function TableInformation({ name }) {
     let taskNames: [];
     getTableInformation(name).then((data) => {
       if (mounted) {
-        console.log(data);
         setOrders(data && data.orders ? data.orders : [{}]);
         if (data && data.orders && data.workTasks) {
           const ordersWithTasks = getWorkTaskNames(

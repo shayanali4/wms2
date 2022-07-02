@@ -11,6 +11,7 @@ import Heading from "../components/Layout/Heading";
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState(null);
+  const [workers, setWorkers] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,15 +20,15 @@ const WIPPage: NextPage = () => {
         .from("order")
         .select("*")
         .eq("tracker_status", 2);
-      console.log(ordersIP);
       setWIPOrders(ordersIP);
       setLoading(false);
     };
-    fetchWIPOrders().catch(console.error);
-    return () => {
-      setWIPOrders(null); // Clean up
-      setLoading(true); // Clean up
+    const getWorkers = async () => {
+      const { data } = await supabaseClient.from("workers").select("*");
+      setWorkers(data||[]);
     };
+    fetchWIPOrders().catch(console.error);
+    getWorkers();
   }, []);
 
   return (
@@ -41,7 +42,7 @@ const WIPPage: NextPage = () => {
             {/* main content */}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="In Progress" />
-              {WIPOrders ? <TableWip orders={WIPOrders} /> : null}
+              {WIPOrders ? <TableWip orders={WIPOrders} workers={workers} /> : null}
             </div>
           </main>
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">

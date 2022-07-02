@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const StartChoices = (props: any) => {
-  // const [targetTime, setTargetTime] = useState(0);
-  // const [brand, setBrand] = useState(null);
 
-  // useEffect(() => {
-  //   const targetTime =
-  //     workOrder.initial_units_or_quantity * task.mins_per_unit;
-  //   console.log(targetTime);
-  //   setTargetTime(targetTime);
-  // }, []);
-  console.log(props.workers);
   return (
     <>
       <h1>Complete this to start</h1>
@@ -23,10 +14,10 @@ export const StartChoices = (props: any) => {
         <option hidden disabled selected>
           Select a Worker
         </option>
-        {/* {props.workers.map(({ name, id }) => (
+        {props.workers.map(({ name, id }) => (
           <option key={id} value={id}>
             {name}
-          </option> */}
+          </option>
         ))}
       </select>
 

@@ -50,6 +50,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                   <div className="flex items-center justify-center">
                     {/* <span>{workTasks[].work_order_name}</span> */}
                     {/* <span>{workTasks[2].name}</span> */}
+                    {workTasks.find((task) => task.id === order.work_task_id)?.name}
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -80,7 +81,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-center">
                   <div className="flex item-center justify-center">
                     <Link href={`/start_wo/${order.id}`}>
-                      <button className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
+                      <button className="px-3 py-1 bg-blue-600 rounded-md w-full text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
                         Update
                       </button>
                     </Link>
