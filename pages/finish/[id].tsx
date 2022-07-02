@@ -9,7 +9,9 @@ import { FinishWO } from '../../components/WorkOrderScreens/Finish/FinishWO';
 
 const FinishIndex: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState(null);
+  const [specifics, setSpecifics] = useState({});
   const [task, setTask] = useState(null);
+  const [brands, setBrands] = useState({});
 
   useEffect(() => {
     const fetchNewOrders = async () => {
