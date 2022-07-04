@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { supabaseClient } from '../lib/client';
 import * as React from 'react';
 import TableWip from '../components/Table/Views/WIP';
 import { NextPage } from 'next';
