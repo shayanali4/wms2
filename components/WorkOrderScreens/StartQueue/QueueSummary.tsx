@@ -4,7 +4,7 @@ export const QueueSummary = (props: any) => {
       <h1>Queue - Order: #{props.workOrder.tracking_id}</h1>
       <p>
         Work Order Task:
-        {props.task.work_order_name}
+        {props.task.name}
       </p>
 
       <ul>

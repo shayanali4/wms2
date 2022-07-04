@@ -14,7 +14,6 @@ import {
 import { supabaseClient } from '../../lib/client';
 
 const Index: NextPage = (props) => {
-  // const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
   const [task, setTasks] = useState({});
@@ -85,15 +84,22 @@ const Index: NextPage = (props) => {
 
   return (
     <>
-      <Layout
-        title={`Order #${workOrder.tracking_id} | Queue | WMS | TuPack`}
-      />
-      <QueueSummary workOrder={workOrder} task={task} />
-      <SpecificDetails specifics={specifics} workOrder={workOrder} />
-      <form onSubmit={handleSubmit}>
-        <StartChoices workers={workers} />
-        <ActionStartQueue />
-      </form>
+      {workOrder && task && workers && specifics && (
+        <>
+          <Layout
+            title={`Order #${workOrder.tracking_id} | Queue | WMS | TuPack`}
+          />
+          <QueueSummary workOrder={workOrder} task={task} />
+          <SpecificDetails
+            specifics={specifics}
+            workOrder={workOrder}
+          />
+          <form onSubmit={handleSubmit}>
+            <StartChoices workers={workers} />
+            <ActionStartQueue />
+          </form>
+        </>
+      )}
     </>
   );
 };
@@ -102,7 +108,6 @@ export default Index;
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  console.log('Not started, SSPid: ', id);
   return {
     props: {
       id,

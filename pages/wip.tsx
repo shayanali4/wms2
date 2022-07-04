@@ -7,22 +7,25 @@ import { fetchOrdersTrackerStatus } from '../data/services';
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState(null);
+  const [workers, setWorkers] = useState(null);
 
   useEffect(() => {
-    let mounted = true;
     fetchOrdersTrackerStatus(2).then((data: any) => {
-      setWIPOrders(data.orders || [{}]);
+      if (data.orders) {
+        setWIPOrders(data.orders || [{}]);
+      }
+      if (data.workers) {
+        setWorkers(data.workers || [{}]);
+      }
     });
-    return () => {
-      mounted = false;
-    };
+    return () => {};
   }, []);
 
   return (
     <>
-      <Page layoutTitle="Not Started Orders | Work Management System | TuPack">
+      <Page layoutTitle="Work Orders In Progress | Work Management System | TuPack">
         {WIPOrders ? (
-          <TableWip orders={WIPOrders} />
+          <TableWip orders={WIPOrders} workers={workers} />
         ) : (
           <div>Loading Table...</div>
         )}

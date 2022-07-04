@@ -12,18 +12,22 @@ const NotStartedPage: NextPage = () => {
   useEffect(() => {
     let mounted = true;
     fetchOrdersTrackerStatus(1).then((data) => {
-      setOrders(data.orders || [{}]);
-      setWorkTasks(data.workTasks || [{}]);
+      if (data.workTasks) {
+        setOrders(data.orders);
+      }
+      if (data.workTasks) {
+        setWorkTasks(data.workTasks);
+      }
     });
     return () => {
       mounted = false;
     };
-  }, [orders]);
+  }, []);
 
   return (
     <>
       <Page layoutTitle="Not Started Orders | Work Management System | TuPack">
-        {orders ? (
+        {orders && tasks ? (
           <NotStartedTable orders={orders} tasks={tasks} />
         ) : (
           <div>Loading Table...</div>

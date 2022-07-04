@@ -6,7 +6,6 @@ export const SpecificDetails = (props: any) => {
   const specifics = filterNulls.filter(
     ([key, value]) => key != 'order_id'
   );
-  console.log(props.workOrder);
   const skus = props.workOrder.skus;
 
   return (

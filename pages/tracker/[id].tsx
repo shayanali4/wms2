@@ -5,7 +5,6 @@ import { supabaseClient } from '../../lib/client';
 
 const Tracking: NextPage = (Props) => {
   const [trackingInfo, setTracker] = useState(null);
-  console.log(Props);
   return (
     <Tracker
       tracking_id={Props.tracking_id}
@@ -24,7 +23,6 @@ export default Tracking;
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  console.log(id);
 
   try {
     let { data, error, status } = await supabaseClient
@@ -38,7 +36,6 @@ export async function getServerSideProps(context: any) {
     }
 
     if (data) {
-      console.log(data);
 
       return {
         props: data,

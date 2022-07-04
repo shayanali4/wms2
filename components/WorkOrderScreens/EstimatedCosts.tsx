@@ -7,15 +7,35 @@ export const EstimatedCosts = (props: any) => {
   const brands = props.brands;
 
   const [targetTime, setTargetTime] = useState(0);
-  const [estCost, setEstCost] = useState(0);
-
-  console.log(props);
-
-  const [workOrders, setWorkOrders] = useState([{}]);
+  const [cost, setCost] = useState(0);
+  const [brand, setBrand] = useState({});
+  const { task, workOrder, brands } = props;
 
   useEffect(() => {
-    console.log(workOrder.id);
-  }, []);
+    if (brand) {
+      const tempTargetTime =
+        workOrder.initial_units_or_quantity * task.mins_per_unit;
+      setTargetTime(tempTargetTime);
+      let tempCost = 0;
+      if (task.mins_per_unit) {
+        tempCost =
+          task.mins_per_unit *
+          (brand.hourly_rate / 60) *
+          workOrder.initial_units_or_quantity;
+        setCost(tempCost);
+      } else {
+        tempCost =
+          task.flat_cost * workOrder.initial_units_or_quantity;
+        setCost(tempCost);
+      }
+      if (task.name === 'Barcoding/ Labelling') {
+        tempCost =
+          brand.rebarcoding_rate *
+          workOrder.initial_units_or_quantity;
+        setCost(tempCost);
+      }
+    }
+  }, [workOrder, task, brand]);
 
   const handleBrandSelect = (input: any) => {
     const brand = brands.filter((b) => b.id == input)[0];
@@ -30,12 +50,12 @@ export const EstimatedCosts = (props: any) => {
     const costRate = brand.hourly_rate;
     let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
     if (minsPerUnit == null && flatCost != null) {
-      setEstCost(Number(flatCost * quantity.toFixed(2)));
+      setCost(Number(flatCost * quantity.toFixed(2)));
     } else if (minsPerUnit == null && flatCost == null) {
-      setEstCost(0);
+      setCost(0);
     } else {
       estimatedCost = Number(estimatedCost.toFixed(2));
-      setEstCost(estimatedCost);
+      setCost(estimatedCost);
     }
   };
 
@@ -46,7 +66,7 @@ export const EstimatedCosts = (props: any) => {
         <li> --- </li>
         <li>
           <b>Work Order: </b>
-          {task.work_order_name}
+          {task.name}
         </li>
         <li>
           <b>Total Units/Quantity: </b>
@@ -68,36 +88,22 @@ export const EstimatedCosts = (props: any) => {
         id="brands"
         onChange={(e) => handleBrandSelect(e.target.value)}
       >
-        <option hidden disabled selected>
+        <option hidden disabled value="">
           Select a Brand
         </option>
-        {/* {brands
-          ? brands
-              .sort(function (a, b) {
-                if (a.name < b.name) {
-                  return -1;
-                }
-                if (a.name > b.name) {
-                  return 1;
-                }
-                return 0;
-              })
-              .map(({ name, id }) => (
-                <option key={id} value={id}>
-                  {name}
-                </option>
-              ))
-          : null} */}
+        {brands.map((brand) => (
+          <option value={brand}>{brand.name}</option>
+        ))}
       </select>
       <ul>
         <li>
           <b>Target Time: </b> {targetTime} minutes
         </li>
         <li>
-          <b>Estimated Costs: </b> £{estCost}
+          <b>Estimated Costs: </b> £{cost}
         </li>
       </ul>
-      <ActionWO targetTime={targetTime} estCost={estCost} />
+      <ActionWO targetTime={targetTime} estCost={cost} />
     </>
   );
 };

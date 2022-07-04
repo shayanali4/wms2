@@ -1,5 +1,4 @@
 import { NotStartedObject } from '../../../interfaces/NotStartedObject';
-import Link from 'next/link';
 import { RowButton } from '../RowButton';
 
 type Props = { orders: NotStartedObject; tasks: any };
@@ -48,8 +47,11 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    {/* <span>{tasks[].work_order_name}</span> */}
-                    {/* <span>{tasks[2].name}</span> */}
+                    {
+                      tasks.find(
+                        (task) => task.id === order.work_task_id
+                      )?.name
+                    }
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">

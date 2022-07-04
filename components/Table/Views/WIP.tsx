@@ -6,9 +6,9 @@ import {
 } from '../../../helpers/helpers';
 import Link from 'next/link';
 
-type Props = { orders: WIPObject };
+type Props = { orders: WIPObject, workers:any };
 
-const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
+const WIPTable: React.FunctionComponent<Props> = ({ orders, workers }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
       <tr className="bg-blue-200 text-gray-600 uppercase text-sm leading-normal">
@@ -76,7 +76,10 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
                 {/* assigned to */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getWorkerName(order.assigned_to)}</span>
+                    <span>
+                    {workers.find((worker) => worker.id === order.assigned_to_id)?.name}
+
+                    </span>
                   </div>
                 </td>
                 {/* target time */}

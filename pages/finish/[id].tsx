@@ -18,8 +18,7 @@ interface File {
 }
 
 const FinishIndex: NextPage = (props) => {
-  // const [loading, setLoading] = useState(true);
-  const [workOrder, setWorkOrder] = useState({});
+  const [workOrder, setWorkOrder] = useState(null);
   const [specifics, setSpecifics] = useState({});
   const [task, setTasks] = useState({});
 
@@ -27,19 +26,25 @@ const FinishIndex: NextPage = (props) => {
     const fetchWIPOrder = async () => {
       console.log(props.id);
       const order = await fetchOneOrder(props.id);
-      setWorkOrder(order || {});
+      if (order) {
+        setWorkOrder(order || {});
+      }
       const specificFields = await findSpecificFieldsForOrder(
         props.id
       );
-      setSpecifics(specificFields || {});
+      if (specificFields) {
+        setSpecifics(specificFields || {});
+      }
       const workTasks = await fetchWorkTasks();
-      setTasks(workTasks || {});
+      if (workTasks) {
+        setTasks(workTasks || {});
+      }
     };
     fetchWIPOrder().catch(console.error);
     return () => {
-      setWorkOrder({});
-      setSpecifics({});
-      setTasks({});
+      // setWorkOrder({});
+      // setSpecifics({});
+      // setTasks({});
     };
   }, []);
 
@@ -124,7 +129,10 @@ const FinishIndex: NextPage = (props) => {
       <form onSubmit={handleSubmit}>
         <TimeSummary workOrder={workOrder} />
         <PricingSummary workOrder={workOrder} />
-        {/* <SpecificDetails specifics={specifics} workOrder={workOrder} /> */}
+        <SpecificDetails
+          specifics={specifics}
+          workOrder={workOrder}
+        />
         <FinishWO />
       </form>
     </>
@@ -135,7 +143,6 @@ export default FinishIndex;
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  console.log('Finish SSPid: ', id);
   return {
     props: {
       id,

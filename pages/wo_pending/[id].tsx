@@ -15,7 +15,6 @@ import {
 } from '../../data/services';
 
 const Index: NextPage = (props) => {
-  // const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
   const [tasks, setTasks] = useState({});
@@ -24,23 +23,30 @@ const Index: NextPage = (props) => {
   useEffect(() => {
     const fetchNewOrders = async () => {
       const order = await fetchOneOrder(props.id);
-      setWorkOrder(order || {});
+      if (order) {
+        setWorkOrder(order || {});
+      }
       const specificFields = await findSpecificFieldsForOrder(
         props.id
       );
-      setSpecifics(specificFields || {});
+      if (specificFields) {
+        setSpecifics(specificFields || {});
+      }
       const workTasks = await fetchWorkTasks();
-      setTasks(workTasks || {});
+      if (workTasks) {
+        setTasks(workTasks || {});
+      }
       const brands = await fetchBrands();
-      console.log(workTasks, brands);
-      setBrands(brands || {});
+      if (brands) {
+        setBrands(brands || {});
+      }
     };
     fetchNewOrders().catch(console.error);
     return () => {
-      setWorkOrder({});
-      setSpecifics({});
-      setTasks({});
-      setBrands({});
+      // setWorkOrder({});
+      // setSpecifics({});
+      // setTasks({});
+      // setBrands({});
     };
   }, []);
 
@@ -90,18 +96,25 @@ const Index: NextPage = (props) => {
 
   return (
     <>
-      <Layout
-        title={`Order #${workOrder.tracking_id} | Pending | WMS | TuPack`}
-      />
-      <WOSummary workOrder={workOrder} task={tasks} />
-      <SpecificDetails specifics={specifics} workOrder={workOrder} />
-      <form onSubmit={handleSubmit}>
-        <EstimatedCosts
-          task={tasks}
-          workOrder={workOrder}
-          brands={brands}
-        />
-      </form>
+      {workOrder && tasks && brands && specifics && (
+        <>
+          <Layout
+            title={`Order #${workOrder.tracking_id} | Pending | WMS | TuPack`}
+          />
+          <WOSummary workOrder={workOrder} task={tasks} />
+          <SpecificDetails
+            specifics={specifics}
+            workOrder={workOrder}
+          />
+          <form onSubmit={handleSubmit}>
+            <EstimatedCosts
+              task={tasks}
+              workOrder={workOrder}
+              brands={brands}
+            />
+          </form>
+        </>
+      )}
     </>
   );
 };
@@ -110,7 +123,6 @@ export default Index;
 
 export async function getServerSideProps(context: any) {
   const id = context.query.id;
-  console.log('SSPid: ', id);
   return {
     props: {
       id,

@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import { QueueObject } from '../../../interfaces/QueueObject';
 import { Row } from '../Row';
 import { RowButton } from '../RowButton';
 
-type Props = { orders: QueueObject; tasks: any };
+type Props = { orders: QueueObject; tasks: QueueObject };
 
-const NewOrdersTable: React.FunctionComponent<Props> = ({
+const NewOrderTable: React.FunctionComponent<Props> = ({
   orders,
   tasks,
 }) => (
@@ -23,7 +22,6 @@ const NewOrdersTable: React.FunctionComponent<Props> = ({
       </tr>
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
-      {/* {console.log(tasks)} */}
       {orders
         ? orders.map((order) => {
             return (
@@ -58,4 +56,4 @@ const NewOrdersTable: React.FunctionComponent<Props> = ({
   </table>
 );
 
-export default NewOrdersTable;
+export default NewOrderTable;

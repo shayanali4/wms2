@@ -1,12 +1,4 @@
-import { useEffect, useState } from 'react';
-
-export const StartChoices = (workers: any) => {
-  const [workerss, setWorkerss] = useState([{}]);
-
-  useEffect(() => {
-    console.log(workers);
-    setWorkerss(workers);
-  }, []);
+export const StartChoices = (props: any) => {
   return (
     <>
       <h1>Complete this to start</h1>
@@ -16,16 +8,14 @@ export const StartChoices = (workers: any) => {
 
       <label htmlFor="assignWorker">Assigned Worker:</label>
       <select value="assignWorker">
-        <option
-          hidden
-          disabled
-          defaultValue={'Select a Worker'}
-        ></option>
-        {/* {workerss.map(({ name, id }) => (
+        <option hidden disabled selected>
+          Select a Worker
+        </option>
+        {props.workers.map(({ name, id }) => (
           <option key={id} value={id}>
             {name}
           </option>
-        ))} */}
+        ))}
       </select>
 
       <label htmlFor="startDate">Expected Finish Date:</label>

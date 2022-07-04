@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Page from '../components/Page';
-import { fetchOrdersTrackerStatus } from '../data/services';
-import NewOrdersTable from '../components/Table/Views/NewOrders';
+import { fetchAllOrders } from '../data/services';
+import NewOrderTable from '../components/Table/Views/NewOrders';
 
 const IndexPage: NextPage = () => {
-  const [orders, setOrders] = useState([{}]);
-  const [tasks, setWorkTasks] = useState([{}]);
+  const [orders, setOrders] = useState([]);
+  const [workTasks, setWorkTasks] = useState([]);
 
   useEffect(() => {
-    let mounted = true;
-    fetchOrdersTrackerStatus(0).then((data: any) => {
-      setOrders(data.orders || [{}]);
-      setWorkTasks(data.workTasks || [{}]);
+    fetchAllOrders().then((data: any) => {
+      if (data.orders) {
+        setOrders(data.orders);
+      }
+      if (data.workTasks) {
+        setWorkTasks(data.workTasks);
+      }
     });
-    return () => {
-      mounted = false;
-    };
   }, []);
 
   return (
     <>
       <Page layoutTitle="New Orders | Work Management System | TuPack">
-        {orders ? (
-          <NewOrdersTable orders={orders} tasks={tasks} />
+        {orders && workTasks ? (
+          <NewOrderTable orders={orders} tasks={workTasks} />
         ) : (
           <div>Loading Table...</div>
         )}
