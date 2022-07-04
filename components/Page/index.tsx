@@ -36,7 +36,7 @@ const Page: React.FunctionComponent<Props> = ({
               <a>Completed</a>
             </Link>
             {'  |  '}
-            <Link href="/#">
+            <Link href="/cancelled">
               <a>Cancelled</a>
             </Link>
           </div>
