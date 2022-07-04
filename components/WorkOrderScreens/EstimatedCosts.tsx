@@ -1,21 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export const EstimatedCosts = (props: any) => {
   const [targetTime, setTargetTime] = useState(0);
-  const [brand, setBrand] = useState(null);
-
-  console.log(props.brands);
-
-  console.log(props.task);
-  const task = props.task;
-  const workOrder = props.workOrder;
+  const [cost, setCost] = useState(0);
+  const [brand, setBrand] = useState({});
+  const { task, workOrder, brands } = props;
 
   useEffect(() => {
-    const targetTime =
-      workOrder.initial_units_or_quantity * task.mins_per_unit;
-    console.log(targetTime);
-    setTargetTime(targetTime);
-  }, []);
+    if (brand) {
+      const tempTargetTime =
+        workOrder.initial_units_or_quantity * task.mins_per_unit;
+      setTargetTime(tempTargetTime);
+      let tempCost = 0;
+      if (task.mins_per_unit) {
+        tempCost =
+          task.mins_per_unit *
+          (brand.hourly_rate / 60) *
+          workOrder.initial_units_or_quantity;
+        setCost(tempCost);
+      } else {
+        tempCost = task.flat_cost * workOrder.initial_units_or_quantity;
+        setCost(tempCost);
+      }
+      if (task.name === "Barcoding/ Labelling") {
+        tempCost = brand.rebarcoding_rate * workOrder.initial_units_or_quantity;
+        setCost(tempCost);
+      }
+    }
+  }, [workOrder, task, brand]);
 
   return (
     <>
@@ -24,7 +36,7 @@ export const EstimatedCosts = (props: any) => {
         <li> --- </li>
         <li>
           <b>Work Order: </b>
-          {task.work_order_name}
+          {task.name}
         </li>
         <li>
           <b>Total Units/Quantity: </b>
@@ -37,18 +49,22 @@ export const EstimatedCosts = (props: any) => {
       </ul>
       <label htmlFor="brand_system">
         <h3 className="mt-3">
-          {' '}
+          {" "}
           Match the Customer's Brand here to display costs
         </h3>
       </label>
       <select
         name="brands"
         id="brands"
-        // onChange={(e) => setBrand(e)}
+        onChange={(e) => setBrand(e.target.value)}
+        value={brand}
       >
-        <option hidden disabled selected>
+        <option hidden disabled value="">
           Select a Brand
         </option>
+        {brands.map((brand) => (
+          <option value={brand}>{brand.name}</option>
+        ))}
         {/* {props.brands
           .sort(function (a, b) {
             if (a.name < b.name) {
@@ -70,7 +86,7 @@ export const EstimatedCosts = (props: any) => {
           <b>Target Time: </b> {targetTime}
         </li>
         <li>
-          <b>Estimated Costs: </b> £15
+          <b>Estimated Costs: </b> £{cost}
         </li>
       </ul>
     </>

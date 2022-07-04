@@ -1,11 +1,10 @@
 export const PriceSummary = (props: any) => {
-  console.log(props);
   return (
     <>
       <h1>Order: #{props.workOrder.tracking_id}</h1>
       <p>
         Task:
-        {props.task.work_order_name}
+        {props.task.name}
       </p>
       <p>
         Total Units / Quantity

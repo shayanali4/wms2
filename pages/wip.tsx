@@ -1,33 +1,34 @@
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '../lib/client';
-import * as React from 'react';
-import Layout from '../components/Layout/Layout';
-import NavBar from '../components/Layout/NavBar';
-import TableWip from '../components/Table/Views/WIP';
-import SideBar from '../components/Layout/SideBar';
-import { NextPage } from 'next';
-import TitleText from '../components/Layout/TitleText';
-import Heading from '../components/Layout/Heading';
+import { useEffect, useState } from "react";
+import { supabaseClient } from "../lib/client";
+import * as React from "react";
+import Layout from "../components/Layout/Layout";
+import NavBar from "../components/Layout/NavBar";
+import TableWip from "../components/Table/Views/WIP";
+import SideBar from "../components/Layout/SideBar";
+import { NextPage } from "next";
+import TitleText from "../components/Layout/TitleText";
+import Heading from "../components/Layout/Heading";
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState(null);
+  const [workers, setWorkers] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchWIPOrders = async () => {
       let { data: ordersIP }: { data: any[] } = await supabaseClient
-        .from('order')
-        .select('*')
-        .eq('tracker_status', 2);
-      console.log(ordersIP);
+        .from("order")
+        .select("*")
+        .eq("tracker_status", 2);
       setWIPOrders(ordersIP);
       setLoading(false);
     };
-    fetchWIPOrders().catch(console.error);
-    return () => {
-      setWIPOrders(null); // Clean up
-      setLoading(true); // Clean up
+    const getWorkers = async () => {
+      const { data } = await supabaseClient.from("workers").select("*");
+      setWorkers(data||[]);
     };
+    fetchWIPOrders().catch(console.error);
+    getWorkers();
   }, []);
 
   return (
@@ -37,14 +38,11 @@ const WIPPage: NextPage = () => {
         <div className="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
           <Heading text="WMS" />
           <NavBar />
-          <main
-            role="main"
-            className="w-full lg:w-5/6 flex-grow pt-1 px-3"
-          >
+          <main role="main" className="w-full lg:w-5/6 flex-grow pt-1 px-3">
             {/* main content */}
             <div className="bg-white shadow-md rounded my-6">
               <TitleText text="In Progress" />
-              {WIPOrders ? <TableWip orders={WIPOrders} /> : null}
+              {WIPOrders ? <TableWip orders={WIPOrders} workers={workers} /> : null}
             </div>
           </main>
           <div className="w-fixed w-full flex-shrink flex-grow-0 px-2">
