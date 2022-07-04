@@ -11,7 +11,7 @@ type Props = { orders: WIPObject };
 const WIPTable: React.FunctionComponent<Props> = ({ orders }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
-      <tr className="bg-green-200 text-gray-600 uppercase text-sm leading-normal">
+      <tr className="bg-blue-200 text-gray-600 uppercase text-sm leading-normal">
         <th className="py-3 px-6 text-left">Date Started</th>
         <th className="py-3 px-6 text-left">Expected Finish Date</th>
         <th className="py-3 px-6 text-left">ID</th>
