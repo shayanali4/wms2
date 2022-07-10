@@ -6,24 +6,33 @@ import CompletedTable from '../components/Table/Views/Completed';
 
 const CompletedPage: NextPage = () => {
   const [orders, setOrders] = useState([{}]);
-  const [tasks, setWorkTasks] = useState([{}]);
+  const [workTasks, setWorkTasks] = useState([{}]);
+  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    let mounted = true;
     fetchOrdersTrackerStatus(3).then((data: any) => {
-      setOrders(data.orders || [{}]);
-      setWorkTasks(data.workTasks || [{}]);
+      if (data.orders) {
+        setOrders(data.orders);
+      }
+      if (data.workTasks) {
+        setWorkTasks(data.workTasks);
+      }
+      if (data.brands) {
+        setBrands(data.brands);
+      }
     });
-    return () => {
-      mounted = false;
-    };
+    return () => {};
   }, []);
 
   return (
     <>
       <Page layoutTitle="Completed Orders | Work Management System | TuPack">
         {orders ? (
-          <CompletedTable orders={orders} tasks={tasks} />
+          <CompletedTable
+            orders={orders}
+            workTasks={workTasks}
+            brands={brands}
+          />
         ) : (
           <div>Loading Table...</div>
         )}

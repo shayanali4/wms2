@@ -3,11 +3,12 @@ import { QueueObject } from '../../../interfaces/QueueObject';
 import { Row } from '../Row';
 import { RowButton } from '../RowButton';
 
-type Props = { orders: QueueObject; tasks: any };
+type Props = { orders: QueueObject; workTasks: any; brands: any };
 
 const CompletedTable: React.FunctionComponent<Props> = ({
   orders,
-  tasks,
+  workTasks,
+  brands,
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
@@ -44,8 +45,20 @@ const CompletedTable: React.FunctionComponent<Props> = ({
                       : null
                   }
                 />
-                <Row input={'insert work task here'} />
-                <Row input={'insert brand'} />
+                <Row
+                  input={
+                    workTasks.find(
+                      (task: any) => task.id === order.work_task_id
+                    )?.name
+                  }
+                />
+                <Row
+                  input={
+                    brands.find(
+                      (brand: any) => brand.id === order.brand_id
+                    )?.name
+                  }
+                />
                 <Row input={order.final_units_or_quantity} />
                 <Row input={`${order.minutes_taken} mins`} />
                 <RowButton
