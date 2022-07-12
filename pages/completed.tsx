@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { NextPage } from 'next';
-import Page from '../components/Page';
-import { fetchOrdersTrackerStatus } from '../data/services';
-import CompletedTable from '../components/Table/Views/Completed';
+import React, { useState, useEffect } from "react";
+import { NextPage } from "next";
+import Page from "../components/Page";
+import { fetchOrdersTrackerStatus } from "../data/services";
+import CompletedTable from "../components/Table/Views/Completed";
 
 const CompletedPage: NextPage = () => {
-  const [orders, setOrders] = useState([{}]);
-  const [workTasks, setWorkTasks] = useState([{}]);
-  const [brands, setBrands] = useState([]);
+  const [orders, setOrders] = useState(null);
+  const [workTasks, setWorkTasks] = useState(null);
+  const [brands, setBrands] = useState(null);
 
   useEffect(() => {
     fetchOrdersTrackerStatus(3).then((data: any) => {
@@ -21,13 +21,12 @@ const CompletedPage: NextPage = () => {
         setBrands(data.brands);
       }
     });
-    return () => {};
   }, []);
 
   return (
     <>
       <Page layoutTitle="Completed Orders | Work Management System | TuPack">
-        {orders ? (
+        {orders && brands && workTasks ? (
           <CompletedTable
             orders={orders}
             workTasks={workTasks}
