@@ -5,41 +5,31 @@ import { QueueSummary } from '../../components/WorkOrderScreens/StartQueue/Queue
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { StartChoices } from '../../components/WorkOrderScreens/StartQueue/StartChoices';
 import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/ActionStartQueue';
-import {
-  fetchWorkers,
-  fetchOneOrder,
-  fetchWorkTasks,
-  findSpecificFieldsForOrder,
-} from '../../data/services';
+import { startOrder } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
   const [specifics, setSpecifics] = useState({});
-  const [task, setTasks] = useState({});
+  const [tasks, setTasks] = useState({});
   const [workers, setWorkers] = useState({});
 
   useEffect(() => {
-    const fetchNotStartedOrders = async () => {
-      const order = await fetchOneOrder(props.id);
-      setWorkOrder(order || {});
-      const specificFields = await findSpecificFieldsForOrder(
-        props.id
-      );
-      setSpecifics(specificFields || {});
-      const workTasks = await fetchWorkTasks();
-      setTasks(workTasks || {});
-      const workers = await fetchWorkers();
-      console.log(workTasks, workers);
-      setWorkers(workers || {});
-    };
-    fetchNotStartedOrders().catch(console.error);
-    return () => {
-      setWorkOrder({});
-      setSpecifics({});
-      setTasks({});
-      setWorkers({});
-    };
+    startOrder(props.id).then((data: any) => {
+      console.log(data);
+      if (data.order) {
+        setWorkOrder(data.order);
+      }
+      if (data.specificFields) {
+        setSpecifics(data.specificFields);
+      }
+      if (data.workTasks) {
+        setTasks(data.workTasks);
+      }
+      if (data.workers) {
+        setWorkers(data.workers);
+      }
+    });
   }, []);
 
   const handleSubmit = async (e: any) => {
@@ -84,12 +74,12 @@ const Index: NextPage = (props) => {
 
   return (
     <>
-      {workOrder && task && workers && specifics && (
+      {workOrder && tasks && workers && specifics && (
         <>
           <Layout
             title={`Order #${workOrder.tracking_id} | Queue | WMS | TuPack`}
           />
-          <QueueSummary workOrder={workOrder} task={task} />
+          <QueueSummary workOrder={workOrder} tasks={tasks} />
           <SpecificDetails
             specifics={specifics}
             workOrder={workOrder}
