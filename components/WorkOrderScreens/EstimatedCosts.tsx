@@ -6,56 +6,88 @@ export const EstimatedCosts = (props: any) => {
 
   const [targetTime, setTargetTime] = useState(0);
   const [cost, setCost] = useState(0);
-  const [brand, setBrand] = useState({});
+  const [brandId, setBrandId] = useState(0);
 
-  // useEffect(() => {
-  //   console.log(props);
-  //   if (brand) {
-  //     const tempTargetTime =
-  //       workOrder.initial_units_or_quantity * task.mins_per_unit;
-  //     setTargetTime(tempTargetTime);
-  //     let tempCost = 0;
-  //     if (task.mins_per_unit) {
-  //       tempCost =
-  //         task.mins_per_unit *
-  //         (brand.hourly_rate / 60) *
-  //         workOrder.initial_units_or_quantity;
-  //       setCost(tempCost);
-  //     } else {
-  //       tempCost =
-  //         task.flat_cost * workOrder.initial_units_or_quantity;
-  //       setCost(tempCost);
-  //     }
-  //     if (task.name === 'Barcoding/ Labelling') {
-  //       tempCost =
-  //         brand.rebarcoding_rate *
-  //         workOrder.initial_units_or_quantity;
-  //       setCost(tempCost);
-  //     }
-  //   }
-  // }, [workOrder, tasks, brand]);
+  useEffect(() => {
+    if (order && tasks) {
+      console.log(order);
+      const task = tasks.find(
+        (task) => task.id === order.work_task_id
+      );
+      if (
+        task.name == 'Arranging a courier collection and delivery'
+      ) {
+        setTargetTime(0);
+      }
 
-  // const handleBrandSelect = (input: any) => {
-  //   const brand = brands.filter((b) => b.id == input)[0];
-  //   const minsPerUnit = task[order.work_task_id].mins_per_unit;
-  //   const flatCost = task[order.work_task_id].flat_cost;
-  //   const quantity = order.initial_units_or_quantity;
-  //   if (minsPerUnit == null) {
-  //     setTargetTime(0);
-  //   } else {
-  //     setTargetTime(minsPerUnit * quantity);
-  //   }
-  //   const costRate = brand.hourly_rate;
-  //   let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
-  //   if (minsPerUnit == null && flatCost != null) {
-  //     setCost(Number(flatCost * quantity.toFixed(2)));
-  //   } else if (minsPerUnit == null && flatCost == null) {
-  //     setCost(0);
-  //   } else {
-  //     estimatedCost = Number(estimatedCost.toFixed(2));
-  //     setCost(estimatedCost);
-  //   }
-  // };
+      // const taskTimeMins = tasks.find(
+      //   (task) => task.id === order.work_task_id
+      // ).mins_per_unit;
+      // console.log(taskTimeMins);
+    }
+    // console.log(brandId);
+    // console.log(taskTimeMins);
+    // const tempTargetTime =
+    //   order.initial_units_or_quantity * taskTimeMins;
+    // setTargetTime(tempTargetTime);
+
+    if (brandId) {
+      // const taskTimeMins = tasks.find(
+      //   (task) => task.id === order.work_task_id
+      // ).mins_per_unit;
+      // console.log(brandId);
+      // console.log(taskTimeMins);
+      // const tempTargetTime =
+      //   order.initial_units_or_quantity * taskTimeMins;
+      // setTargetTime(tempTargetTime);
+      // let tempCost = 0;
+      // if (task.mins_per_unit) {
+      //   tempCost =
+      //     task.mins_per_unit *
+      //     (brand.hourly_rate / 60) *
+      //     workOrder.initial_units_or_quantity;
+      //   setCost(tempCost);
+      // } else {
+      //   tempCost =
+      //     task.flat_cost * workOrder.initial_units_or_quantity;
+      //   setCost(tempCost);
+      // }
+      // if (task.name === 'Barcoding/ Labelling') {
+      //   tempCost =
+      //     brand.rebarcoding_rate *
+      //     workOrder.initial_units_or_quantity;
+      //   setCost(tempCost);
+      // }
+    }
+  }, [order, tasks, brandId]);
+
+  const handleBrandSelect = (brandId: number) => {
+    setBrandId(brandId);
+    // console.log(brandId);
+    // console.log(brands[2].id);
+    // const brand = brands.find((b) => b.id === brandId);
+    // const brand2 = brands.filter((b) => b.id === brandId)[0];
+    // console.log(brand);
+    // console.log(brand2);
+    // const minsPerUnit = task[order.work_task_id].mins_per_unit;
+    // const flatCost = task[order.work_task_id].flat_cost;
+    // const quantity = order.initial_units_or_quantity;
+    // if (minsPerUnit == null) {
+    //   setTargetTime(0);
+    // } else {
+    //   setTargetTime(minsPerUnit * quantity);
+    // }
+    // const costRate = brand.hourly_rate;
+    // let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
+    // if (minsPerUnit == null && flatCost != null) {
+    //   setCost(Number(flatCost * quantity.toFixed(2)));
+    // } else if (minsPerUnit == null && flatCost == null) {
+    //   setCost(0);
+    // } else {
+    //   estimatedCost = Number(estimatedCost.toFixed(2));
+    //   setCost(estimatedCost);
+    // }
+  };
 
   return (
     <>
@@ -94,8 +126,8 @@ export const EstimatedCosts = (props: any) => {
             <option hidden disabled value="">
               Select a Brand
             </option>
-            {brands.map((brand) => (
-              <option value={brand}>{brand.name}</option>
+            {brands.map((brand: any) => (
+              <option value={brand.id}>{brand.name}</option>
             ))}
           </select>
           <ul>
