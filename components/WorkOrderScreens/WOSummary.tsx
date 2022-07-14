@@ -1,48 +1,59 @@
 export const WOSummary = (props: any) => {
+  const { tasks, order } = props;
+
   return (
     <>
-      <h1 className="mb-5">
-        {props.workOrder.tracking_id}: Accept / Reject Work Order
-      </h1>
-      <h2> Summary</h2>
-      <ul className="mb-3">
-        <li> --- </li>
-        <li>
-          <b>Task: </b> {props.task.name}
-        </li>
-        <li>
-          <b>Description: </b>
-          {props.workOrder.description}
-        </li>
-        <li>
-          <b>Total Units/Quantity: </b>
-          {props.workOrder.initial_units_or_quantity}
-        </li>
-        <li>
-          <b>Date Submitted: </b>
-          {props ? props.workOrder.created_at : 'not working rn'}
-        </li>
-      </ul>
-      <h2>Contact</h2>
-      <ul className="mb-3">
-        <li> --- </li>
-        <li>
-          <b>Brand (Customer Entry): </b>
-          {props.workOrder.brand_entry}
-        </li>
-        <li>
-          <b>Customer Name: </b>
-          {props.workOrder.name}
-        </li>
-        <li>
-          <b>Email: </b>
-          {props.workOrder.email}
-        </li>
-        <li>
-          <b>Phone Number: </b>
-          {props.workOrder.number}
-        </li>
-      </ul>
+      {tasks && order && (
+        <>
+          <h1 className="mb-5">
+            {order.tracking_id}: Accept / Reject Work Order
+          </h1>
+          <h2> Summary</h2>
+          <ul className="mb-3">
+            <li> --- </li>
+            <li>
+              <b>Task: </b>{' '}
+              {
+                tasks.find(
+                  (task: any) => task.id === order.work_task_id
+                )?.name
+              }
+            </li>
+            <li>
+              <b>Description: </b>
+              {order.description}
+            </li>
+            <li>
+              <b>Total Units/Quantity: </b>
+              {order.initial_units_or_quantity}
+            </li>
+            <li>
+              <b>Date Submitted: </b>
+              {props ? order.created_at : 'not working rn'}
+            </li>
+          </ul>
+          <h2>Contact</h2>
+          <ul className="mb-3">
+            <li> --- </li>
+            <li>
+              <b>Brand (Customer Entry): </b>
+              {order.brand_entry}
+            </li>
+            <li>
+              <b>Customer Name: </b>
+              {order.name}
+            </li>
+            <li>
+              <b>Email: </b>
+              {order.email}
+            </li>
+            <li>
+              <b>Phone Number: </b>
+              {order.number}
+            </li>
+          </ul>
+        </>
+      )}
     </>
   );
 };

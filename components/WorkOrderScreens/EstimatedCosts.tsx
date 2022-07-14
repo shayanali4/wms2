@@ -2,79 +2,82 @@ import { useEffect, useState } from 'react';
 import { ActionWO } from './AcceptorReject/ActionWO';
 
 export const EstimatedCosts = (props: any) => {
-  const { task, workOrder, brands } = props;
+  const { tasks, order, brands } = props;
 
   const [targetTime, setTargetTime] = useState(0);
   const [cost, setCost] = useState(0);
   const [brand, setBrand] = useState({});
 
-  useEffect(() => {
-    console.log(props);
-    if (brand) {
-      const tempTargetTime =
-        workOrder.initial_units_or_quantity * task.mins_per_unit;
-      setTargetTime(tempTargetTime);
-      let tempCost = 0;
-      if (task.mins_per_unit) {
-        tempCost =
-          task.mins_per_unit *
-          (brand.hourly_rate / 60) *
-          workOrder.initial_units_or_quantity;
-        setCost(tempCost);
-      } else {
-        tempCost =
-          task.flat_cost * workOrder.initial_units_or_quantity;
-        setCost(tempCost);
-      }
-      if (task.name === 'Barcoding/ Labelling') {
-        tempCost =
-          brand.rebarcoding_rate *
-          workOrder.initial_units_or_quantity;
-        setCost(tempCost);
-      }
-    }
-  }, [workOrder, task, brand]);
+  // useEffect(() => {
+  //   console.log(props);
+  //   if (brand) {
+  //     const tempTargetTime =
+  //       workOrder.initial_units_or_quantity * task.mins_per_unit;
+  //     setTargetTime(tempTargetTime);
+  //     let tempCost = 0;
+  //     if (task.mins_per_unit) {
+  //       tempCost =
+  //         task.mins_per_unit *
+  //         (brand.hourly_rate / 60) *
+  //         workOrder.initial_units_or_quantity;
+  //       setCost(tempCost);
+  //     } else {
+  //       tempCost =
+  //         task.flat_cost * workOrder.initial_units_or_quantity;
+  //       setCost(tempCost);
+  //     }
+  //     if (task.name === 'Barcoding/ Labelling') {
+  //       tempCost =
+  //         brand.rebarcoding_rate *
+  //         workOrder.initial_units_or_quantity;
+  //       setCost(tempCost);
+  //     }
+  //   }
+  // }, [workOrder, tasks, brand]);
 
-  const handleBrandSelect = (input: any) => {
-    const brand = brands.filter((b) => b.id == input)[0];
-    const minsPerUnit = task[workOrder.work_task_id].mins_per_unit;
-    const flatCost = task[workOrder.work_task_id].flat_cost;
-    const quantity = workOrder.initial_units_or_quantity;
-    if (minsPerUnit == null) {
-      setTargetTime(0);
-    } else {
-      setTargetTime(minsPerUnit * quantity);
-    }
-    const costRate = brand.hourly_rate;
-    let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
-    if (minsPerUnit == null && flatCost != null) {
-      setCost(Number(flatCost * quantity.toFixed(2)));
-    } else if (minsPerUnit == null && flatCost == null) {
-      setCost(0);
-    } else {
-      estimatedCost = Number(estimatedCost.toFixed(2));
-      setCost(estimatedCost);
-    }
-  };
+  // const handleBrandSelect = (input: any) => {
+  //   const brand = brands.filter((b) => b.id == input)[0];
+  //   const minsPerUnit = task[order.work_task_id].mins_per_unit;
+  //   const flatCost = task[order.work_task_id].flat_cost;
+  //   const quantity = order.initial_units_or_quantity;
+  //   if (minsPerUnit == null) {
+  //     setTargetTime(0);
+  //   } else {
+  //     setTargetTime(minsPerUnit * quantity);
+  //   }
+  //   const costRate = brand.hourly_rate;
+  //   let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
+  //   if (minsPerUnit == null && flatCost != null) {
+  //     setCost(Number(flatCost * quantity.toFixed(2)));
+  //   } else if (minsPerUnit == null && flatCost == null) {
+  //     setCost(0);
+  //   } else {
+  //     estimatedCost = Number(estimatedCost.toFixed(2));
+  //     setCost(estimatedCost);
+  //   }
+  // };
 
   return (
     <>
-      {brands && (
+      {tasks && order && brands && (
         <>
           <h2>Calculate Estimated Costs</h2>
           <ul>
             <li> --- </li>
             <li>
-              <b>Work Order: </b>
-              {task.name}
+              <b>Task: </b>
+              {
+                tasks.find((task) => task.id === order.work_task_id)
+                  ?.name
+              }
             </li>
             <li>
               <b>Total Units/Quantity: </b>
-              {workOrder.initial_units_or_quantity}
+              {order.initial_units_or_quantity}
             </li>
             <li>
               <b>Customer's Brand Entry: </b>
-              {workOrder.brand_entry}
+              {order.brand_entry}
             </li>
           </ul>
           <label htmlFor="brand_system">
@@ -91,9 +94,9 @@ export const EstimatedCosts = (props: any) => {
             <option hidden disabled value="">
               Select a Brand
             </option>
-            {/* {brands.map((brand) => (
+            {brands.map((brand) => (
               <option value={brand}>{brand.name}</option>
-            ))} */}
+            ))}
           </select>
           <ul>
             <li>

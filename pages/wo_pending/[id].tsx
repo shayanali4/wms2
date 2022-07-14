@@ -85,15 +85,15 @@ const Index: NextPage = (props) => {
           <Layout
             title={`Order #${workOrder.tracking_id} | Pending | WMS | TuPack`}
           />
-          <WOSummary workOrder={workOrder} task={tasks} />
+          <WOSummary order={workOrder} tasks={tasks} />
           <SpecificDetails
             specifics={specifics}
             workOrder={workOrder}
           />
           <form onSubmit={handleSubmit}>
             <EstimatedCosts
-              task={tasks}
-              workOrder={workOrder}
+              tasks={tasks}
+              order={workOrder}
               brands={brands}
             />
           </form>
