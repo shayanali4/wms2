@@ -1,10 +1,11 @@
 import { NotStartedObject } from '../../../interfaces/NotStartedObject';
 import { RowButton } from '../RowButton';
 
-type Props = { orders: NotStartedObject; tasks: any };
+type Props = { orders: NotStartedObject; tasks: any; brands: any };
 const NotStartedTable: React.FunctionComponent<Props> = ({
   orders,
   tasks,
+  brands,
 }) => (
   <table className="min-w-max w-full table-auto">
     <thead>
@@ -61,7 +62,14 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                 </td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>tbc</span>
+                    <span>
+                      {' '}
+                      {
+                        brands.find(
+                          (b: any) => b.id === order.brand_id
+                        )?.name
+                      }
+                    </span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center">

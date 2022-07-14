@@ -8,27 +8,31 @@ import { fetchOrdersTrackerStatus } from '../data/services';
 const NotStartedPage: NextPage = () => {
   const [orders, setOrders] = useState([{}]);
   const [tasks, setWorkTasks] = useState([{}]);
+  const [brands, setBrands] = useState([{}]);
 
   useEffect(() => {
-    let mounted = true;
     fetchOrdersTrackerStatus(1).then((data) => {
-      if (data.workTasks) {
+      if (data.orders) {
         setOrders(data.orders);
       }
       if (data.workTasks) {
         setWorkTasks(data.workTasks);
       }
+      if (data.brands) {
+        setBrands(data.brands);
+      }
     });
-    return () => {
-      mounted = false;
-    };
   }, []);
 
   return (
     <>
       <Page layoutTitle="Not Started Orders | Work Management System | TuPack">
-        {orders && tasks ? (
-          <NotStartedTable orders={orders} tasks={tasks} />
+        {orders && tasks && brands ? (
+          <NotStartedTable
+            orders={orders}
+            tasks={tasks}
+            brands={brands}
+          />
         ) : (
           <div>Loading Table...</div>
         )}
