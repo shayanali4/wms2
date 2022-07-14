@@ -6,48 +6,32 @@ import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetai
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
 import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
-import {
-  fetchBrands,
-  fetchOneOrder,
-  fetchWorkTasks,
-  findSpecificFieldsForOrder,
-  findWorkTask,
-} from '../../data/services';
+import { queueOrderAcceptReject } from '../../data/services';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
-  const [specifics, setSpecifics] = useState({});
-  const [tasks, setTasks] = useState({});
-  const [brands, setBrands] = useState({});
+  const [specifics, setSpecifics] = useState([]);
+  const [tasks, setTasks] = useState([{}]);
+  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    const fetchNewOrders = async () => {
-      const order = await fetchOneOrder(props.id);
-      if (order) {
-        setWorkOrder(order || {});
+    queueOrderAcceptReject(props.id).then((data: any) => {
+      console.log(data);
+      if (data.order) {
+        setWorkOrder(data.order);
       }
-      const specificFields = await findSpecificFieldsForOrder(
-        props.id
-      );
-      if (specificFields) {
-        setSpecifics(specificFields || {});
+      if (data.specificFields) {
+        setSpecifics(data.specificFields);
       }
-      const workTasks = await fetchWorkTasks();
-      if (workTasks) {
-        setTasks(workTasks || {});
+      if (data.workTasks) {
+        setTasks(data.workTasks);
       }
-      const brands = await fetchBrands();
-      if (brands) {
-        setBrands(brands || {});
+      if (data.brands) {
+        setBrands(data.brands);
+      } else {
+        console.log('didntwork');
       }
-    };
-    fetchNewOrders().catch(console.error);
-    return () => {
-      // setWorkOrder({});
-      // setSpecifics({});
-      // setTasks({});
-      // setBrands({});
-    };
+    });
   }, []);
 
   const handleSubmit = async (e: any) => {

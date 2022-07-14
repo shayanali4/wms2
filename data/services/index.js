@@ -72,6 +72,15 @@ export const fetchOrdersInProgress = async () => {
   return { orders, workTasks, workers, brands };
 };
 
+export const queueOrderAcceptReject = async (id) => {
+  const order = await fetchOneOrder(id);
+  const specificFields = await findSpecificFieldsForOrder(id);
+  const workTasks = await fetchWorkTasks();
+  const brands = await fetchBrands();
+  console.log(brands);
+  return { order, specificFields, workTasks, brands };
+};
+
 export const getTableInformation = async (name) => {
   if (name === 'newOrders') {
     return await newOrders();
