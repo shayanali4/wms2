@@ -15,7 +15,7 @@ export const SpecificDetails = (props: any) => {
         <li> --- </li>
 
         {specifics.map((specific) => (
-          <li>
+          <li key={specific[0]}>
             {specific[0]}: {specific[1]}
           </li>
         ))}
