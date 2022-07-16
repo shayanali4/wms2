@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/Layout';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { getAllOrderData } from '../../data/services';
-import { supabaseClient } from '../../lib/client';
 import Button from '../../components/Button';
 import { CompletedSummary } from '../../components/WorkOrderScreens/Completed/Summary';
 import { WarehouseSummary } from '../../components/WorkOrderScreens/Completed/WarehouseNotes';
 import { InitialClientDetails } from '../../components/WorkOrderScreens/Completed/InitialClientDetails';
+import Title from '../../components/Title';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
@@ -43,6 +43,9 @@ const Index: NextPage = (props) => {
         <>
           <Layout
             title={`Order #${workOrder.tracking_id} | Completed Orders | WMS | TuPack`}
+          />
+          <Title
+            text={`Completed Order - #${workOrder.tracking_id}`}
           />
           <Button text="Go Back" hyperlink="/completed" />
           <CompletedSummary
