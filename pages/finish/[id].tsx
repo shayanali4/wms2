@@ -12,7 +12,7 @@ import {
   findSpecificFieldsForOrder,
 } from '../../data/services';
 import S3UploadFile from '../../components/s3UploadFile';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button/';
 
 interface File {
   name: string;

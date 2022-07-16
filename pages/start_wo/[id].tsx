@@ -7,7 +7,7 @@ import { StartChoices } from '../../components/WorkOrderScreens/StartQueue/Start
 import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/ActionStartQueue';
 import { startOrder } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});

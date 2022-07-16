@@ -4,10 +4,9 @@ import Layout from '../../components/Layout/Layout';
 import { WOSummary } from '../../components/WorkOrderScreens/WOSummary';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
-import { ActionWO } from '../../components/WorkOrderScreens/AcceptorReject/ActionWO';
 import { supabaseClient } from '../../lib/client';
 import { queueOrderAcceptReject } from '../../data/services';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
