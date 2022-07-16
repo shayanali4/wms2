@@ -12,6 +12,7 @@ import {
   findSpecificFieldsForOrder,
 } from '../../data/services';
 import S3UploadFile from '../../components/s3UploadFile';
+import Button from '../../components/Button/Button';
 
 interface File {
   name: string;
@@ -125,6 +126,7 @@ const FinishIndex: NextPage = (props) => {
   return (
     <>
       <Layout title={`Complete WO`} />
+      <Button text="Go Back" hyperlink="/wip" />
       <FinishSummary workOrder={workOrder} task={task} />
       <form onSubmit={handleSubmit}>
         <TimeSummary workOrder={workOrder} />

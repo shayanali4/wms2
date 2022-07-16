@@ -7,6 +7,7 @@ import { StartChoices } from '../../components/WorkOrderScreens/StartQueue/Start
 import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/ActionStartQueue';
 import { startOrder } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
+import Button from '../../components/Button/Button';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
@@ -79,6 +80,7 @@ const Index: NextPage = (props) => {
           <Layout
             title={`Order #${workOrder.tracking_id} | Queue | WMS | TuPack`}
           />
+          <Button text="Go Back" hyperlink="/notstarted" />
           <QueueSummary workOrder={workOrder} tasks={tasks} />
           <SpecificDetails
             specifics={specifics}
