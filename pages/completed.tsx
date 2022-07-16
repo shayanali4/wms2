@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { NextPage } from "next";
-import Page from "../components/Page";
-import { fetchOrdersTrackerStatus } from "../data/services";
-import CompletedTable from "../components/Table/Views/Completed";
+import React, { useState, useEffect } from 'react';
+import { NextPage } from 'next';
+import Page from '../components/Page';
+import { fetchOrdersTrackerStatus } from '../data/services';
+import CompletedTable from '../components/Table/Views/Completed';
 
 const CompletedPage: NextPage = () => {
   const [orders, setOrders] = useState(null);
@@ -25,7 +25,10 @@ const CompletedPage: NextPage = () => {
 
   return (
     <>
-      <Page layoutTitle="Completed Orders | Work Management System | TuPack">
+      <Page
+        layoutTitle="Completed Orders | Work Management System | TuPack"
+        pageName="Completed Orders"
+      >
         {orders && brands && workTasks ? (
           <CompletedTable
             orders={orders}

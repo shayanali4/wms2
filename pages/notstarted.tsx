@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import NotStartedTable from '../components/Table/Views/NotStarted';
 import Page from '../components/Page';
 import { fetchOrdersTrackerStatus } from '../data/services';
+import Title from '../components/Title';
 
 const NotStartedPage: NextPage = () => {
   const [orders, setOrders] = useState([{}]);
@@ -25,7 +26,10 @@ const NotStartedPage: NextPage = () => {
 
   return (
     <>
-      <Page layoutTitle="Not Started Orders | Work Management System | TuPack">
+      <Page
+        layoutTitle="Not Started Orders | Work Management System | TuPack"
+        pageName="Not Started Orders"
+      >
         {orders && tasks && brands ? (
           <NotStartedTable
             orders={orders}

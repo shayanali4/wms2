@@ -21,7 +21,10 @@ const CancelledPage: NextPage = () => {
 
   return (
     <>
-      <Page layoutTitle="Completed Orders | Work Management System | TuPack">
+      <Page
+        layoutTitle="Cancelled Orders | Work Management System | TuPack"
+        pageName="Cancelled Orders"
+      >
         {orders ? (
           <CancelledTable orders={orders} workTasks={workTasks} />
         ) : (

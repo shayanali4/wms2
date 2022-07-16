@@ -4,6 +4,7 @@ import TableWip from '../components/Table/Views/WIP';
 import { NextPage } from 'next';
 import Page from '../components/Page';
 import { fetchOrdersInProgress } from '../data/services';
+import Title from '../components/Title';
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState([]);
@@ -31,7 +32,10 @@ const WIPPage: NextPage = () => {
 
   return (
     <>
-      <Page layoutTitle="Work Orders In Progress | Work Management System | TuPack">
+      <Page
+        layoutTitle="Work Orders In Progress | Work Management System | TuPack"
+        pageName="Work Orders In Progress"
+      >
         {WIPOrders ? (
           <TableWip
             orders={WIPOrders}

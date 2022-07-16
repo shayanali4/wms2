@@ -1,14 +1,17 @@
 import Heading from '../Layout/Heading';
 import Layout from '../Layout/Layout';
 import Link from 'next/link';
+import Title from '../Title';
 type Props = {
   title?: string;
   layoutTitle?: string;
+  pageName: string;
 };
 
 const Page: React.FunctionComponent<Props> = ({
   children,
   layoutTitle = 'This is the default title',
+  pageName,
 }) => (
   <>
     <Layout title={layoutTitle} />
@@ -41,6 +44,8 @@ const Page: React.FunctionComponent<Props> = ({
             </Link>
           </div>
           <div className="bg-white shadow-md rounded my-6">
+            <Title text={pageName} />
+
             {children}
           </div>
         </main>
