@@ -6,11 +6,7 @@ import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetai
 import { TimeSummary } from '../../components/WorkOrderScreens/Finish/TimeSummary';
 import { PricingSummary } from '../../components/WorkOrderScreens/Finish/PricingSummary';
 import { FinishWO } from '../../components/WorkOrderScreens/Finish/FinishWO';
-import {
-  fetchOneOrder,
-  fetchWorkTasks,
-  findSpecificFieldsForOrder,
-} from '../../data/services';
+import { finishOrder } from '../../data/services';
 import S3UploadFile from '../../components/s3UploadFile';
 import Button from '../../components/Button/';
 
@@ -24,29 +20,18 @@ const FinishIndex: NextPage = (props) => {
   const [task, setTasks] = useState({});
 
   useEffect(() => {
-    const fetchWIPOrder = async () => {
-      console.log(props.id);
-      const order = await fetchOneOrder(props.id);
-      if (order) {
-        setWorkOrder(order || {});
+    finishOrder(props.id).then((data: any) => {
+      console.log(data);
+      if (data.order) {
+        setWorkOrder(data.order);
       }
-      const specificFields = await findSpecificFieldsForOrder(
-        props.id
-      );
-      if (specificFields) {
-        setSpecifics(specificFields || {});
+      if (data.specificFields) {
+        setSpecifics(data.specificFields);
       }
-      const workTasks = await fetchWorkTasks();
-      if (workTasks) {
-        setTasks(workTasks || {});
+      if (data.workTasks) {
+        setTasks(data.workTasks);
       }
-    };
-    fetchWIPOrder().catch(console.error);
-    return () => {
-      // setWorkOrder({});
-      // setSpecifics({});
-      // setTasks({});
-    };
+    });
   }, []);
 
   const handleSubmit = async (e: any) => {
@@ -107,36 +92,27 @@ const FinishIndex: NextPage = (props) => {
         QCPics.length > 0 ? (formData['qc_pics'] = QCPics) : null;
       }
     );
-
-    // make receipt
-
-    // const { data, error } = await supabaseClient
-    //   .from('order')
-    //   .update(formData)
-    //   .eq('id', props.id);
-    // console.log(data);
-    // if (error) {
-    //   console.log(error.message);
-    // }
-    // if (data) {
-    //   alert('Submitted successfully');
-    // }
   };
 
   return (
     <>
-      <Layout title={`Complete WO`} />
-      <Button text="Go Back" hyperlink="/wip" />
-      <FinishSummary workOrder={workOrder} task={task} />
-      <form onSubmit={handleSubmit}>
-        <TimeSummary workOrder={workOrder} />
-        <PricingSummary workOrder={workOrder} />
+      {workOrder && specifics && (
+        <>
+          {console.log(workOrder, specifics)}
+          <Layout title={`Complete WO`} />
+          <Button text="Go Back" hyperlink="/wip" />
+          <FinishSummary workOrder={workOrder} task={task} />
+          <form onSubmit={handleSubmit}>
+            {/* <TimeSummary workOrder={workOrder} /> */}
+            {/* <PricingSummary workOrder={workOrder} />
         <SpecificDetails
           specifics={specifics}
           workOrder={workOrder}
         />
-        <FinishWO />
-      </form>
+        <FinishWO /> */}
+          </form>
+        </>
+      )}
     </>
   );
 };

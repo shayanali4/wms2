@@ -1,17 +1,20 @@
 export const TimeSummary = (props: any) => {
+  const { workOrder } = props;
+  console.log(props);
+
   return (
     <>
       <h2>Final Timings</h2>
       <p>
         <b>Start Date: </b>
-        {props.workOrder.start_time}
+        {workOrder.start_time}
       </p>
       <p>
         <b>Expected Finish Date: </b>
-        {props.workOrder.expected_finish_date}
+        {workOrder.expected_finish_date}
       </p>
       <p className="mt-3">
-        <b>Target Time: </b> {props.workOrder.target_time} mins
+        <b>Target Time: </b> {workOrder.target_time} mins
       </p>
       <label htmlFor="finishTime">Actual Finish Date</label>
       <input type="date" id="finishTime" />
@@ -19,7 +22,7 @@ export const TimeSummary = (props: any) => {
       <label htmlFor="timeTaken">Total Time Taken </label>
       <input
         type="text"
-        value={`${props.workOrder.target_time} mins`}
+        value={`${workOrder.target_time} mins`}
         id="timeTaken"
       />
     </>

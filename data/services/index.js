@@ -88,6 +88,13 @@ export const startOrder = async (id) => {
   const workers = await fetchWorkers();
   return { order, specificFields, workTasks, workers };
 };
+export const finishOrder = async (id) => {
+  const order = await fetchOneOrder(id);
+  const specificFields = await findSpecificFieldsForOrder(id);
+  const workTasks = await fetchWorkTasks();
+  const workers = await fetchWorkers();
+  return { order, specificFields, workTasks };
+};
 
 export const getTableInformation = async (name) => {
   if (name === 'newOrders') {
