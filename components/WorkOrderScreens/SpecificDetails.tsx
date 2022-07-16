@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const SpecificDetails = (props: any) => {
   const specificsAsArray = Object.entries(props.specifics);
   const filterNulls = specificsAsArray.filter(
@@ -6,19 +8,24 @@ export const SpecificDetails = (props: any) => {
   const specifics = filterNulls.filter(
     ([key, value]) => key != 'order_id'
   );
-  const skus = props.workOrder.skus;
+  const skus = props.specifics.skus;
+  const pics = props.specifics.pics;
 
   return (
     <>
       <h2>Specific Order Details</h2>
       <ul>
         <li> --- </li>
-
-        {specifics.map((specific) => (
-          <li key={specific[0]}>
-            {specific[0]}: {specific[1]}
-          </li>
-        ))}
+        {!pics ? null : <h3>Customer Pictures</h3>}
+        {!pics ? null : (
+          <ul>
+            {pics.map((url: any, index: any) => (
+              <li>
+                Image {index + 1} - <Link href={url}>Link</Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </ul>
       {!skus ? null : skus.length === 1 ? (
         <h3>SKU</h3>
@@ -36,6 +43,13 @@ export const SpecificDetails = (props: any) => {
             })
           : null}
       </ul>
+      {specifics.map((specific) =>
+        specific[0] == 'skus' || specific[0] == 'pics' ? null : (
+          <li key={specific[0]}>
+            {specific[0]}: {specific[1]}
+          </li>
+        )
+      )}
     </>
   );
 };
