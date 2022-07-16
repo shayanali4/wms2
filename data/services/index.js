@@ -81,12 +81,13 @@ export const queueOrderAcceptReject = async (id) => {
   return { order, specificFields, workTasks, brands };
 };
 
-export const startOrder = async (id) => {
+export const getAllOrderData = async (id) => {
   const order = await fetchOneOrder(id);
   const specificFields = await findSpecificFieldsForOrder(id);
   const workTasks = await fetchWorkTasks();
   const workers = await fetchWorkers();
-  return { order, specificFields, workTasks, workers };
+  const brands = await fetchBrands();
+  return { order, specificFields, workTasks, workers, brands };
 };
 export const finishOrder = async (id) => {
   const order = await fetchOneOrder(id);
