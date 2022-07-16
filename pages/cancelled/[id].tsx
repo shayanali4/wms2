@@ -4,9 +4,8 @@ import Layout from '../../components/Layout/Layout';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { getAllOrderData } from '../../data/services';
 import Button from '../../components/Button';
-import { CompletedSummary } from '../../components/WorkOrderScreens/Completed/Summary';
-import { WarehouseSummary } from '../../components/WorkOrderScreens/Completed/WarehouseNotes';
 import { InitialClientDetails } from '../../components/WorkOrderScreens/Completed/InitialClientDetails';
+import { CancelledSummary } from '../../components/WorkOrderScreens/AcceptorReject/CancelledSummary';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
@@ -37,11 +36,10 @@ const Index: NextPage = (props) => {
       {workOrder && tasks && workers && specifics && (
         <>
           <Layout
-            title={`Order #${workOrder.tracking_id} | Completed Orders | WMS | TuPack`}
+            title={`Order #${workOrder.tracking_id} | Cancelled Orders | WMS | TuPack`}
           />
-          <Button text="Go Back" hyperlink="/completed" />
-          <CompletedSummary workOrder={workOrder} tasks={tasks} />
-          <WarehouseSummary workOrder={workOrder} />
+          <Button text="Go Back" hyperlink="/cancelled" />
+          <CancelledSummary workOrder={workOrder} tasks={tasks} />
           <InitialClientDetails
             workOrder={workOrder}
             tasks={tasks}

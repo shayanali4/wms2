@@ -48,7 +48,10 @@ const CancelledTable: React.FunctionComponent<Props> = ({
                   }
                 />
                 <Row input={order.decline_reason} />
-                <RowButton link={'#'} text="All Details" />
+                <RowButton
+                  link={`/cancelled/${order.id}`}
+                  text="All Details"
+                />
               </tr>
             );
           })
