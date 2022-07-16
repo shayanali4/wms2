@@ -1,18 +1,12 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/Layout';
-import { QueueSummary } from '../../components/WorkOrderScreens/StartQueue/QueueSummary';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
-import { StartChoices } from '../../components/WorkOrderScreens/StartQueue/StartChoices';
-import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/ActionStartQueue';
 import { startOrder } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
 import Button from '../../components/Button';
 import { CompletedSummary } from '../../components/WorkOrderScreens/Completed/Summary';
-import {
-  WarehouseNotes,
-  WarehouseSummary,
-} from '../../components/WorkOrderScreens/Completed/WarehouseNotes';
+import { WarehouseSummary } from '../../components/WorkOrderScreens/Completed/WarehouseNotes';
 import { InitialClientDetails } from '../../components/WorkOrderScreens/Completed/InitialClientDetails';
 
 const Index: NextPage = (props) => {
