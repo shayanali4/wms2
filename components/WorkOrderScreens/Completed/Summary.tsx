@@ -1,8 +1,8 @@
 export const CompletedSummary = (props: any) => {
-  const { workOrder, tasks } = props;
+  const { workOrder, tasks, brands } = props;
   return (
     <>
-      {workOrder && tasks && (
+      {workOrder && tasks && brands && (
         <>
           <h1>Completed Order: #{workOrder.tracking_id}</h1>
           <p>
@@ -14,7 +14,15 @@ export const CompletedSummary = (props: any) => {
               // )?.name
             }
           </p>
-          <p>Brand:</p>
+          <p>
+            Brand:
+            {
+              'TBCCC'
+              //   brands.find(
+              //     (brand: any) => brand.id == workOrder.brand_id
+              //   )?.name
+            }
+          </p>
           <p>Customer Name: {workOrder.name}</p>
           <ul>
             <li>Email: {workOrder.email}</li>
