@@ -1,5 +1,6 @@
 import { WIPObject } from '../../../interfaces/WIPObject';
 import Link from 'next/link';
+import { RowButton } from '../RowButton';
 
 type Props = {
   orders: WIPObject;
@@ -37,7 +38,6 @@ const WIPTable: React.FunctionComponent<Props> = ({
                 key={order.tracking_id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                {/* order time accpeted */}
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
@@ -47,7 +47,6 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     </span>
                   </div>
                 </td>
-                {/* expected finish date */}
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
@@ -57,7 +56,6 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     </span>
                   </div>
                 </td>
-                {/* tracking id */}
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   <div className="flex items-center">
                     <span className="font-medium">
@@ -65,7 +63,6 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     </span>
                   </div>
                 </td>
-                {/* work order */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
@@ -78,14 +75,12 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     </span>
                   </div>
                 </td>
-                {/* units */}
                 <td className="py-3 px-6 text-center">
                   <span className="font-medium">
                     {order.initial_units_or_quantity}
                   </span>
                 </td>
 
-                {/* assigned to */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
@@ -98,13 +93,11 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     </span>
                   </div>
                 </td>
-                {/* target time */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>{order.target_time} minutes</span>
                   </div>
                 </td>
-                {/* brand */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
@@ -116,25 +109,15 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     </span>
                   </div>
                 </td>
-                {/* intiial cost */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>£{order.initial_cost}</span>
                   </div>
                 </td>
-                {/* button */}
-                <td className="py-3 px-6 text-center">
-                  <div className="flex item-center justify-center">
-                    <Link href={`/finish/${order.id}`}>
-                      <button
-                        className="px-3 py-1 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                        value={order.id}
-                      >
-                        Finish
-                      </button>
-                    </Link>
-                  </div>
-                </td>
+                <RowButton
+                  link={`/finish/${order.id}`}
+                  text={'Finish'}
+                />
               </tr>
             );
           })

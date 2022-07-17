@@ -5,7 +5,7 @@ import { QueueSummary } from '../../components/WorkOrderScreens/StartQueue/Queue
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { StartChoices } from '../../components/WorkOrderScreens/StartQueue/StartChoices';
 import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/ActionStartQueue';
-import { startOrder } from '../../data/services';
+import { getAllOrderData } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
 import Button from '../../components/Button';
 
@@ -16,7 +16,7 @@ const Index: NextPage = (props) => {
   const [workers, setWorkers] = useState({});
 
   useEffect(() => {
-    startOrder(props.id).then((data: any) => {
+    getAllOrderData(props.id).then((data: any) => {
       console.log(data);
       if (data.order) {
         setWorkOrder(data.order);

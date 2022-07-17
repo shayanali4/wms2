@@ -7,6 +7,7 @@ import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts
 import { supabaseClient } from '../../lib/client';
 import { queueOrderAcceptReject } from '../../data/services';
 import Button from '../../components/Button';
+import Title from '../../components/Title';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
@@ -82,10 +83,11 @@ const Index: NextPage = (props) => {
     <>
       {workOrder && tasks && brands && specifics && (
         <>
-          <Button text="Go Back" hyperlink="/" />
           <Layout
             title={`Order #${workOrder.tracking_id} | Pending | WMS | TuPack`}
           />
+          <Title text={`Pending Order - #${workOrder.tracking_id}`} />
+          <Button text="Go Back" hyperlink="/" />
           <WOSummary order={workOrder} tasks={tasks} />
           <SpecificDetails
             specifics={specifics}
