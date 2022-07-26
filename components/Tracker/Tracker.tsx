@@ -1,3 +1,5 @@
+import { Pending } from '../Page/Tracker/Pending';
+
 interface Props {
   id: String;
   created_at: Date;
@@ -17,8 +19,7 @@ export function Tracker(props: Props) {
       <section className="root">
         <figure>
           <figcaption>
-            <h4>Tracking Details</h4>
-            <h6>Order Number</h6>
+            <h4>Work Order Tracker</h4>
             <h2># {props.tracking_id}</h2>
           </figcaption>
         </figure>
@@ -38,25 +39,51 @@ export function Tracker(props: Props) {
           </p>
         ) : null}
         {props.tracker_status === 1 ? (
-          <p>
-            <b>Accepted</b> We accepted your work order @{' '}
-            {props.time_accepted} We'll update you again when the work
-            order has started{' '}
-          </p>
+          <>
+            <b>Accepted</b>
+            <p>
+              We accepted your work order at {props.time_accepted}.
+              <ul>
+                <li>Estimated time: {props.target_time}mins</li>
+                <li>Estimated cost: £{props.initial_cost}</li>
+              </ul>
+            </p>
+            <p>
+              We'll update you again when the work order has started.{' '}
+            </p>
+          </>
         ) : null}
         {props.tracker_status === 2 ? (
-          <p>
-            <b>Started</b> We expect to complete your work order @{' '}
-            {props.expected_finish_date} We'll let you know when this
-            is done{' '}
-          </p>
+          <>
+            <b>Started</b>
+            <p>
+              We expect to complete your work order{' '}
+              {props.expected_finish_date}.
+              <ul>
+                <li>Work Order accepted on: {props.created_at}</li>
+                <li>Estimated time: {props.target_time}mins</li>
+                <li>Estimated cost: £{props.initial_cost}</li>
+              </ul>
+            </p>
+            <p>
+              You'll hear from us again as soon as your work order has
+              been completed.{' '}
+            </p>
+          </>
         ) : null}
         {props.tracker_status === 3 ? (
-          <p>
-            <b>Finished</b> Your work order was completed at{' '}
-            {props.finish_time} and it took {props.time_taken}. Click
-            here to view detials and print a receipt{' '}
-          </p>
+          <>
+            <b>Finished</b>
+            <p>
+              Your work order was completed at {props.finish_time}.
+              <ul>
+                <li>Time Taken: {props.time_taken}mins</li>
+              </ul>
+            </p>
+            <h3>Full Details</h3>
+            <p>tbc</p>
+            <p>Thanks for your order. </p>
+          </>
         ) : null}
       </section>
     </div>

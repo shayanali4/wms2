@@ -1,10 +1,8 @@
 import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
 import { Tracker } from '../../components/Tracker/Tracker';
 import { supabaseClient } from '../../lib/client';
 
 const Tracking: NextPage = (Props) => {
-  const [trackingInfo, setTracker] = useState(null);
   return (
     <Tracker
       tracking_id={Props.tracking_id}
@@ -15,6 +13,8 @@ const Tracking: NextPage = (Props) => {
       expected_finish_date={Props.expected_finish_date}
       finish_time={Props.finish_time}
       time_taken={Props.time_taken}
+      target_time={Props.target_time}
+      initial_cost={Props.initial_cost}
     ></Tracker>
   );
 };
@@ -36,7 +36,6 @@ export async function getServerSideProps(context: any) {
     }
 
     if (data) {
-
       return {
         props: data,
       };
