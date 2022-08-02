@@ -117,10 +117,10 @@ export const EstimatedCosts = (props: any) => {
           </select>
           <ul>
             <li>
-              <b>Target Time: </b> {targetTime} minutes
+              <b>Target Time (mins): </b> {targetTime} minutes
             </li>
             <li>
-              <b>Estimated Costs: </b> £{cost}
+              <b>Estimated Costs (£): </b> £{cost}
             </li>
           </ul>
           <ActionWO targetTime={targetTime} estCost={cost} />
