@@ -8,6 +8,7 @@ import { supabaseClient } from '../../lib/client';
 import { queueOrderAcceptReject } from '../../data/services';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
+import { updateZendeskStatus } from '../../data/services/zendesk';
 
 const Index: NextPage = (props) => {
   const [workOrder, setWorkOrder] = useState({});
@@ -37,46 +38,48 @@ const Index: NextPage = (props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    let formData = {};
+    updateZendeskStatus(props.id);
 
-    Array.prototype.forEach.call(
-      e.target.elements,
-      (element: Element) => {
-        element.id == 'updateTime'
-          ? (formData = { ...formData, target_time: element.value })
-          : null;
-        element.id == 'updateCost'
-          ? (formData = { ...formData, initial_cost: element.value })
-          : null;
-        if (element.id == 'submitReject') {
-          formData = { ...formData, tracker_status: 99 };
-        } else if (element.id == 'submitAccept') {
-          formData = { ...formData, tracker_status: 2 };
-        }
-        element.id == 'initialComments' && element.value
-          ? (formData = {
-              ...formData,
-              initial_comments: element.value,
-            })
-          : null;
-        element.id == 'declineReason'
-          ? (formData = {
-              ...formData,
-              decline_reason: element.value,
-            })
-          : null;
-      }
-    );
+    // let formData = {};
 
-    const { data, error } = await supabaseClient
-      .from('order')
-      .update(formData)
-      .eq('id', props.id);
-    console.log(data);
-    if (error) {
-      console.log(error.message);
-    }
-    alert('Submitted successfully');
+    // Array.prototype.forEach.call(
+    //   e.target.elements,
+    //   (element: Element) => {
+    //     element.id == 'updateTime'
+    //       ? (formData = { ...formData, target_time: element.value })
+    //       : null;
+    //     element.id == 'updateCost'
+    //       ? (formData = { ...formData, initial_cost: element.value })
+    //       : null;
+    //     if (element.id == 'submitReject') {
+    //       formData = { ...formData, tracker_status: 99 };
+    //     } else if (element.id == 'submitAccept') {
+    //       formData = { ...formData, tracker_status: 2 };
+    //     }
+    //     element.id == 'initialComments' && element.value
+    //       ? (formData = {
+    //           ...formData,
+    //           initial_comments: element.value,
+    //         })
+    //       : null;
+    //     element.id == 'declineReason'
+    //       ? (formData = {
+    //           ...formData,
+    //           decline_reason: element.value,
+    //         })
+    //       : null;
+    //   }
+    // );
+
+    // const { data, error } = await supabaseClient
+    //   .from('order')
+    //   .update(formData)
+    //   .eq('id', props.id);
+    // console.log(data);
+    // if (error) {
+    //   console.log(error.message);
+    // }
+    // alert('Submitted successfully');
   };
 
   return (
