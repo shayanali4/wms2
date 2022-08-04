@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Page from '../components/Page';
 import { fetchOrdersTrackerStatus } from '../data/services';
-import CancelledTable from '../components/Table/Views/Cancelled';
 import CompletedTable from '../components/Table/Views/Completed';
 
 const CompletedPage: NextPage = () => {
