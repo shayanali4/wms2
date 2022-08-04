@@ -40,7 +40,7 @@ const Index: NextPage = (props: any) => {
 
   return (
     <>
-      {workOrder && tasks && workers && specifics && (
+      {workOrder && tasks && workers && specifics && brands && (
         <>
           <Layout
             title={`Order #${workOrder.tracking_id} | Completed Orders | WMS | TuPack`}
