@@ -5,9 +5,9 @@ import { fetchOrdersTrackerStatus } from '../data/services';
 import CompletedTable from '../components/Table/Views/Completed';
 
 const CompletedPage: NextPage = () => {
-  const [orders, setOrders] = useState(null);
-  const [workTasks, setWorkTasks] = useState(null);
-  const [brands, setBrands] = useState(null);
+  const [orders, setOrders] = useState({});
+  const [workTasks, setWorkTasks] = useState({});
+  const [brands, setBrands] = useState({});
 
   useEffect(() => {
     fetchOrdersTrackerStatus(3).then((data: any) => {
