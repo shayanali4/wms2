@@ -1,17 +1,4 @@
-interface Props {
-  id: String;
-  created_at: Date;
-  order_finish_time: String;
-  tracker_status: Number;
-  tracking_id: string;
-  decline_reason: string;
-  time_accepted: Date;
-  expected_finish_date: Date;
-  finish_time: Date;
-  time_taken: Number;
-}
-
-export function Tracker(props: Props) {
+export function Tracker(props: any) {
   return (
     <div className="Container">
       <section className="root">

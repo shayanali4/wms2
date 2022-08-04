@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import NotStartedTable from '../components/Table/Views/NotStarted';
 import Page from '../components/Page';
 import { fetchOrdersTrackerStatus } from '../data/services';
-import Title from '../components/Title';
 
 const NotStartedPage: NextPage = () => {
   const [orders, setOrders] = useState([{}]);

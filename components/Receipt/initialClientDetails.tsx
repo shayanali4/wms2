@@ -1,34 +1,34 @@
-import { Text, View, StyleSheet, Link } from "@react-pdf/renderer";
-import React from "react";
+import { Text, View, StyleSheet, Link } from '@react-pdf/renderer';
+import React from 'react';
 
-const borderColor = "#000";
+const borderColor = '#000';
 const styles = StyleSheet.create({
   mainCont: {
-    width: "50%",
+    width: '50%',
     marginBottom: 20,
   },
   title: {
-    fontStyle: "bold",
+    fontStyle: 'bold',
     fontSize: 16,
     marginBottom: 10,
   },
   container: {
-    flexDirection: "column",
+    flexDirection: 'column',
     borderColor: borderColor,
-    color: "#000",
+    color: '#000',
     borderWidth: 1,
-    alignItems: "flex-start",
-    fontStyle: "bold",
+    alignItems: 'flex-start',
+    fontStyle: 'bold',
   },
   row: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderColor: borderColor,
-    width: "100%",
+    width: '100%',
     borderWidth: 1,
   },
   col1: {
     borderRightColor: borderColor,
-    color: "#000",
+    color: '#000',
     borderRightWidth: 1,
     padding: 5,
   },
@@ -54,7 +54,9 @@ const InitialClientDetails: React.FunctionComponent<Props> = ({
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Initial Units/Quantity</Text>
-        <Text style={styles.col2}>{order.initial_units_or_quantity}</Text>
+        <Text style={styles.col2}>
+          {order.initial_units_or_quantity}
+        </Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Initial Cost</Text>
@@ -63,7 +65,7 @@ const InitialClientDetails: React.FunctionComponent<Props> = ({
       <View style={styles.row}>
         <Text style={styles.col1}>SKUs</Text>
         <Text style={styles.col2}>
-          {specifics.skus ? specifics.skus : "n/a"}
+          {specifics.skus ? specifics.skus : 'n/a'}
         </Text>
       </View>
       <View style={styles.row}>
@@ -74,7 +76,7 @@ const InitialClientDetails: React.FunctionComponent<Props> = ({
         <View style={styles.row}>
           <Text style={styles.col1}>Quality Control Pics</Text>
           <View>
-            {order.qc_pics.map((url, index) => (
+            {order.qc_pics.map((url: string, index: number) => (
               <Text style={styles.col2}>
                 Image {index + 1} -<Link src={url}>Link</Link>
               </Text>

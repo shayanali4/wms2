@@ -1,8 +1,7 @@
 import { QueueObject } from '../../../interfaces/QueueObject';
-import { Row } from '../Row';
-import { RowButton } from '../RowButton';
-import { PDFDownloadLink } from '@react-pdf/renderer/lib/react-pdf.browser.cjs.js';
-import Receipt from '../../Receipt';
+// import { PDFDownloadLink } from '@react-pdf/renderer/lib/react-pdf.browser.cjs.js';
+// import Receipt from '../../Receipt';
+import Link from 'next/link';
 
 type Props = { orders: QueueObject; workTasks: any; brands: any };
 
@@ -16,13 +15,13 @@ const CompletedTable: React.FunctionComponent<Props> = ({
       <tr className="bg-green-200 text-gray-600 uppercase text-sm leading-normal">
         <th className="py-3 px-6 text-left">ID</th>
         <th className="py-3 px-6 text-left">Finish Date</th>
-        <th className="py-3 px-6 text-center">Work Task</th>
-        <th className="py-3 px-6 text-center">Brand</th>
-        <th className="py-3 px-6 text-center">
+        <th className="py-3 px-6 text-left">Work Task</th>
+        <th className="py-3 px-6 text-left">Brand</th>
+        <th className="py-3 px-6 text-left">
           Final Units / Quantity
         </th>
         <th className="py-3 px-6 text-center">Time Taken</th>
-        <th className="py-3 px-6 text-center">Receipt Link</th>
+        {/* <th className="py-3 px-6 text-center">Receipt Link</th> */}
         <th className="py-3 px-6 text-center">See All Details</th>
       </tr>
     </thead>
@@ -34,35 +33,61 @@ const CompletedTable: React.FunctionComponent<Props> = ({
                 key={order.tracking_id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                <Row input={order.tracking_id} />
-                <Row
-                  input={
-                    order.finish_time
-                      ? String(
-                          order.finish_time
-                            .slice(0, 19)
-                            .replace(/T/g, ' ')
-                        )
-                      : null
-                  }
-                />
-                <Row
-                  input={
-                    workTasks.find(
-                      (task: any) => task.id === order.work_task_id
-                    )?.name
-                  }
-                />
-                <Row
-                  input={
-                    brands.find(
-                      (brand: any) => brand.id === order.brand_id
-                    )?.name
-                  }
-                />
-                <Row input={order.final_units_or_quantity} />
-                <Row input={`${order.minutes_taken} mins`} />
-                <td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex align-center items-center">
+                    <span className="text-center">
+                      {order.tracking_id}
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex align-center items-center">
+                    <span className="text-center">
+                      {order.finish_time
+                        ? String(
+                            order.finish_time
+                              .slice(0, 19)
+                              .replace(/T/g, ' ')
+                          )
+                        : null}
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex align-center items-center">
+                    <span className="text-center">
+                      {
+                        workTasks.find(
+                          (task: any) =>
+                            task.id === order.work_task_id
+                        )?.name
+                      }
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex align-center items-center">
+                    <span className="text-center">
+                      {
+                        brands.find(
+                          (brand: any) => brand.id === order.brand_id
+                        )?.name
+                      }
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex align-center items-center">
+                    <span className="text-center">{`${order.final_units_or_quantity}`}</span>
+                  </div>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <div className="flex align-center items-center">
+                    <span className="text-center">{`${order.minutes_taken} mins`}</span>
+                  </div>
+                </td>
+
+                {/* <td>
                   <div className="flex justify-center bg-blue-600 rounded-md ">
                     <PDFDownloadLink
                       document={
@@ -82,11 +107,16 @@ const CompletedTable: React.FunctionComponent<Props> = ({
                       Get Receipt
                     </PDFDownloadLink>
                   </div>
+                </td> */}
+                <td>
+                  <div className="flex justify-center">
+                    <Link href={`/completed/${order.id}`}>
+                      <button className=" bg-blue-600 w-full rounded-md text-white outline-none focus:ring-4 shadow-lg">
+                        {'All Details'}
+                      </button>
+                    </Link>
+                  </div>
                 </td>
-                <RowButton
-                  link={`/completed/${order.id}`}
-                  text="All Details"
-                />
               </tr>
             );
           })

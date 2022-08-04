@@ -1,34 +1,34 @@
-import { Text, View, StyleSheet } from "@react-pdf/renderer";
-import React from "react";
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import React from 'react';
 
-const borderColor = "#000";
+const borderColor = '#000';
 const styles = StyleSheet.create({
   mainCont: {
-    width: "50%",
+    width: '50%',
     marginBottom: 20,
   },
   title: {
-    fontStyle: "bold",
+    fontStyle: 'bold',
     fontSize: 16,
     marginBottom: 10,
   },
   container: {
-    flexDirection: "column",
+    flexDirection: 'column',
     borderColor: borderColor,
-    color: "#000",
+    color: '#000',
     borderWidth: 1,
-    alignItems: "flex-start",
-    fontStyle: "bold",
+    alignItems: 'flex-start',
+    fontStyle: 'bold',
   },
   row: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderColor: borderColor,
-    width: "100%",
+    width: '100%',
     borderWidth: 1,
   },
   col1: {
     borderRightColor: borderColor,
-    color: "#000",
+    color: '#000',
     borderRightWidth: 1,
     padding: 5,
   },
@@ -37,9 +37,11 @@ const styles = StyleSheet.create({
   },
 });
 
-type Props = { order: any, specifics:any };
+type Props = { specifics: any };
 
-const TaskSpecificDetails: React.FunctionComponent<Props> = ({ order, specifics }) => (
+const TaskSpecificDetails: React.FunctionComponent<Props> = ({
+  specifics,
+}) => (
   <View style={styles.mainCont}>
     <Text style={styles.title}>Task Specific Details</Text>
 
@@ -54,7 +56,9 @@ const TaskSpecificDetails: React.FunctionComponent<Props> = ({ order, specifics 
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Thread Color</Text>
-        <Text style={styles.col2}>{specifics.threadColour?specifics.threadColour:"n/a"}</Text>
+        <Text style={styles.col2}>
+          {specifics.threadColour ? specifics.threadColour : 'n/a'}
+        </Text>
       </View>
     </View>
   </View>

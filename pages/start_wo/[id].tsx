@@ -8,9 +8,12 @@ import { ActionStartQueue } from '../../components/WorkOrderScreens/StartQueue/A
 import { getAllOrderData } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
 import Button from '../../components/Button';
+import { WorkOrder } from '../../interfaces/WorkOrder';
 
-const Index: NextPage = (props) => {
-  const [workOrder, setWorkOrder] = useState({});
+const Index: NextPage = (props: any) => {
+  const [workOrder, setWorkOrder] = useState<WorkOrder>({
+    tracking_id: null,
+  });
   const [specifics, setSpecifics] = useState({});
   const [tasks, setTasks] = useState({});
   const [workers, setWorkers] = useState({});
@@ -35,11 +38,11 @@ const Index: NextPage = (props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    let formData = { tracker_status: 2 };
+    let formData: WorkOrder = { tracker_status: 2 };
 
     Array.prototype.forEach.call(
       e.target.elements,
-      (element: Element) => {
+      (element: any) => {
         console.log(element.id, ' ', element.value);
         element.id == 'declineReason'
           ? (formData = {

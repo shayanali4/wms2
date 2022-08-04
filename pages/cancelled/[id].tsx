@@ -6,9 +6,10 @@ import { getAllOrderData } from '../../data/services';
 import Button from '../../components/Button';
 import { InitialClientDetails } from '../../components/WorkOrderScreens/Completed/InitialClientDetails';
 import { CancelledSummary } from '../../components/WorkOrderScreens/AcceptorReject/CancelledSummary';
+import { WorkOrder } from '../../interfaces/WorkOrder';
 
-const Index: NextPage = (props) => {
-  const [workOrder, setWorkOrder] = useState({});
+const Index: NextPage = (props: any) => {
+  const [workOrder, setWorkOrder] = useState<WorkOrder>({});
   const [specifics, setSpecifics] = useState({});
   const [tasks, setTasks] = useState({});
   const [workers, setWorkers] = useState({});

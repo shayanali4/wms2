@@ -1,7 +1,6 @@
-import { NotStartedObject } from '../../../interfaces/NotStartedObject';
-import { RowButton } from '../RowButton';
+import Link from 'next/link';
 
-type Props = { orders: NotStartedObject; tasks: any; brands: any };
+type Props = { orders: any; tasks: any; brands: any };
 const NotStartedTable: React.FunctionComponent<Props> = ({
   orders,
   tasks,
@@ -22,7 +21,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
       {orders
-        ? orders.map((order) => {
+        ? orders.map((order: any) => {
             return (
               <tr
                 key={order.tracking_id}
@@ -82,10 +81,15 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                     <span>£{order.initial_cost}</span>
                   </div>
                 </td>
-                <RowButton
-                  link={`/start_wo/${order.id}`}
-                  text={'Start '}
-                />
+                <td>
+                  <div className="flex justify-center">
+                    <Link href={`/start_wo/${order.id}`}>
+                      <button className=" bg-blue-600 w-full rounded-md text-white outline-none focus:ring-4 shadow-lg">
+                        {'Start'}
+                      </button>
+                    </Link>
+                  </div>
+                </td>
               </tr>
             );
           })

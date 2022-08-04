@@ -2,22 +2,25 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/Layout';
 import { FinishSummary } from '../../components/WorkOrderScreens/Finish/FinishSummary';
-import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
-import { TimeSummary } from '../../components/WorkOrderScreens/Finish/TimeSummary';
-import { PricingSummary } from '../../components/WorkOrderScreens/Finish/PricingSummary';
-import { FinishWO } from '../../components/WorkOrderScreens/Finish/FinishWO';
 import { finishOrder } from '../../data/services';
 import S3UploadFile from '../../components/s3UploadFile';
 import Button from '../../components/Button/';
+import { WorkOrder } from '../../interfaces/WorkOrder';
+import { TimeSummary } from '../../components/WorkOrderScreens/Finish/TimeSummary';
+import { FinishWO } from '../../components/WorkOrderScreens/Finish/FinishWO';
+import { PricingSummary } from '../../components/WorkOrderScreens/Finish/PricingSummary';
+import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 
 interface File {
   name: string;
 }
 
-const FinishIndex: NextPage = (props) => {
-  const [workOrder, setWorkOrder] = useState(null);
+const FinishIndex: NextPage = (props: any) => {
+  const [workOrder, setWorkOrder] = useState<WorkOrder>({
+    email: '',
+  });
   const [specifics, setSpecifics] = useState({});
-  const [task, setTasks] = useState({});
+  const [tasks, setTasks] = useState({});
 
   useEffect(() => {
     finishOrder(props.id).then((data: any) => {
@@ -36,13 +39,13 @@ const FinishIndex: NextPage = (props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    let formData = { tracker_status: 3 };
-    let QCPics = [];
-    const emailAd = workOrder.email;
+    let formData: WorkOrder = { tracker_status: 3 };
+    let QCPics: any = [];
+    const emailAd = workOrder ? workOrder.email : '';
 
     Array.prototype.forEach.call(
       e.target.elements,
-      (element: Element) => {
+      (element: any) => {
         console.log(element.id, ' ', element.value);
         element.id == 'declineReason'
           ? (formData = {
@@ -85,10 +88,6 @@ const FinishIndex: NextPage = (props) => {
             });
           }
         }
-        // formData = {
-        //   ...formData,
-        //   qc_pics: QCPics
-        // };
         QCPics.length > 0 ? (formData['qc_pics'] = QCPics) : null;
       }
     );
@@ -96,20 +95,20 @@ const FinishIndex: NextPage = (props) => {
 
   return (
     <>
-      {workOrder && specifics && (
+      {workOrder && specifics && tasks && (
         <>
-          {console.log(workOrder, specifics)}
+          {console.log(workOrder, specifics, tasks)}
           <Layout title={`Complete WO`} />
           <Button text="Go Back" hyperlink="/wip" />
-          <FinishSummary workOrder={workOrder} task={task} />
+          <FinishSummary workOrder={workOrder} tasks={tasks} />
           <form onSubmit={handleSubmit}>
-            {/* <TimeSummary workOrder={workOrder} /> */}
-            {/* <PricingSummary workOrder={workOrder} />
-        <SpecificDetails
-          specifics={specifics}
-          workOrder={workOrder}
-        />
-        <FinishWO /> */}
+            <TimeSummary workOrder={workOrder} />
+            <PricingSummary workOrder={workOrder} />
+            <SpecificDetails
+              specifics={specifics}
+              workOrder={workOrder}
+            />
+            <FinishWO />
           </form>
         </>
       )}

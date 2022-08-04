@@ -1,6 +1,4 @@
-import { QueueObject } from '../../interfaces/QueueObject';
-
-export function AcceptWO(props: QueueObject) {
+export function AcceptWO(props: any) {
   return (
     <div>
       <h1>Details for Order: {props.tracking_id} </h1>

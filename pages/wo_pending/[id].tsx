@@ -4,14 +4,14 @@ import Layout from '../../components/Layout/Layout';
 import { WOSummary } from '../../components/WorkOrderScreens/WOSummary';
 import { SpecificDetails } from '../../components/WorkOrderScreens/SpecificDetails';
 import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts';
-import { supabaseClient } from '../../lib/client';
 import { queueOrderAcceptReject } from '../../data/services';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import { updateZendeskStatus } from '../../data/services/zendesk';
+import { WorkOrder } from '../../interfaces/WorkOrder';
 
-const Index: NextPage = (props) => {
-  const [workOrder, setWorkOrder] = useState({});
+const Index: NextPage = (props: any) => {
+  const [workOrder, setWorkOrder] = useState<WorkOrder>({});
   const [specifics, setSpecifics] = useState([]);
   const [tasks, setTasks] = useState([{}]);
   const [brands, setBrands] = useState([]);

@@ -8,12 +8,12 @@ export const FinishSummary = (props: any) => {
           <h1>Finish Order: #{workOrder.tracking_id}</h1>
           <p>
             Task:
-            {
+            {/* {
               // 'TBCCC'
               tasks.find(
                 (task: any) => task.id == workOrder.work_task_id
               )?.name
-            }
+            } */}
           </p>
           <p>
             Total Units / Quantity:{' '}

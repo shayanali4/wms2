@@ -8,9 +8,10 @@ import { CompletedSummary } from '../../components/WorkOrderScreens/Completed/Su
 import { WarehouseSummary } from '../../components/WorkOrderScreens/Completed/WarehouseNotes';
 import { InitialClientDetails } from '../../components/WorkOrderScreens/Completed/InitialClientDetails';
 import Title from '../../components/Title';
+import { WorkOrder } from '../../interfaces/WorkOrder';
 
-const Index: NextPage = (props) => {
-  const [workOrder, setWorkOrder] = useState({});
+const Index: NextPage = (props: any) => {
+  const [workOrder, setWorkOrder] = useState<WorkOrder>({});
   const [specifics, setSpecifics] = useState({});
   const [tasks, setTasks] = useState({});
   const [workers, setWorkers] = useState({});

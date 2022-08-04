@@ -1,7 +1,7 @@
 type Props = { text: string; color?: string };
 
 const Title: React.FunctionComponent<Props> = ({
-  color = 'text-blue-600',
+  color = 'black',
   text,
 }) => {
   return (

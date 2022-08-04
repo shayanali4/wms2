@@ -1,8 +1,7 @@
-import { WIPObject } from '../../../interfaces/WIPObject';
-import { RowButton } from '../RowButton';
+import Link from 'next/link';
 
 type Props = {
-  orders: WIPObject;
+  orders: any;
   workers: any;
   workTasks: any;
   brands: any;
@@ -31,7 +30,7 @@ const WIPTable: React.FunctionComponent<Props> = ({
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
       {orders
-        ? orders.map((order) => {
+        ? orders.map((order: any) => {
             return (
               <tr
                 key={order.tracking_id}
@@ -118,10 +117,15 @@ const WIPTable: React.FunctionComponent<Props> = ({
                     <span>£{order.initial_cost}</span>
                   </div>
                 </td>
-                <RowButton
-                  link={`/finish/${order.id}`}
-                  text={'Finish'}
-                />
+                <td>
+                  <div className="flex justify-center">
+                    <Link href={`/finish/${order.id}`}>
+                      <button className=" bg-blue-600 w-full rounded-md text-white outline-none focus:ring-4 shadow-lg">
+                        {'Finish'}
+                      </button>
+                    </Link>
+                  </div>
+                </td>
               </tr>
             );
           })

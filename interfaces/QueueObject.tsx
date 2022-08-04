@@ -1,7 +1,7 @@
 export declare type QueueObject = {
   id?: number;
   tracking_id?: string;
-  tracker_status_id?: number;
+  tracker_status: number;
   work_order_id?: number;
   created_at?: string;
   description?: string;
@@ -12,5 +12,10 @@ export declare type QueueObject = {
   name?: string;
   email?: string;
   phone_number?: string;
+  decline_reason?: string;
+  start_time?: string;
+  finish_time?: string;
+  expected_finish_date?: string;
+  qc_pics?: String[];
   [otherOptions: string]: unknown;
 }[];

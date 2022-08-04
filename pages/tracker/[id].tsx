@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { Tracker } from '../../components/Tracker/Tracker';
 import { supabaseClient } from '../../lib/client';
 
-const Tracking: NextPage = (Props) => {
+const Tracking: NextPage = (Props: any) => {
   return (
     <Tracker
       tracking_id={Props.tracking_id}
