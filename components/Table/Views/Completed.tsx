@@ -1,9 +1,8 @@
-import { QueueObject } from '../../../interfaces/QueueObject';
 // import { PDFDownloadLink } from '@react-pdf/renderer/lib/react-pdf.browser.cjs.js';
 // import Receipt from '../../Receipt';
 import Link from 'next/link';
 
-type Props = { orders: QueueObject; workTasks: any; brands: any };
+type Props = { orders: any; workTasks: any; brands: any };
 
 const CompletedTable: React.FunctionComponent<Props> = ({
   orders,
@@ -27,7 +26,7 @@ const CompletedTable: React.FunctionComponent<Props> = ({
     </thead>
     <tbody className="text-gray-600 text-sm font-light">
       {orders
-        ? orders.map((order) => {
+        ? orders.map((order: any) => {
             return (
               <tr
                 key={order.tracking_id}
