@@ -3,11 +3,9 @@ import Link from 'next/link';
 export const SpecificDetails = (props: any) => {
   const specificsAsArray = Object.entries(props.specifics);
   const filterNulls = specificsAsArray.filter(
-    ([key, value]) => value != null
+    ([, value]) => value != null
   );
-  const specifics = filterNulls.filter(
-    ([key, value]) => key != 'order_id'
-  );
+  const specifics = filterNulls.filter(([key]) => key != 'order_id');
   const skus = props.specifics.skus;
   const pics = props.specifics.pics;
 

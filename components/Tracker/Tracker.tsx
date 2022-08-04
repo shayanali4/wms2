@@ -1,5 +1,3 @@
-import { Pending } from '../Page/Tracker/Pending';
-
 interface Props {
   id: String;
   created_at: Date;

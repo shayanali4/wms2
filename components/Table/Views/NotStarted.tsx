@@ -50,7 +50,7 @@ const NotStartedTable: React.FunctionComponent<Props> = ({
                   <div className="flex items-center justify-center">
                     {
                       tasks.find(
-                        (task) => task.id === order.work_task_id
+                        (task: any) => task.id === order.work_task_id
                       )?.name
                     }
                   </div>

@@ -6,10 +6,12 @@ export const EstimatedCosts = (props: any) => {
 
   const [targetTime, setTargetTime] = useState(0);
   const [cost, setCost] = useState(0);
-  const [brandId, setBrandId] = useState(0);
+  const [brandId, setBrandId] = useState('');
 
   useEffect(() => {
-    const task = tasks.find((task) => task.id === order.work_task_id);
+    const task = tasks.find(
+      (task: any) => task.id === order.work_task_id
+    );
 
     if (brandId) {
       const brand = brands.find((b: any) => b.id == brandId);
@@ -47,31 +49,8 @@ export const EstimatedCosts = (props: any) => {
     }
   }, [order, tasks, brandId]);
 
-  const handleBrandSelect = (brandId: number) => {
+  const handleBrandSelect = (brandId: string) => {
     setBrandId(brandId);
-    // console.log(brands[2].id);
-    // const brand = brands.find((b) => b.id === brandId);
-    // const brand2 = brands.filter((b) => b.id === brandId)[0];
-    // console.log(brand);
-    // console.log(brand2);
-    // const minsPerUnit = task[order.work_task_id].mins_per_unit;
-    // const flatCost = task[order.work_task_id].flat_cost;
-    // const quantity = order.initial_units_or_quantity;
-    // if (minsPerUnit == null) {
-    //   setTargetTime(0);
-    // } else {
-    //   setTargetTime(minsPerUnit * quantity);
-    // }
-    // const costRate = brand.hourly_rate;
-    // let estimatedCost = (minsPerUnit / 60) * costRate * quantity;
-    // if (minsPerUnit == null && flatCost != null) {
-    //   setCost(Number(flatCost * quantity.toFixed(2)));
-    // } else if (minsPerUnit == null && flatCost == null) {
-    //   setCost(0);
-    // } else {
-    //   estimatedCost = Number(estimatedCost.toFixed(2));
-    //   setCost(estimatedCost);
-    // }
   };
 
   return (
@@ -84,8 +63,9 @@ export const EstimatedCosts = (props: any) => {
             <li>
               <b>Task: </b>
               {
-                tasks.find((task) => task.id === order.work_task_id)
-                  ?.name
+                tasks.find(
+                  (task: any) => task.id === order.work_task_id
+                )?.name
               }
             </li>
             <li>

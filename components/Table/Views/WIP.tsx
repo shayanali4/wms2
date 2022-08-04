@@ -1,5 +1,4 @@
 import { WIPObject } from '../../../interfaces/WIPObject';
-import Link from 'next/link';
 import { RowButton } from '../RowButton';
 
 type Props = {
@@ -41,19 +40,24 @@ const WIPTable: React.FunctionComponent<Props> = ({
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
-                      {(order.start_time as any)
-                        .slice(0, 19)
-                        .replace(/T/g, ' ')}
+                      {order.start_time
+                        ? (order.start_time as any)
+                            .slice(0, 19)
+                            .replace(/T/g, ' ')
+                        : null}
                     </span>
                   </div>
                 </td>
                 <td className="py-3 px-6 text-left">
                   <div className="flex items-center">
                     <span>
-                      {(order.expected_finish_date as any)
-                        .slice(0, 19)
-                        .replace(/T/g, ' ')}
+                      {order.expected_finish_date
+                        ? (order.expected_finish_date as any)
+                            .slice(0, 19)
+                            .replace(/T/g, ' ')
+                        : null}
                     </span>
+                    {console.log(order)}
                   </div>
                 </td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">

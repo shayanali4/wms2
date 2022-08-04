@@ -9,14 +9,11 @@ const CancelledPage: NextPage = () => {
   const [workTasks, setWorkTasks] = useState([{}]);
 
   useEffect(() => {
-    let mounted = true;
     fetchOrdersTrackerStatus(99).then((data: any) => {
       setOrders(data.orders);
       setWorkTasks(data.workTasks);
     });
-    return () => {
-      mounted = false;
-    };
+    return () => {};
   }, []);
 
   return (

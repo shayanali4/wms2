@@ -1,6 +1,4 @@
-import Layout from '../Layout/Layout';
 import { QueueObject } from '../../interfaces/QueueObject';
-import { ReactChild, ReactFragment, ReactPortal } from 'react';
 
 export function AcceptWO(props: QueueObject) {
   return (
@@ -32,8 +30,7 @@ export function AcceptWO(props: QueueObject) {
       <div>
         <li> ---</li>
         <h1>Specific Order Details</h1>
-        <p>SKU{props.
-         && props.skus.length === 1 ? null : 's'}</p>
+        <p>SKU{props && props.skus.length === 1 ? null : 's'}</p>
         <ul>
           {props.skus
             ? props.skus.map((sku: any, i: number) => {

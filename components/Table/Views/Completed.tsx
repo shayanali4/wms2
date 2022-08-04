@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { QueueObject } from '../../../interfaces/QueueObject';
 import { Row } from '../Row';
 import { RowButton } from '../RowButton';
@@ -70,10 +69,10 @@ const CompletedTable: React.FunctionComponent<Props> = ({
                         <Receipt
                           order={order}
                           brand={brands.find(
-                            (x) => x.id === order.brand_id
+                            (x: any) => x.id === order.brand_id
                           )}
                           task={workTasks.find(
-                            (x) => x.id == order.work_task_id
+                            (x: any) => x.id == order.work_task_id
                           )}
                         />
                       }

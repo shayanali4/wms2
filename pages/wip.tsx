@@ -4,7 +4,6 @@ import TableWip from '../components/Table/Views/WIP';
 import { NextPage } from 'next';
 import Page from '../components/Page';
 import { fetchOrdersInProgress } from '../data/services';
-import Title from '../components/Title';
 
 const WIPPage: NextPage = () => {
   const [WIPOrders, setWIPOrders] = useState([]);

@@ -19,7 +19,7 @@ const Table: React.FunctionComponent<Props> = ({
         </tr>
       </thead>
       <tbody className="text-gray-600 text-sm font-light">
-        {tbodyData.map((item) => {
+        {tbodyData.map((item: any) => {
           return <TableRow key={item.id} data={item.items} />;
         })}
       </tbody>
