@@ -7,8 +7,9 @@ import { EstimatedCosts } from '../../components/WorkOrderScreens/EstimatedCosts
 import { queueOrderAcceptReject } from '../../data/services';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
-import { updateZendeskStatus } from '../../data/services/zendesk';
 import { WorkOrder } from '../../interfaces/WorkOrder';
+import { supabaseClient } from '../../lib/client';
+import Router from 'next/router';
 
 const Index: NextPage = (props: any) => {
   const [workOrder, setWorkOrder] = useState<WorkOrder>({});
@@ -38,48 +39,52 @@ const Index: NextPage = (props: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    updateZendeskStatus(props.id);
 
-    // let formData = {};
+    let formData = {};
 
-    // Array.prototype.forEach.call(
-    //   e.target.elements,
-    //   (element: Element) => {
-    //     element.id == 'updateTime'
-    //       ? (formData = { ...formData, target_time: element.value })
-    //       : null;
-    //     element.id == 'updateCost'
-    //       ? (formData = { ...formData, initial_cost: element.value })
-    //       : null;
-    //     if (element.id == 'submitReject') {
-    //       formData = { ...formData, tracker_status: 99 };
-    //     } else if (element.id == 'submitAccept') {
-    //       formData = { ...formData, tracker_status: 2 };
-    //     }
-    //     element.id == 'initialComments' && element.value
-    //       ? (formData = {
-    //           ...formData,
-    //           initial_comments: element.value,
-    //         })
-    //       : null;
-    //     element.id == 'declineReason'
-    //       ? (formData = {
-    //           ...formData,
-    //           decline_reason: element.value,
-    //         })
-    //       : null;
-    //   }
-    // );
+    Array.prototype.forEach.call(
+      e.target.elements,
+      (element: any) => {
+        element.id == 'updateTime'
+          ? (formData = { ...formData, target_time: element.value })
+          : null;
+        element.id == 'updateCost'
+          ? (formData = { ...formData, initial_cost: element.value })
+          : null;
+        if (element.id == 'submitReject') {
+          formData = { ...formData, tracker_status: 99 };
+        } else if (element.id == 'submitAccept') {
+          formData = { ...formData, tracker_status: 2 };
+        }
+        element.id == 'initialComments' && element.value
+          ? (formData = {
+              ...formData,
+              initial_comments: element.value,
+            })
+          : null;
+        element.id == 'declineReason'
+          ? (formData = {
+              ...formData,
+              decline_reason: element.value,
+            })
+          : null;
+      }
+    );
 
-    // const { data, error } = await supabaseClient
-    //   .from('order')
-    //   .update(formData)
-    //   .eq('id', props.id);
-    // console.log(data);
-    // if (error) {
-    //   console.log(error.message);
-    // }
-    // alert('Submitted successfully');
+    const { data, error } = await supabaseClient
+      .from('order')
+      .update(formData)
+      .eq('id', props.id);
+    console.log(data);
+    if (error) {
+      alert('Submission failed - please try again');
+      console.log(error.message);
+      return;
+    }
+    alert('Submitted successfully');
+    Router.push({
+      pathname: `/`,
+    });
   };
 
   return (
