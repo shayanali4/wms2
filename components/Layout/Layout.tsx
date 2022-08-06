@@ -16,6 +16,7 @@ const Layout: React.FunctionComponent<Props> = ({
         name="viewport"
         content="initial-scale=1.0, width=device-width"
       />
+      <link rel="shortcut icon" href="/favicon.ico" />
     </Head>
     {children}
   </div>
