@@ -8,7 +8,7 @@ export const AcceptWO = ({
   return (
     <>
       <label htmlFor="updateTiming">
-        <p className="mt-3">Confirm Target Time</p>
+        <p className="mt-3">Confirm Target Time (mins)</p>
       </label>
       <input
         placeholder={String(targetTime)}
@@ -18,7 +18,7 @@ export const AcceptWO = ({
       ></input>
 
       <label htmlFor="updateCosts">
-        <p>Confirm Estimated Cost</p>
+        <p>Confirm Estimated Cost (£)</p>
       </label>
       <input
         placeholder={String(estCost)}

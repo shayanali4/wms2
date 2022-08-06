@@ -80,7 +80,8 @@ export const EstimatedCosts = (props: any) => {
           <label htmlFor="brand_system">
             <h3 className="mt-3">
               {' '}
-              Match the Customer's Brand here to get estimates
+              Select the Customer's Brand here to update estimates
+              below
             </h3>
           </label>
           <select
