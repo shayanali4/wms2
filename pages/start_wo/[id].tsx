@@ -9,6 +9,7 @@ import { getAllOrderData } from '../../data/services';
 import { supabaseClient } from '../../lib/client';
 import Button from '../../components/Button';
 import { WorkOrder } from '../../interfaces/WorkOrder';
+import { createZendeskTicket } from '../../data/services/zendesk';
 
 const Index: NextPage = (props: any) => {
   const [workOrder, setWorkOrder] = useState<WorkOrder>({
@@ -39,10 +40,10 @@ const Index: NextPage = (props: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let formData: WorkOrder = { tracker_status: 2 };
-
+    console.log(e.target.elements,"<=elements")
     Array.prototype.forEach.call(
       e.target.elements,
-      (element: any) => {
+      async (element: any) => {
         console.log(element.id, ' ', element.value);
         element.id == 'declineReason'
           ? (formData = {
@@ -75,6 +76,7 @@ const Index: NextPage = (props: any) => {
       alert('Submitted successfully');
     }
   };
+
 
   return (
     <>
